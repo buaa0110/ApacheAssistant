@@ -28,3 +28,18 @@ software experiment of buaa
     git stash pop
 
 命令将本地修改与origin变化合并后在进行提交
+
+- 比较本地和远程分支的差异
+
+```
+#比较本地和远程分支相差的commit
+git fetch origin
+git log master..origin/master
+
+#比较本地和远程分支文件内容的改动
+git fetch origin
+git diff --stat master origin/master	#查看所有文件各修改了多少行
+git diff master origin/master			#查看所有文件的具体内容改动
+git diff master origin/master README.md	#查看某个文件的具体内容改动
+```
+
