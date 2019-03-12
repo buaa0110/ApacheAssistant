@@ -1,0 +1,119 @@
+[33mcommit 500c13e8337612350768b34fb2a6c6532be61ac6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: buaa0110 <king>
+Date:   Tue Mar 12 13:29:12 2019 +0800
+
+    用户需求简单纲要
+
+[33mcommit a3222633cf331c545dd5a6097b577f47859d09bb[m
+Author: jisuozhao <444506758@qq.com>
+Date:   Tue Mar 12 12:18:00 2019 +0800
+
+    1.4功能需求Outline
+
+[33mcommit 3ea6f2da6a58e260895b2372646d293b51ce74c2[m
+Author: jisuozhao <444506758@qq.com>
+Date:   Tue Mar 12 11:45:19 2019 +0800
+
+    增加README中比较本地和远程分支差异的说明
+
+[33mcommit b51507bee83796dd8743bdf189f4f2a69651256c[m
+Author: nothing2say <king_jk816@163.com>
+Date:   Tue Mar 12 11:28:40 2019 +0800
+
+    Update README.md
+
+[33mcommit 6a63d0f801045de68384a6e7f8e1f4caac2896cf[m
+Author: nothing2say <king_jk816@163.com>
+Date:   Tue Mar 12 11:27:29 2019 +0800
+
+    Update README.md
+
+[33mcommit 7830097e620afb2c50601827eae66dc3788aff2b[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Tue Mar 12 11:14:21 2019 +0800
+
+    更新doc文件至md中
+
+[33mcommit a1a065316dba31a0680a7c4d78ca851868993652[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Tue Mar 12 11:09:53 2019 +0800
+
+    test again
+
+[33mcommit 85622e3cf72bd4eea862e1b3853a2df26033e923[m
+Author: 韩慧敏 <hanhuimin@nlsde.buaa.edu.cn>
+Date:   Tue Mar 12 11:02:51 2019 +0800
+
+    '测试md文件'
+
+[33mcommit 6cccbe5c2a79999a9add05b153b07966478a79de[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Tue Mar 12 10:59:55 2019 +0800
+
+    a md file
+
+[33mcommit 3ccc14b41bcceca895fccb0578b12312ad34823a[m
+Author: 韩慧敏 <hanhuimin@nlsde.buaa.edu.cn>
+Date:   Tue Mar 12 10:25:04 2019 +0800
+
+    '测试一下push功能'
+
+[33mcommit 48f3e5cf54bdc8902c6d7857073b033d67e70408[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Tue Mar 12 10:12:09 2019 +0800
+
+    完成了用户需求部分1.3.1的撰写
+
+[33mcommit e5fbfaf24c56f9a179674b1c9a58da847b61ac6d[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Mon Mar 11 22:10:05 2019 +0800
+
+    完成了非功能性需求分析
+
+[33mcommit 39072e38a1eaa726d21b186fd587ad0f2c8c87be[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Mon Mar 11 21:34:20 2019 +0800
+
+    完成了业务需求的部分内容
+
+[33mcommit d96a17478592c93c2efc5b05ef02ab5b511f1eef[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Mon Mar 11 17:11:03 2019 +0800
+
+    完成了背景部分文档的撰写
+
+[33mcommit a59e597b5c08061476230b89849fbd6d357e9c0e[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Mon Mar 11 14:49:40 2019 +0800
+
+    重新调整结构
+
+[33mcommit ed114f5720371901153fc5ecbf23b3f07620f432[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Mon Mar 11 14:20:44 2019 +0800
+
+    根据讨论结果对需求文档组织形式进行第二次调整
+
+[33mcommit f374eacb0dc68a9df9f131379eec77a34edc2e5f[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Mon Mar 11 14:03:34 2019 +0800
+
+    部分修改表述，增加了一个其他需求
+
+[33mcommit 5e019d02de4b2fbedc59704543a0692c29f0fd30[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Fri Mar 8 21:37:45 2019 +0800
+
+    change file structure
+
+[33mcommit 070d2c37525378419cc3f9f3a3dea07c431d9144[m
+Author: buaa0110 <king_jk816@163.com>
+Date:   Fri Mar 8 21:30:24 2019 +0800
+
+    first doc
+
+[33mcommit fa1f2d38d4012b002666ff04685f9b41de3e8dc8[m
+Author: nothing2say <king_jk816@163.com>
+Date:   Fri Mar 8 21:28:19 2019 +0800
+
+    Initial commit
