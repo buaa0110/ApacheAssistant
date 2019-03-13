@@ -69,7 +69,7 @@
 											"font": "Arial;13;1",
 											"left": 69,
 											"top": 317,
-											"width": 41.17724609375,
+											"width": 42,
 											"height": 13,
 											"text": "开发者"
 										},
@@ -104,7 +104,7 @@
 									"font": "Arial;13;0",
 									"left": 64,
 									"top": 310,
-									"width": 51.17724609375,
+									"width": 52,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFpca6nJLjdTSw="
@@ -188,7 +188,7 @@
 							"containerChangeable": true,
 							"left": 64,
 							"top": 256,
-							"width": 51.17724609375,
+							"width": 52,
 							"height": 80,
 							"nameCompartment": {
 								"$ref": "AAAAAAFpca6nJLjclVU="
@@ -645,11 +645,11 @@
 												"$ref": "AAAAAAFpccd3Nrm+I7k="
 											},
 											"font": "Arial;13;1",
-											"left": 311.5,
+											"left": 312.5,
 											"top": 435.5,
-											"width": 79,
+											"width": 83,
 											"height": 13,
-											"text": "查询模块状态"
+											"text": "查看模块信息"
 										},
 										{
 											"_type": "LabelView",
@@ -680,9 +680,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 306.5,
+									"left": 307.5,
 									"top": 428.5,
-									"width": 89.5234375,
+									"width": 94,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAFpccd3N7m/iF8="
@@ -782,7 +782,7 @@
 							"containerChangeable": true,
 							"left": 288,
 							"top": 424,
-							"width": 126,
+							"width": 132,
 							"height": 35,
 							"nameCompartment": {
 								"$ref": "AAAAAAFpccd3Nrm+I7k="
@@ -1215,7 +1215,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 294,
+									"left": 295,
 									"top": 356,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1235,8 +1235,8 @@
 										"$ref": "AAAAAAFpcctQKrpBvT0="
 									},
 									"font": "Arial;13;0",
-									"left": 278,
-									"top": 346,
+									"left": 279,
+									"top": 345,
 									"width": 55.65625,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1258,7 +1258,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 273,
+									"left": 274,
 									"top": 377,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1277,7 +1277,7 @@
 								"$ref": "AAAAAAFpccrP3LnyCN8="
 							},
 							"lineStyle": 1,
-							"points": "235:323;333:423",
+							"points": "236:323;335:423",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFpcctQKrpEbEc="
@@ -1468,7 +1468,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 142,
+									"left": 143,
 									"top": 278,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -1489,8 +1489,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 145,
-									"top": 264,
+									"left": 146,
+									"top": 265,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -1510,7 +1510,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 135,
+									"left": 136,
 									"top": 305,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -1551,7 +1551,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 140,
+									"left": 141,
 									"top": 264,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -1617,7 +1617,7 @@
 								"$ref": "AAAAAAFpca6nJLjbn5w="
 							},
 							"lineStyle": 1,
-							"points": "115:297;167:301",
+							"points": "116:297;167:301",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFpccu70bpxZBI="
@@ -1715,7 +1715,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "查询模块状态"
+					"name": "查看模块信息"
 				},
 				{
 					"_type": "UMLUseCase",
