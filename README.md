@@ -43,5 +43,24 @@ git diff master origin/master			#查看所有文件的具体内容改动
 git diff master origin/master README.md	#查看某个文件的具体内容改动
 ```
 
-    test 大赛
+### 关于华为云和github的协同管理问题
+
+由于课程要求我们将代码托管交付华为云，因此有必要在华为云上维护相同的项目，处于节省时间和精力的考虑，现发布本项目在Git和华为云的协同方式
+
+本质上，依然使用Git管理，区别在于，项目人员需要在本地仓库维护一个华为云的远程仓库
+
+首先，请各位注意，确保自己在华为云上已经设置好了个人的ssh密钥和https密钥，相关步骤可以在华为云代码托管页面找到
+
+完成密钥设置后，首先运行
+
+    git remote add remoteName [URL]
+
++ 说明： remoteName可以自行指定
+
+然后，按照正常的操作行为规范进行github项目的维护，例如push和pull，只是需要每次在git进行一次push之后，运行以下命令
+
+    git push remoteName
+
++ 说明：此处的remoteName为项目组人员在上一步所设置
+
 
