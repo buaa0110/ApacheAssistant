@@ -24,17 +24,18 @@ python demo.py
 
 - 后端框架
 
-  Flask（使用Python编写的轻量级Web框架，参考教程：http://docs.jinkan.org/docs/flask/index.html）
+  Flask（使用Python编写的轻量级Web框架），参考教程：http://docs.jinkan.org/docs/flask/index.html
 
 - 前端框架
 
-  jQuery（快速、简洁的JavaScript框架，参考教程：http://www.runoob.com/jquery/jquery-tutorial.html）
+  jQuery（快速、简洁的JavaScript框架），参考教程：http://www.runoob.com/jquery/jquery-tutorial.html
 
-  Semantic-UI（简单、美观的CSS框架，官方网站：https://semantic-ui.com/）
+  Semantic-UI（简单、美观的CSS框架），官方网站：https://semantic-ui.com/
 
 - 解析配置文件
 
-  使用Python实现的Apache配置文件解析库（https://github.com/mikemrm/ApacheConfigParser），暂时作为样例使用，可能功能不是特别全
+  使用Python实现的Apache配置文件解析库，仓库地址：https://github.com/mikemrm/ApacheConfigParser
+  暂时作为样例使用，可能功能不是特别全
 
 ## 功能介绍
 
