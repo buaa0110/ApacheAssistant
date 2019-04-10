@@ -1,0 +1,551 @@
+/* Hardknocks Agency Template
+    Document   : layout.css
+    Created on : August, 2012
+    Author     : Kobus Swartz - info@kobusswartz.co.za
+    Description: Main style sheet for the Hardknocks Temaplate
+------------------------------------------------------------------------------------------------------------------
+All sections are marked to make it easier to navigate and change the css.
+*/
+
+body {
+	background: #333;
+	font-family: Helvetica, sans-serif;
+	color: #3c3434;
+	font-size: 14px;
+}
+
+/* Load Custom Fonts */
+ @font-face {
+ 	font-family: 'Pacifico';
+ 	src: url("Pacifico.ttf");
+ 	font-style: normal;
+ 	font-weight: normal;
+ }
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+a:active {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #666;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #666;
+}
+
+/* Heading Styles */
+h1 {
+	color: #3a3737;
+	font-size: 24px;
+	margin: 0;
+}
+
+h2 {
+	color: #3a3737;
+	font-size: 18px;
+}
+
+/* Styles for top headings of each section block */
+.grid-1 h1, .grid-2 h1, .grid-3 h1, .grid-4 h1 {
+	background: url("../img/layout/header-splitter.png") 0 33px repeat-x;
+	padding-bottom: 20px;
+	margin-top: 0;
+	line-height: 22px;
+	margin-bottom: 11px;
+}
+.copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
+.clean {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	position: relative;
+	width: 1020px;
+	margin: 20px;
+}
+/* Sideview contains the Logo and navigation */
+.sideview {
+	position: relative;
+	width: 250px;
+	float: left;
+	position: fixed;
+	top: 20px;
+}
+
+.menu {
+	background: url("../img/layout/dark-overlay.png") repeat;
+	width: 230px;
+	padding: 10px;
+}
+
+.logo {
+	width: 250px;
+	margin-bottom: 10px;
+}
+
+.content {
+	margin-left: 270px;
+	margin-bottom: 45px;
+	width: 750px;
+}
+
+/* Pages Styles */
+
+/* About page */
+
+.about .intro {
+}
+
+.about .intro h1 {
+	margin: 0;
+}
+
+.about .intro h2 {
+	font-size: 34px;
+	margin: 10px 0 15px 0;
+	line-height: 37px;
+}
+
+.intro-text {
+	float: left;
+	width: 390px;
+	margin-right: 20px;
+}
+
+.intro-img {
+	float: left;
+	width: 300px;
+	margin-top: 15px;
+}
+
+.about .slider {
+	background: #fff;
+	float: left;
+	margin-bottom: 20px;
+	width: 750px;
+	height: 300px;
+}
+
+.about .science ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.about .science ul li {
+	float: left;
+	width: 223px;
+	margin-right: 20px;
+	text-align: center;
+}
+
+.about .science ul li h2 {
+	border-bottom: 5px solid #ddd;
+	margin-bottom: 13px;
+	padding-bottom: 5px;
+}
+
+.about .science ul li p {
+	text-align: left;
+}
+
+.about .science ul li.last {
+	margin: 0;
+}
+
+/* Skills Bars */
+ul.skills {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	float: left;
+	width: 345px;
+}
+
+ul.skills li {
+	background: #e7e7e7;
+	width: 326px;
+	height: 30px;
+	line-height: 34px;
+	background: url("img/patterns/pattern-3.png") repeat #e7e7e7;
+	margin-bottom: 10px;
+}
+
+ul.skills li:hover {
+	opacity: 0.9;
+}
+
+ul.skills li em {
+	float: right;
+	margin-right: 10px;
+	color: #333;
+}
+
+ul.skills li span.ux {
+	background: url("img/patterns/pattern-3.png") repeat #c54444;
+	padding: 10px 198px 5px 5px;
+	line-height: 36px;
+}
+
+.about .what-we-do p {
+	margin-bottom: 15px;
+}
+
+.about .what-we-do img {
+	float: left;
+	width: 345px;
+	
+}
+
+.about .what-we-do img {
+	margin-bottom: 10px;
+}
+
+ul.team {
+	padding: 0;
+	margin: 15px 0 0 0;
+	list-style-type: none;
+}
+
+ul.team li {
+	float: left;
+	width:223px;
+	margin-right: 20px;
+	background: url("../img/team-box.png") top no-repeat;
+	padding: 0;
+}
+
+ul.team li .section {
+
+}
+
+ul.team li p {
+	padding: 10px 10px 0 10px;
+	margin-bottom: 15px;
+	color: #666;
+}
+
+ul.team li p.team-member {
+	text-align: center;
+	font-weight: bold;
+	color: #fff;
+	margin: 0 0 30px 0;
+	font-size: 12px;
+
+}
+
+ul.team li p.team-member span {
+	font-weight: normal;
+}
+
+ul.team li img{
+	margin-left: 43px;
+}
+
+ul.team li.last {
+	margin: 0;
+}
+
+/* 3 Coloumn gallery */
+
+ul#filter { 
+	float: left; 
+	font-size: 14px; 
+	list-style: none; 
+	margin 0;
+	padding: 0; 
+	width: 100%; 
+}
+
+ul#filter li { 
+	float: left;
+	line-height: 16px;
+	margin-right: 10px;
+	padding-right: 10px;
+}
+
+ul#filter li:last-child { 
+	border-right: none; 
+	margin-right: 0; 
+	padding-right: 0; 
+}
+
+ul#filter a { 
+	color: #999; 
+	text-decoration: none; 
+}
+
+ul#filter li.current a, ul#filter a:hover { 
+	text-decoration: none; 
+}
+
+ul#filter li.current a { 
+	color: #333; 
+	border-bottom: 3px solid #ccc;
+}
+
+ul#portfolio { 
+	float: left; 
+	list-style: none; 
+	margin: 0;
+	padding: 0; 
+}
+
+ul#portfolio li { 
+	background: #fff; 
+	float: left; 
+	margin: 0 10px 20px 10px;
+	width: 210px;
+	border: 10px solid #fff;
+}
+
+ul#portfolio li p {
+	font-weight: bold;
+	background: url("../img/camera.png") 194px 3px no-repeat;
+}
+
+ul#portfolio li p span {
+	font-weight: normal;
+	display: block;
+	color: #999;
+}
+
+ul#portfolio a { 
+	display: block; 
+	width: 100%; 
+}
+
+ul#portfolio a:hover { 
+	text-decoration: none; 
+}
+
+ul#portfolio img {  
+	display: block; 
+	padding-bottom: 5px; 
+}
+
+ul#portfolio img:hover {  
+	display: block; 
+	padding-bottom: 5px;
+	opacity: 0.8;
+}
+
+/* Single View Gallery - Column*/
+
+.gallery {
+	margin-top: 216px;
+}
+
+ul#portfolio-one  {
+	list-style-type: none;
+	margin: 20px 0 0 0;
+	padding: 0; 
+	display: block;
+}
+
+ul#portfolio-one li {
+	background: #fff;
+	padding: 10px;
+	width: 730px;
+	margin-bottom: 20px;
+}
+
+ul#portfolio-one h2 {
+	margin: 0 0 10px 0;
+}
+
+ul#portfolio-one img {
+	margin-bottom: 10px;
+
+}
+
+.project-desc {
+	width: 100%;
+	background: url("../img/heart.png") top right 0 no-repeat;
+}
+
+/* Blog styling */
+
+.blog h2 {
+	margin-bottom: 0;
+}
+
+.single.blog h2 {
+	margin: 0 0 10px 0;
+}
+
+.single.blog img {
+	margin-bottom: 20px;
+} 
+
+.single.blog comments {
+
+}
+
+.single.blog .comments input {
+	width: 430px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	display: block;
+	padding: 10px;
+	color: #999;
+}
+
+.single.blog .comments textarea {
+	width: 430px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	display: block;
+	padding: 10px;
+	color: #999;
+	height: 120px;
+}
+
+.blog p {
+	margin-bottom: 10px;
+}
+
+.blog .btn {
+	float: right;
+}
+
+.blog ul.blog-desc {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: #666;
+}
+
+.blog ul.blog-desc span {
+	font-weight: normal;
+	color: #999;
+}
+
+.btn {
+	background: url("../img/plus-icon.png") no-repeat 90px 7px #9e0a14;
+	padding: 8px 30px 8px 12px;
+	font-size: 14px;
+	line-height: 14px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.send {
+	background: #9e0a14;
+	padding: 8px 12px 8px 12px;
+	font-size: 14px;
+	line-height: 14px;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	float: right;
+	width: 80px;
+}
+
+.btn:hover {
+	background: url("../img/plus-icon.png") no-repeat 90px 7px #b84545;
+}
+
+a.btn {
+	color: #fff;
+}
+
+a.btn:hover {
+	color: #fff;
+}
+
+.likes span {
+	background: url("../img/heart.png") 30px 0 no-repeat;
+	padding-right: 25px;
+}
+
+/* Contact us styling */
+
+.contact input {
+	width: 430px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	display: block;
+	padding: 10px;
+	color: #999;
+}
+
+.contact textarea {
+	width: 430px;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+	display: block;
+	padding: 10px;
+	color: #999;
+	height: 120px;
+}
+
+.contact h2 {
+	margin-top: 0;
+}
+
+ul.contact-details {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.contact-details li {
+	font-weight: bold;
+	color: #666;
+}
+
+ul.contact-details li span {
+	font-weight: normal;
+	color: #999;
+}
+
+.extend {
+	height: 316px;
+}
+
+/* Footer styles */
+#footer {
+	background: url("../img/layout/footer-bg.png") repeat-x;
+	height: 20px;
+	color: #999;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	padding: 10px;
+	font-size: 12px;
+}
+
+#footer p {
+	margin: 0;
+	float: left;
+	line-height: 24px;
+}
+
+#footer ul {
+	float: right;
+	margin: 0 30px 0 0;
+}
+
+#footer ul li {
+	float: left;
+	padding-left: 10px;
+}
+
+#footer ul li:hover {
+	padding-top: 3px;
+	opacity: 0.8;
+}

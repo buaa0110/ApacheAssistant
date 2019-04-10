@@ -7,13 +7,13 @@
 <!-- Load main style sheets -->
 <link rel="stylesheet" href="styles.css" />
 
-
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
 <!-- Default stylesheets for the slider -->
 <link rel="stylesheet" href="nivo-slider/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="nivo-slider/themes/pascal/pascal.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="nivo-slider/themes/orman/orman.css" type="text/css" media="screen" />
 
-<!-- Load Javascript and Jquery -->
+<!-- load Javascript and Jquery -->
 <script src="js/jquery-1.7.1.min.js"></script>
 <script src="js/jquery.nivo.slider.pack.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>
@@ -28,6 +28,13 @@
     });
     </script>
 
+<!-- Jquery Form Validation -->
+<script type="text/javascript">
+	$(document).ready(function() {
+	  $("#commentForm").validate();
+});
+</script>
+
 <!-- Fullsscreen Background -->
 <script type="text/javascript">
       jQuery(document).ready(function($) {
@@ -37,7 +44,7 @@
           autoplay: "true",
           autoplayTime: 5,
           
-          images:["img/fullscreen/stare.jpg",
+         images:["img/fullscreen/stare.jpg",
           			"img/fullscreen/water-studio.JPG",
 					"img/fullscreen/ginger.jpg",
 					"img/fullscreen/couch.JPG",
@@ -101,15 +108,44 @@
 			</ul>
 		</div><!-- end menu -->
 	</div><!-- end sideview -->
-    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >Website Template</a></div>
-<!-- Start Content -->
-	<div class="content cf">
+	<!-- Start Content -->
+	<div class="content contact cf">
+		<div class="grid-1">
+			<h1>Contact Us</h1>
+			<p><strong>Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar. Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar.</strong></p>
+		</div>
 
+		<div class="grid-4">
+			<h2>Use the form below to get in touch</h2>
+			<form id="commentForm" method="post" action="check.php" />
+		        <fieldset class="text-fields">
+		   			<input type="text" name="name" id="cname" class="required cname" onFocus="if(this.value == 'Your Name') { this.value = ''; }" value="Your name" />
+		          	<input type="text" name="cemail" id="cemail" class="required email" onFocus="if(this.value == 'Your Email') { this.value = ''; }" value="Your Email" />
+		        </fieldset>
+		        <fieldset class="text-block">
+		          	<textarea name="ccomment" class="required comment" onFocus="if(this.value == 'Type your message here') { this.value = ''; }">Type your message here</textarea>
+		        </fieldset>
+		        <button class="send">Send</button>
+		      </form>
+		</div>
+
+		<div class="grid-3 extend last">
+			<h2>Contact Details</h2>
+			<ul class="contact-details">
+				<li>Tel: <span>074 125 6528</span></li>
+				<li>Fax: <span>012 327 2675</span></li>
+				<li>Email: <span><a href="mailto:info@example.com">info@example.com</a></span></li>
+				<li>Address<br /> <span>701 Koby Street<br />Pretoria, <br />0183<br />South Africa</span></li>
+			</ul>
+		</div>
+		<div class="grid-1">
+			<iframe width="710" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.za/maps?q=hollywood+california&amp;ie=UTF8&amp;hq=&amp;hnear=Hollywood,+Los+Angeles,+California,+United+States&amp;gl=za&amp;t=m&amp;z=14&amp;ll=34.092809,-118.328661&amp;output=embed"></iframe>
+		</div>
 	</div><!-- end content -->
 </div><!-- end container -->
 <!-- Start footer -->
 <div id="footer" class="clearfix cf">
-	<p>Hardknocks 2013 &copy; More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></p>
+	<p>Hardknocks 2013 &copy;</p>
 	<ul class="clean">
 		<li><a href="#"><img src="img/layout/rss.png" width="25" height="18" alt="Rss Feed" /></a></li>
 		<li><a href="#"><img src="img/layout/twitter.png" width="25" height="18" alt="Twitter" /></a></li>

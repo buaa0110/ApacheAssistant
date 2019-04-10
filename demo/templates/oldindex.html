@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="static/semantic-ui/semantic.css" rel="stylesheet">
+    <title>demo</title>
+</head>
+
+<body>
+    <div class="ui container">
+        <br>
+        <h1 class="ui center aligned  header">ApacheAssistant demo</h1>
+        <div class="ui segment">
+            <button class="ui blue button" id='readfile'>
+                读取文件内容
+            </button>
+            <button class="ui blue button" id='change'>
+                修改ServerName
+            </button>
+            <button class="ui blue button" id='transferjson'>
+                传输json格式数据
+            </button>
+            <div class="ui divider"></div>
+            <div class="ui input">
+                <input id='savetext' type="text" placeholder="要存储的内容">
+            </div>
+            <button class="ui blue button" id='savedata'>
+                持久化存储
+            </button>
+        </div>
+        <div class="ui segment">
+            <div class="ui top left attached label">结果</div>
+            <div id="result"></div>
+        </div>
+    </div>
+
+</body>
+<script src="static/js/jquery.min.js"></script>
+<script src="static/semantic-ui/semantic.js"></script>
+<script type="text/javascript">
+    //--------------读取持久化存储的内容-----------------
+    $.get('/api/loaddata/', function (data) {
+        $('#savetext').val(data['savetext'])
+    })
+    //--------------按钮功能-----------------
+    //<读取文件内容>按钮
+    $('#readfile').click(function () {
+        //发送GET请求
+        $.get('/api/readfile/', function (data) {
+            //显示结果
+            $('#result').text(data)
+            $('#result').html($('#result').html().replace(/\n/g, '<br/>'))
+        })
+    })
+    //<修改ServerName>按钮
+    $('#change').click(function () {
+        //发送POST请求
+        $.post('/api/change/', { 'name': 'qq.com' }, function (data) {
+            //显示结果
+            $('#result').text(data)
+            $('#result').html($('#result').html().replace(/\n/g, '<br/>'))
+        })
+    })
+    //<传输json格式数据>按钮
+    $('#transferjson').click(function () {
+        //发送POST请求,与后端双向传输json数据
+        $.ajax({
+            url: '/api/transferjson/',
+            data: JSON.stringify({ '前端框架': 'jQuery+Semantic-UI' }),
+            type: 'POST',
+            dataType: 'json', //收到的数据格式
+            contentType: 'application/json;charset=utf-8', //发送的数据格式
+            success: function (data) {
+                //显示结果
+                console.log(data)
+                $('#result').html('前端发送的数据:<br>{"前端框架":"jQuery+Semantic-UI"}<br>后端发来的数据:<br>' + JSON.stringify(data))
+            }
+        })
+    })
+    //<持久化存储>按钮
+    $('#savedata').click(function () {
+        //发送POST请求,与后端双向传输json数据
+        $.ajax({
+            url: '/api/savedata/',
+            data: JSON.stringify({ 'savetext': $('#savetext').val() }),
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                //显示结果
+                $('#result').text(data)
+                $('#result').html($('#result').html().replace(/\n/g, '<br/>'))
+            }
+        })
+    })
+</script>
+
+</html>

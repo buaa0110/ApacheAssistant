@@ -7,19 +7,21 @@
 <!-- Load main style sheets -->
 <link rel="stylesheet" href="styles.css" />
 
-
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
 <!-- Default stylesheets for the slider -->
 <link rel="stylesheet" href="nivo-slider/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="nivo-slider/themes/pascal/pascal.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="nivo-slider/themes/orman/orman.css" type="text/css" media="screen" />
 
-<!-- Load Javascript and Jquery -->
+<!-- load Javascript and Jquery -->
 <script src="js/jquery-1.7.1.min.js"></script>
-<script src="js/jquery.nivo.slider.pack.js"></script>
+<script src="js/jquery.nivo.slider.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/jquery.validate.js"></script>
 <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="js/background-image.js"></script>
+<script type="text/javascript" src="js/filter-gallery.js"></script>
+
 
 <!-- Nivo Slider -->
     <script type="text/javascript">
@@ -27,6 +29,13 @@
         $('#slider').nivoSlider();
     });
     </script>
+
+<!-- PrettyPhoto Jquery Gallery -->
+    <script type="text/javascript">
+  $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto();
+  });
+</script>
 
 <!-- Fullsscreen Background -->
 <script type="text/javascript">
@@ -37,7 +46,7 @@
           autoplay: "true",
           autoplayTime: 5,
           
-          images:["img/fullscreen/stare.jpg",
+         images:["img/fullscreen/stare.jpg",
           			"img/fullscreen/water-studio.JPG",
 					"img/fullscreen/ginger.jpg",
 					"img/fullscreen/couch.JPG",
@@ -69,7 +78,7 @@
 <body>
 	<!-- Start container -->
 <div id="container">
-	<!-- Side view contains the logo and header section -->
+	<!-- Side view contains the Logo and header section -->
 	<div class="sideview">
 		<div class="logo">
 			<a href="index.html"><img src="img/layout/logo.png" width="250" height="146" alt="Logo" /></a>
@@ -101,15 +110,66 @@
 			</ul>
 		</div><!-- end menu -->
 	</div><!-- end sideview -->
-    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >Website Template</a></div>
 <!-- Start Content -->
 	<div class="content cf">
+		<div class="grid-1 cf">
+			<h1>1 Column Gallery</h1>
+			<p><strong>Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar. Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar.</strong></p>
+			<ul id="filter">
+				<li class="current"><a href="#">All</a></li>
+				<li><a href="#">Design</a></li>
+				<li><a href="#">Photography</a></li>
+				<li><a href="#">Development</a></li>
+				<li><a href="#">Services</a></li>
+			</ul>
+		</div>
+		<div class="gallery">
+			<ul id="portfolio-one">
+				<li class="development design">
+				<h2>Glass Shot</h2>
+				<a href="img/gallery00-large.png" rel="prettyPhoto" alt="Preview"><img src="img/large-preview.png" alt="" height="483" width="730" /></a>
+				<div class="project-desc">
+					<strong>Project Description</strong>
+					<p>Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar.</p>
+				</div>
+				</li>
 
-	</div><!-- end content -->
-</div><!-- end container -->
+				<li class="development photography">
+				<h2>Fire Projection</h2>
+				<a href="img/gallery00-large.png" rel="prettyPhoto" alt="Preview"><img src="img/large-preview2.png" alt="" height="483" width="730" /></a>
+				<div class="project-desc">
+					<strong>Project Description</strong>
+					<p>Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar.</p>
+				</div>
+				</li>
+
+				<li class="photography design">
+				<h2>Couch Photography</h2>
+				<a href="img/gallery00-large.png" rel="prettyPhoto" alt="Preview"><img src="img/large-preview3.png" alt="" height="483" width="730" /></a>
+				<div class="project-desc">
+					<strong>Project Description</strong>
+					<p>Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar.</p>
+				</div>
+				</li>
+
+				<li class="design services">
+				<h2>Another Project</h2>
+				<a href="img/gallery00-large.png" rel="prettyPhoto" alt="Preview"><img src="img/large-preview4.png" alt="" height="483" width="730" /></a>
+				<div class="project-desc">
+					<strong>Project Description</strong>
+					<p>Lorem ipsumia dolor sit ametis and the consectetur adipisicing elit, sed dos eiusmod tempor incididunt uno labores set dolore magna an sofar.</p>
+				</div>
+				</li>
+
+			</ul>
+			</div>
+		</div><!-- end grid-1 -->
+</div><!-- end content -->
+<!-- end container -->
+
 <!-- Start footer -->
 <div id="footer" class="clearfix cf">
-	<p>Hardknocks 2013 &copy; More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></p>
+	<p>Hardknocks 2013 &copy;</p>
 	<ul class="clean">
 		<li><a href="#"><img src="img/layout/rss.png" width="25" height="18" alt="Rss Feed" /></a></li>
 		<li><a href="#"><img src="img/layout/twitter.png" width="25" height="18" alt="Twitter" /></a></li>
