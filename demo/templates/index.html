@@ -5,21 +5,21 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
 <!-- Load main style sheets -->
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="static/styles.css" />
 
 
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link rel="shortcut icon" type="static/image/x-icon" href="favicon.ico" />
 
 <!-- Default stylesheets for the slider -->
-<link rel="stylesheet" href="nivo-slider/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="static/nivo-slider/themes/default/default.css" type="text/css" media="screen" />
 
 <!-- Load Javascript and Jquery -->
-<script src="js/jquery-1.7.1.min.js"></script>
-<script src="js/jquery.nivo.slider.pack.js"></script>
-<script src="js/jquery.prettyPhoto.js"></script>
-<script src="js/jquery.validate.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/background-image.js"></script>
+<script src="static/js/jquery-1.7.1.min.js"></script>
+<script src="static/js/jquery.nivo.slider.pack.js"></script>
+<script src="static/js/jquery.prettyPhoto.js"></script>
+<script src="static/js/jquery.validate.js"></script>
+<script type="text/javascript" src="static/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="static/js/background-image.js"></script>
 
 <!-- Nivo Slider -->
     <script type="text/javascript">
@@ -36,21 +36,21 @@
           pattern: "img/patterns/pattern-1.png",
           autoplay: "true",
           autoplayTime: 5,
-          
-          images:["img/fullscreen/stare.jpg",
-          			"img/fullscreen/water-studio.JPG",
-					"img/fullscreen/ginger.jpg",
-					"img/fullscreen/couch.JPG",
-					"img/fullscreen/kruip.jpg",
-					"img/fullscreen/leg.jpg",
-					"img/fullscreen/moeg.jpg",
-					"img/fullscreen/tired.jpg",
-					"img/fullscreen/veld.jpg",
-					"img/fullscreen/glasses.jpg",
-					"img/fullscreen/vlinder.jpg"],
+
+          images:["static/img/fullscreen/stare.jpg",
+          			"static/img/fullscreen/water-studio.JPG",
+					"static/img/fullscreen/ginger.jpg",
+					"static/img/fullscreen/couch.JPG",
+					"static/img/fullscreen/kruip.jpg",
+					"static/img/fullscreen/leg.jpg",
+					"static/img/fullscreen/moeg.jpg",
+					"static/img/fullscreen/tired.jpg",
+					"static/img/fullscreen/veld.jpg",
+					"static/img/fullscreen/glasses.jpg",
+					"static/img/fullscreen/vlinder.jpg"],
           images_sizing: "fill", // fill || adjust || stretch || repeat
-          
-          animationIn: { attribute:["y", "alpha"], // x || y || alpha 
+
+          animationIn: { attribute:["y", "alpha"], // x || y || alpha
                 value:  ["1px", 0],
                 easing: ["easeOutCubic", "swing"],
                 time: [0.7, 1.5],
@@ -72,32 +72,32 @@
 	<!-- Side view contains the logo and header section -->
 	<div class="sideview">
 		<div class="logo">
-			<a href="index.html"><img src="img/layout/logo.png" width="250" height="146" alt="Logo" /></a>
+			<a href="index.html"><img src="static/img/layout/apachelogo.jpg" width="250" height="146" alt="Logo" /></a>
 		</div><!-- end logo -->
 		<!-- Start menu -->
 		<div class="menu">
 			<ul class="nav">
 				<li><a href="index.html">Home<span class="desc">Back to the home page</span></a></li>
-				<li class="dropdown"><a href="#">Features<span class="desc">Layouts</span></a>
+				<li class="dropdown"><a href="#">Apache配置<span class="desc">Layouts</span></a>
 					<ul>
 						<li><a href="../background-image/index.html">Fullscreen Image Background</a></li>
 						<li><a href="../background-video/index.html">Fullscreen Video Background</a></li>
 						<li><a href="../background-plain/index.html">Plain Background</a></li>
 					</ul>
 				</li>
-				<li><a href="about.html">About<span class="desc">Meet the team</span></a></li>
+				<li><a href="about.html">团队介绍<span class="desc">Meet the team</span></a></li>
 				<li class="dropdown"><a href="3-column.html">Our Work<span class="desc">Clients and projects</span></a>
 					<ul>
 						<li><a href="1-column.html">1 Column Gallery</a></li>
 						<li><a href="3-column.html">3 Column Gallery</a></li>
 					</ul>
 				</li>
-				<li class="dropdown"><a href="blog.html">Blog<span class="desc">Catch up on some news</span></a>
+				<!-- <li class="dropdown"><a href="blog.html">Blog<span class="desc">Catch up on some news</span></a>
 					<ul>
 						<li><a href="single-blog.html">Single Blog Page</a></li>
 					</ul>
-				</li>
-				<li><a href="contact.html" class="last">Contact us<span class="desc">Get in touch</span></a></li>
+				</li> -->
+				<li><a href="contact.html" class="last">联系我们<span class="desc">Get in touch</span></a></li>
 			</ul>
 		</div><!-- end menu -->
 	</div><!-- end sideview -->
@@ -109,12 +109,12 @@
 </div><!-- end container -->
 <!-- Start footer -->
 <div id="footer" class="clearfix cf">
-	<p>Hardknocks 2013 &copy; More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a></p>
+	<p>BUAASCSE 2019 &copy; 软件工程实验 <target="_blank" title="模板之家">弟归</a></p>
 	<ul class="clean">
-		<li><a href="#"><img src="img/layout/rss.png" width="25" height="18" alt="Rss Feed" /></a></li>
-		<li><a href="#"><img src="img/layout/twitter.png" width="25" height="18" alt="Twitter" /></a></li>
-		<li><a href="#"><img src="img/layout/dribbble.png" width="25" height="18" alt="Dribbble" /></a></li>
-		<li><a href="#"><img src="img/layout/facebook.png" width="8" height="18" alt="Facebook" /></a></li>
+		<li><a href="#"><img src="static/img/layout/rss.png" width="25" height="18" alt="Rss Feed" /></a></li>
+		<li><a href="#"><img src="static/img/layout/twitter.png" width="25" height="18" alt="Twitter" /></a></li>
+		<li><a href="#"><img src="static/img/layout/dribbble.png" width="25" height="18" alt="Dribbble" /></a></li>
+		<li><a href="#"><img src="static/img/layout/facebook.png" width="8" height="18" alt="Facebook" /></a></li>
 	</ul>
 </div><!-- end footer -->
 

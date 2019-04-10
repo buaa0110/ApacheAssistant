@@ -1,0 +1,7 @@
+/* Load all the CSS Styles */
+@import url("css/boilerplate.css");
+@import url("css/prettyPhoto.css");
+@import url("nivo-slider/nivo-slider.css");
+@import url("css/navigation.css");
+@import url("css/modules.css");
+@import url("css/layout.css");
