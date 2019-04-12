@@ -66,6 +66,31 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+@app.route('/introduction')
+def introduction():
+    return render_template('introduction.html')
+@app.route('/introduction/usecase')
+def usecase():
+    return render_template("usecase.html")
+@app.route('/introduction/function')
+def function():
+    return render_template("function.html")
+@app.route('/func')
+def func():
+    return render_template("func.html")
+@app.route('/func/conf')
+def conf():
+    return render_template("conf.html")
+@app.route('/func/effi')
+def effi():
+    return render_template("effi.html")
+@app.route('/func/path')
+def path():
+    return render_template("path.html")
+@app.route('/func/module')
+def module():
+    return render_template("module.html")
+
 #----------------启动服务器----------------------
 if __name__ == '__main__':
     app.run(debug=True) #开启debug模式后修改文件内容能够自动重启服务器
