@@ -40,7 +40,7 @@ def transferjson():
 
 #持久化存储后端示例，实现在settings.json文件中保存和读取数据功能
 @app.route('/api/savedata/',methods=['POST'])
-def savedata(): 
+def savedata():
     data=request.json #前端发来的数据
     #写文件
     with open('settings.json','w') as f:
@@ -48,15 +48,24 @@ def savedata():
     return '保存到settings.json成功'
 
 @app.route('/api/loaddata/')
-def loaddata(): 
+def loaddata():
     #读文件
     with open('settings.json', 'r') as f:
         data = json.load(f)
     return jsonify(data) #后端传回的数据
 #----------------页面----------------------
+#homepage
 @app.route('/')
 def index():
     return render_template('index.html')
+#aboutpage
+@app.route('/about')
+def about():
+    return render_template('about.html')
+#contactpage
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 #----------------启动服务器----------------------
 if __name__ == '__main__':
     app.run(debug=True) #开启debug模式后修改文件内容能够自动重启服务器
