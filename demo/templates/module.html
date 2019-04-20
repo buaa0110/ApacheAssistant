@@ -2,13 +2,71 @@
 {% block title %}
     模块管理
 {% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="../static/jqueryPagination/css/jquery.pagination.css"/>
+    <script type="text/javascript" src="../static/jqueryPagination/js/jquery.pagination.min.js"></script>
+    <script>
+        $(function () {
+            $("#pagination1").pagination({
+                currentPage: 1,
+                totalPage: 12,
+                callback: function (current) {
+                    $("#current1").text(current)
+                }
+            });
+            $("#pagination4").pagination({
+                currentPage: 1,
+                totalPage: 12,
+                callback: function (current) {
+                    $("#current4").text(current)
+                }
+            });
+
+
+            $("#pagination2").pagination({
+                currentPage: 3,
+                totalPage: 12,
+                isShow: false,
+                count: 6,
+                prevPageText: "< 上一页",
+                nextPageText: "下一页 >",
+                callback: function (current) {
+                    $("#current2").text(current)
+                }
+            });
+
+            $("#pagination3").pagination({
+                currentPage: 4,
+                totalPage: 16,
+                isShow: true,
+                count: 7,
+                homePageText: "首页",
+                endPageText: "尾页",
+                prevPageText: "上一页",
+                nextPageText: "下一页",
+                callback: function (current) {
+                    $("#current3").text(current)
+                }
+            });
+
+            $("#getPage").on("click", function () {
+                var info = $("#pagination3").pagination("getPage");
+                alert("当前页数：" + info.current + ",总页数：" + info.total);
+            });
+
+            $("#setPage").on("click", function () {
+                $("#pagination3").pagination("setPage", 1, 10);
+            });
+        });
+    </script>
+{% endblock %}
 {% block MainContainer %}
     <div class="content cf">
         <div class="grid-1 cf">
             <h1>模块管理</h1>
             <p><strong>您可以在此安装卸载Apache服务器的模块</strong></p>
         </div>
-        <div class="gallery">
+        <li class="gallery">
             <ul id="portfolio-one">
                 <li class="development design">
                     <h2 class="ui center aligned icon header">
@@ -18,40 +76,82 @@
                 </li>
 
                 <li class="development photography">
-                    <div class="ui celled list">
+                    <h2 class="ui center aligned header">已安装模块</h2>
+                    <div class="ui middle aligned celled list">
                         <div class="item">
-                            <div class="content">
+                            <div class="right floated ui button">卸载</div>
 
-                                An excellent companion
-                            </div>
+                            分页插件
                         </div>
                         <div class="item">
-                            <div class="content">
-                                <div class="header">Poodle</div>
-                                A poodle, its pretty basic
-                            </div>
+                            <div class="right floated ui button">卸载</div>
+
+                            Lena
                         </div>
                         <div class="item">
-                            <div class="content">
-                                <div class="header">Paulo</div>
-                                He's also a dog
+                            <div class="right floated ui button">卸载</div>
+
+                            Lena
+                        </div>
+                        <div class="item">
+                            <div class="right floated ui button">卸载</div>
+
+                            Lena
+                        </div>
+                        <div class="item">
+                            <div id="pagination1" class="page fl"></div>
+                            <div class="info fl">
+                                <p>当前页数：<span id="current1">1</span></p>
                             </div>
                         </div>
                     </div>
+
                 </li>
 
                 <li class="photography design">
-                    <h2>查看性能参数</h2>
-
-                    <div class="project-desc">
-                        <strong>放置Apache性能相关参数（可能是图表为主）</strong>
-                        <p>施工中。。。</p>
+                    <h2 class="ui center aligned header">模块安装</h2>
+                    <div class="ui middle aligned celled list">
+                        <div class="item">
+                            <div class="right floated ui button">安装/已安装</div>
+                            <div class="right floated ui button">卸载/已卸载</div>
+                            分页插件
+                        </div>
+                        <div class="item">
+                            <div class="right floated ui button">安装/已安装</div>
+                            <div class="right floated ui button">卸载/已卸载</div>
+                            Lena
+                        </div>
+                        <div class="item">
+                            <div class="right floated ui button">安装/已安装</div>
+                            <div class="right floated ui button">卸载/已卸载</div>
+                            Lena
+                        </div>
+                        <div class="item">
+                            <div class="right floated ui button">安装/已安装</div>
+                            <div class="right floated ui button">卸载/已卸载</div>
+                            Lena
+                        </div>
+                        <div class="item">
+                            <div class="right floated ui button">安装/已安装</div>
+                            <div class="right floated ui button">卸载/已卸载</div>
+                            Lena
+                        </div>
+                        <div class="item">
+                            <div id="pagination4" class="page fl"></div>
+                            <div class="info fl">
+                            <p>当前页数：<span id="current4">1</span></p>
+                        </div>
+                        </div>
                     </div>
+
                 </li>
             </ul>
-        </div>
-    </div><!-- end grid-1 -->
+
+    </div>
+    </div><!-- end content -->
 {% endblock %}
+
+
 
 
 
