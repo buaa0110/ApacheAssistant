@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!doctype html>
 <head>
 <title>Hardknocks Agency</title>
@@ -99,6 +100,14 @@
     <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >Website Template</a></div>
 <!-- Start Content -->
 	<div class="content cf">
+=======
+{% extends 'base.html' %}
+{% block title %}
+    模块管理
+{% endblock %}
+{% block MainContainer %}
+<div class="content cf">
+>>>>>>> Stashed changes
     <div class="grid-1 cf">
 			<h1>性能监控</h1>
 			<p><strong>您可以在此查看Apache服务器的相关性能参数，以便于您更好地掌握本地服务器状态</strong></p>
@@ -140,18 +149,4 @@
 			</ul>
 			</div>
 		</div><!-- end grid-1 -->
-	</div><!-- end content -->
-</div><!-- end container -->
-<!-- Start footer -->
-<div id="footer" class="clearfix cf">
-	<p>BUAASCSE 2019 &copy; 软件工程实验 <target="_blank" title="模板之家">弟归</a></p>
-	<ul class="clean">
-		<li><a href="#"><img src="../static/img/layout/rss.png" width="25" height="18" alt="Rss Feed" /></a></li>
-		<li><a href="#"><img src="../static/img/layout/twitter.png" width="25" height="18" alt="Twitter" /></a></li>
-		<li><a href="#"><img src="../static/img/layout/dribbble.png" width="25" height="18" alt="Dribbble" /></a></li>
-		<li><a href="#"><img src="../static/img/layout/facebook.png" width="8" height="18" alt="Facebook" /></a></li>
-	</ul>
-</div><!-- end footer -->
-
-</body>
-</html>
+{% endblock %}
