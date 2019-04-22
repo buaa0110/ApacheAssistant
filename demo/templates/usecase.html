@@ -28,36 +28,31 @@
     });
     </script>
 
-<!-- Fullsscreen Background -->
-<script type="text/javascript">
-      jQuery(document).ready(function($) {
-        var background = new Easy_Background({
-          background_color: "none",
-          pattern: "../static/img/patterns/pattern-1.png",
-          autoplay: "true",
-          autoplayTime: 5,
+    <script type="text/javascript">
+          jQuery(document).ready(function($) {
+            var background = new Easy_Background({
+              background_color: "none",
+              pattern: "../static/img/patterns/pattern-1.png",
+              autoplay: "true",
+              autoplayTime: 5,
 
-          images:["../static/img/fullscreen/screen1.jpg",
-          			"../static/img/fullscreen/screen2.jpg",
-					"../static/img/fullscreen/screen3.jpg",
-					"../static/img/fullscreen/screen4.JPG",
-					"../static/img/fullscreen/screen5.jpg"],
-          images_sizing: "fill", // fill || adjust || stretch || repeat
+              images:["../static/img/fullscreen/screen2.jpg"],
+              images_sizing: "fill", // fill || adjust || stretch || repeat
 
-          animationIn: { attribute:["y", "alpha"], // x || y || alpha
-                value:  ["1px", 0],
-                easing: ["easeOutCubic", "swing"],
-                time: [0.7, 1.5],
-                delay:  0 },
-          animationOut: { attribute:[],
-                 value:   [],
-                 easing:  [],
-                 time:  [],
-                 delay: 0 }
-        });
-        $('body').click(background.next);
-      });
-    </script>
+              animationIn: { attribute:["y", "alpha"], // x || y || alpha
+                    value:  ["1px", 0],
+                    easing: ["easeOutCubic", "swing"],
+                    time: [0.7, 1.5],
+                    delay:  0 },
+              animationOut: { attribute:[],
+                     value:   [],
+                     easing:  [],
+                     time:  [],
+                     delay: 0 }
+            });
+            $('body').click(background.next);
+          });
+        </script>
 
 </head>
 <body>
