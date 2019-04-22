@@ -54,39 +54,47 @@ def loaddata():
         data = json.load(f)
     return jsonify(data) #后端传回的数据
 #----------------页面----------------------
-#homepage
+#homepage主页
 @app.route('/')
 def index():
     return render_template('index.html')
-#aboutpage
+#aboutpage关于我们
 @app.route('/about')
 def about():
     return render_template('about.html')
-#contactpage
+#contactpage联系我们
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+# 应用介绍
 @app.route('/introduction')
 def introduction():
     return render_template('introduction.html')
+# 使用说明
 @app.route('/introduction/usecase')
 def usecase():
     return render_template("usecase.html")
+#功能介绍
 @app.route('/introduction/function')
 def function():
     return render_template("function.html")
+#具体功能
 @app.route('/func')
 def func():
     return render_template("func.html")
+#配置管理
 @app.route('/func/conf')
 def conf():
     return render_template("conf.html")
+# 性能监控
 @app.route('/func/effi')
 def effi():
     return render_template("effi.html")
+#日志管理
 @app.route('/func/path')
 def path():
     return render_template("path.html")
+#模块管理
 @app.route('/func/module')
 def module():
     return render_template("module.html")
