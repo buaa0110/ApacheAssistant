@@ -1,7 +1,5 @@
 # ApacheAssistant demo
 
-ApacheAssistant demo项目搭建好了前端和后端框架，并实现前端和后端的数据传输、配置文件解析、文件读写等具体功能，可作为正式开发时的参考代码
-
 ## 安装及运行
 
 首先安装Python 3.5及以上版本，然后安装flask等依赖库
@@ -16,9 +14,46 @@ pip install flask apacheconfig apache_log_parser psutil sqlitedict
 python demo.py
 ```
 
-在浏览器中输入localhost:5000即可看到页面
+在浏览器中输入127.0.0.1:5000即可看到页面
 
-![](readme_image/demo1.png)
+## 后端开发进度
+
+### API版本：V0.2
+
+- /api/save_config/ 修改配置文件API修改为前端仅发送要修改的项
+- 增加/api/load_all_settings/ 查看所有保存的信息（如配置文件路径等）API，用于读取database.sqlite文件，仅用于debug
+
+### API实现进度
+
+#### 配置管理
+
+- [x] /api/save_config_path/	保存Apache配置文件路径
+- [x] /api/load_config_path/	读取保存的Apache配置文件路径
+- [x] /api/load_config/	读取解析好的Apahce配置文件信息
+- [x] /api/save_config/	修改配置文件（前端仅发送要修改的项）
+
+#### 日志管理
+
+- [ ] /api/save_log_path/	保存Apache日志文件路径
+- [ ] /api/load_log_path/	读取保存的Apache日志文件路径
+- [ ] /api/load_log_text/	读取Apahce日志文件文本
+- [ ] /api/save_log_text/	保存修改过的Apahce日志文件文本
+
+#### 性能监控
+
+- [ ] /api/apache_status/	查看apache系统状态(running/stop)
+- [ ] /api/control_apache/	改变apache系统状态(stop/start/restart)
+- [ ] /api/apache_params/	查看apache的性能参数
+
+#### 模块管理
+
+- [ ] /api/modules_list/	获得模块列表
+- [ ] /api/install_module/	安装模块
+- [ ] /api/remove_module/	卸载模块
+
+#### 全局工具
+
+- [x] /api/load_all_settings	查看所有保存的信息
 
 ## 使用的框架
 
@@ -32,26 +67,6 @@ python demo.py
 
   Semantic-UI（简单、美观的CSS框架），官方网站：https://semantic-ui.com/
 
-
-## 功能介绍
-
-#### 读取文件内容
-
-读取本机的文件内容并展示在页面上
-
-#### 修改ServerName
-
-调用ApacheConfigParser解析配置文件，并修改ServerName属性为qq.com
-
-#### 传输json格式数据
-
-前后端双向传输json格式的数据
-
-#### 持久化存储
-
-点击按钮后将文本框里的内容存储到settings.json文件中，并在页面加载时自动读取内容
-
-[注]该功能可用于实际项目中配置文件路径的存储，这里仅做一个样例，如果需要存储的数据较多，可以考虑使用SQLite作为存储单元
 
 ## 功能实现
 
