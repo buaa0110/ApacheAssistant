@@ -4,10 +4,10 @@ ApacheAssistant demo项目搭建好了前端和后端框架，并实现前端和
 
 ## 安装及运行
 
-首先安装Python 3.5及以上版本，然后安装flask包
+首先安装Python 3.5及以上版本，然后安装flask等依赖库
 
 ```
-pip install flask
+pip install flask apacheconfig apache_log_parser psutil sqlitedict
 ```
 
 进入demo.py所在目录，执行
@@ -32,10 +32,6 @@ python demo.py
 
   Semantic-UI（简单、美观的CSS框架），官方网站：https://semantic-ui.com/
 
-- 解析配置文件
-
-  使用Python实现的Apache配置文件解析库，仓库地址：https://github.com/mikemrm/ApacheConfigParser
-  暂时作为样例使用，可能功能不是特别全
 
 ## 功能介绍
 
@@ -99,10 +95,10 @@ python demo.py
 
 与项目相关的文件和文件夹有：
 
-| 文件或文件夹        | 功能                     |
-| ------------------- | ------------------------ |
-| demo.py             | 后端入口                 |
-| settings.json       | 持久化存储内容的文件     |
-| static/             | 前端js、css文件存储位置  |
-| templates/          | 前端页面html文件存储位置 |
-| ApacheConfigParser/ | ApacheConfigParser库     |
+| 文件或文件夹    | 功能                                                   |
+| --------------- | ------------------------------------------------------ |
+| demo.py         | 后端入口                                               |
+| settings.json   | 持久化存储内容的文件                                   |
+| static/         | 前端js、css文件存储位置                                |
+| templates/      | 前端页面html文件存储位置                               |
+| example_config/ | 配置文件示例httpd.conf和日志文件示例access.log存储位置 |

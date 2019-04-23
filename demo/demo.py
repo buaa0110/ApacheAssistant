@@ -1,58 +1,130 @@
 # -*- coding: utf-8 -*-
 from flask import Flask,render_template,request,abort,jsonify
-from ApacheConfigParser.ApacheConfig import ApacheParser
+import re
 import json
+from sqlitedict import SqliteDict
+import os
+from apacheconfig import *
 app = Flask(__name__)
 
 #----------------API后端----------------------
-#GET请求后端示例，实现读取文件内容功能
-@app.route('/api/readfile/')
-def readfile():
-    with open('ApacheConfigParser/examples/test_apache_config.conf','r') as f:
-        text=f.read()
-    result='读取到的文件内容:\n'+text
-    return result
+"""
+全局工具
+"""
+#持久化存储数据库，修改storage会自动保存
+storage = SqliteDict('./database.sqlite', autocommit=True)
 
-#POST请求后端示例，实现修改ServerName功能
-@app.route('/api/change/',methods=['POST'])
-def change():
-    name=request.form['name'] #name为收到的参数
-    with open('ApacheConfigParser/examples/test_apache_config.conf','rb') as f:
-        parsed = ApacheParser(f) #调用ApacheConfigParser解析文件,注意使用rb模式读取文件
-    result='要修改为的ServerName:'+name+'\n'
-    result+='============修改前的内容============\n'
-    result+=parsed.render().decode('utf-8')
-    #修改ServerName
-    parsed.findAll('VirtualHost').findChildren('ServerName').update(name)
-    result+='============修改后的内容============\n'
-    result+=parsed.render().decode('utf-8')
-    return result
-
-#传输json数据后端示例
-@app.route('/api/transferjson/',methods=['POST'])
-def transferjson():
-    data=request.json #前端发来的json数据
-    result={
-        '后端接收到的数据':data,
-        '后端框架':'Flask'
+#解析配置文件
+def parse_config():
+    options = {
+        'useapacheinclude':False,
+        'namedblock': False,
+        'noescape':True
     }
-    return jsonify(result) #后端传回json数据
+    with make_loader(**options) as loader:
+        config = loader.load(storage['config_path'])
+    
+    #返回特定的配置项
+    result={}
+    #配置项含义 
+    # Listen 监听端口(数值)
+    result['Listen']=config['Listen']
+    # DocumentRoot 网页目录位置(文件夹路径字符串)
+    result['DocumentRoot']=config['DocumentRoot']
+    # Keep Alive开关(On/Off)
+    result['KeepAlive']=config['KeepAlive']
+    # Keep Alive超时时间(数值)
+    result['KeepAliveTimeout']=config['KeepAliveTimeout']
+    # MaxKeepAliveRequests 最大连接数(数值)
+    result['MaxKeepAliveRequests']=config['MaxKeepAliveRequests']
+    # LogFormat 日志记录格式(字符串)
+    for obj in config['IfModule']:
+        if 'log_config_module' in obj:
+            log_module=obj
+    result['LogFormat']=log_module['log_config_module']['LogFormat']
+    
+    return result
 
-#持久化存储后端示例，实现在settings.json文件中保存和读取数据功能
-@app.route('/api/savedata/',methods=['POST'])
-def savedata():
-    data=request.json #前端发来的数据
-    #写文件
-    with open('settings.json','w') as f:
-        f.write(json.dumps(data,ensure_ascii=False,indent=2))
-    return '保存到settings.json成功'
+#返回成功信息
+def success(info):
+    return jsonify({'info':info})
 
-@app.route('/api/loaddata/')
-def loaddata():
-    #读文件
-    with open('settings.json', 'r') as f:
-        data = json.load(f)
-    return jsonify(data) #后端传回的数据
+#返回错误信息,HTTP 400 Bad Request
+def error(info):
+    return jsonify({'error':info}),400
+
+#查看所有保存的信息
+@app.route('/api/load_all_settings/',methods=['GET'])
+def load_all_settings():
+    result={}
+    for key, value in storage.iteritems():
+        result[key]=value
+    return jsonify(result)
+
+"""
+配置管理
+"""
+#保存Apache配置文件路径
+@app.route('/api/save_config_path/',methods=['POST'])
+def save_config_path():
+    #接收前端发来的json数据
+    data=request.json 
+    path=data['path']
+
+    #检查路径是否存在
+    if os.path.exists(path):
+        #保存并返回成功信息
+        storage['config_path']=path
+        return success('保存成功')
+    else:
+        #返回错误信息
+        return error('路径不存在')
+
+#读取保存的Apache配置文件路径
+@app.route('/api/load_config_path/',methods=['GET'])
+def load_config_path():
+    #检查是否已保存配置文件路径
+    if 'config_path' in storage:
+        #返回已保存的配置文件路径
+        result={'path':storage['config_path']}
+        return jsonify(result)
+    else:
+        #返回错误信息
+        return error('配置文件路径未保存')
+
+#读取解析好的Apahce配置文件信息
+@app.route('/api/load_config/',methods=['GET'])
+def load_config():
+    #解析配置文件
+    result=parse_config()
+    #返回解析的信息
+    return jsonify(result)
+
+#修改配置文件(前端仅发送要修改的项)
+@app.route('/api/save_config/',methods=['POST'])
+def save_config():
+    #接收前端发来的json数据
+    data=request.json 
+
+    #解析配置文件
+    config=parse_config()
+    #读取配置文件文本
+    with open(storage['config_path'],'r') as f:
+        config_text=f.read()
+    
+    #修改配置项
+    for key in data:
+        if key not in config:
+            return error('配置项'+key+'不在配置文件中')
+        old=config[key]
+        new=data[key]
+        config_text= re.sub(key+'\s+'+old,key+' '+new, config_text)
+    
+    #保存文件内容并返回成功信息
+    with open(storage['config_path'],'w') as f:
+        f.write(config_text)
+    return success('保存成功')
+    
 #----------------页面----------------------
 #homepage主页
 @app.route('/')
