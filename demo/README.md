@@ -67,45 +67,6 @@ python demo.py
 
   Semantic-UI（简单、美观的CSS框架），官方网站：https://semantic-ui.com/
 
-
-## 功能实现
-
-#### 以读取文件内容为例
-
-1. 用户点击<读取文件内容>按钮
-
-2. 前端向后端/api/readfile/发出GET请求，具体代码如下：
-
-   ```javascript
-   //templates/index.html文件
-   //<读取文件内容>按钮
-   $('#readfile').click(function () {
-       //发送GET请求
-       $.get('/api/readfile/', function (data) {
-           //显示结果
-           $('#result').text(data)
-           $('#result').html($('#result').html().replace(/\n/g, '<br/>'))
-       })
-   })
-   ```
-
-3. 后端收到请求，读取本机上指定位置的文件，然后将文件内容传输给前端，具体代码如下：
-
-   ```python
-   #demo.py文件
-   #GET请求后端示例，实现读取文件内容功能
-   @app.route('/api/readfile/')
-   def readfile():
-       with open('ApacheConfigParser/examples/test_apache_config.conf','r') as f:
-           text=f.read()
-       result='读取到的文件内容:\n'+text
-       return result
-   ```
-
-4. 前端收到内容后在页面中显示文件内容
-
-   ![](readme_image/demo2.png)
-
 ## 文件结构
 
 与项目相关的文件和文件夹有：
@@ -113,7 +74,54 @@ python demo.py
 | 文件或文件夹    | 功能                                                   |
 | --------------- | ------------------------------------------------------ |
 | demo.py         | 后端入口                                               |
-| settings.json   | 持久化存储内容的文件                                   |
+| database.sqlite | 持久化存储内容的SQLite数据库文件                       |
 | static/         | 前端js、css文件存储位置                                |
 | templates/      | 前端页面html文件存储位置                               |
 | example_config/ | 配置文件示例httpd.conf和日志文件示例access.log存储位置 |
+
+## 使用Postman测试后端API
+
+Postman是一款功能强大的HTTP请求测试软件，常用于Web开发与测试
+
+以/api/save_config_path/ 保存Apache配置文件路径为例测试后端API的具体功能
+
+#### 1.下载Postman并安装
+
+https://www.getpostman.com/
+
+#### 2.运行demo.py，启动Postman
+
+发送请求的操作如图所示
+
+![](readme_image/postman1.png)
+
+![](readme_image/postman2.png)
+
+#### 3.使用Postman生成前端发送请求的js代码
+
+Postman可以自动生成各种变成语言的请求代码，生成js代码的操作如图所示
+
+![](readme_image/postman3.png)
+
+生成的js代码（稍作修改即可用于前端页面）：
+
+```javascript
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:5000/api/save_config_path/",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/json",
+    "cache-control": "no-cache",
+    "Postman-Token": "74738f9b-cb8b-4f08-a47b-6227b40ae6b3"
+  },
+  "processData": false,
+  "data": "{\n\t\"path\":\"乱写的\"\n}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
