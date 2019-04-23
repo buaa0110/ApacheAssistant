@@ -1,54 +1,156 @@
 {% extends 'base.html' %}
 {% block title %}
- 日志管理
+ 配置管理
 {% endblock %}
 {% block head %}
+    <link rel="stylesheet" type="text/css" href="../static/jqueryPagination/css/jquery.pagination.css"/>
+    <script type="text/javascript" src="../static/jqueryPagination/js/jquery.pagination.min.js"></script>
+    <script>
+        $(function () {
+            $("#pagination1").pagination({
+                currentPage: 1,
+                totalPage: 12,
+                callback: function (current) {
+                    $("#current1").text(current)
+                }
+            });
+            $("#pagination4").pagination({
+                currentPage: 1,
+                totalPage: 12,
+                callback: function (current) {
+                    $("#current4").text(current)
+                }
+            });
+
+
+            $("#pagination2").pagination({
+                currentPage: 3,
+                totalPage: 12,
+                isShow: false,
+                count: 6,
+                prevPageText: "< 上一页",
+                nextPageText: "下一页 >",
+                callback: function (current) {
+                    $("#current2").text(current)
+                }
+            });
+
+            $("#pagination3").pagination({
+                currentPage: 4,
+                totalPage: 16,
+                isShow: true,
+                count: 7,
+                homePageText: "首页",
+                endPageText: "尾页",
+                prevPageText: "上一页",
+                nextPageText: "下一页",
+                callback: function (current) {
+                    $("#current3").text(current)
+                }
+            });
+
+            $("#getPage").on("click", function () {
+                var info = $("#pagination3").pagination("getPage");
+                alert("当前页数：" + info.current + ",总页数：" + info.total);
+            });
+
+            $("#setPage").on("click", function () {
+                $("#pagination3").pagination("setPage", 1, 10);
+            });
+        });
+    </script>
 {% endblock %}
 {% block MainContainer %}
-    <div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >Website Template</a></div>
-<!-- Start Content -->
-	<div class="content cf">
-    <div class="grid-1 cf">
-			<h1>性能监控</h1>
-			<p><strong>您可以在此查看Apache服务器的相关性能参数，以便于您更好地掌握本地服务器状态</strong></p>
-			<!--<ul id="filter">-->
-				<!--<li class="current"><a href="#">All</a></li>-->
-				<!--<li><a href="#">Design</a></li>-->
-				<!--<li><a href="#">Photography</a></li>-->
-				<!--<li><a href="#">Development</a></li>-->
-				<!--<li><a href="#">Services</a></li>-->
-			<!--</ul>-->
+    <div class="content cf">
+		<div class="grid-1 cf">
+			<h1>日志管理</h1>
+			<p><strong>您可以在此查看当前日志文件路径、管理日志文件路径、读取日志信息和修改日志信息</strong></p>
 		</div>
 		<div class="gallery">
 			<ul id="portfolio-one">
 				<li class="development design">
-				<h2>查看Apache状态</h2>
-				<div class="project-desc">
-					<strong>放置Apache状态情况</strong>
-					<p>施工中。。。</p>
-				</div>
+				<h2 class="ui left aligned icon header">原日志文件路径</h2>
+        <div class="ui left labeled button " >
+          <a class="ui basic right label">
+          路径内容，使用js读取后端实时返回内容
+          </a>
+          <div class="ui button">
+            <i class="sync icon"></i> 刷新
+          </div>
+        </div>
+	</li>
+	<li class="development photography">
+				<h2>修改日志文件路径</h2>
+        <div class="ui fluid action input">
+            <input type="text" placeholder="默认路径">
+                <button class="ui button"><i class="large folder open outline icon"></i></button>
+                        &nbsp;
+                <button class="ui button">修改</button>
+                </div>
 				</li>
 
-				<li class="development photography">
-				<h2>改变Apache状态</h2>
-
-				<div class="project-desc">
-					<strong>Apache状态改变按钮</strong>
-					<p>施工中。。。</p>
-				</div>
-				</li>
 
 				<li class="photography design">
-				<h2>查看性能参数</h2>
+				<h2>当前日志文件信息</h2>
 
-				<div class="project-desc">
-					<strong>放置Apache性能相关参数（可能是图表为主）</strong>
-					<p>施工中。。。</p>
-				</div>
+				<div >
+          <div class="ui grid">
+            <div class="twelve wide column">
+
+            </div>
+
+
+          </div>
+          <div class="ui segment">
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                日志内容，使用js读取后端实时返回内容
+                </a>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                日志内容，使用js读取后端实时返回内容
+                </a>
+              </div><div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                日志内容，使用js读取后端实时返回内容
+                </a>
+              </div><div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                日志内容，使用js读取后端实时返回内容
+                </a>
+              </div><div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                日志内容，使用js读取后端实时返回内容
+                </a>
+              </div>
+              <div class="ui divider"></div>
+              <div class="item">
+                            <div id="pagination1" class="page fl"></div>
+                            <div class="info fl">
+                                <p>当前页数：<span id="current1">1</span></p>
+                            </div>
+                        </div>
+          </div>
+        </div>
+
 				</li>
+         <li class="design services">
+				<h2>修改日志文件信息</h2>
+        <div class="ui segment">
+            <div class="ui fluid action input">
+              <input type="text" placeholder="日志内容">
+              <div class="ui button">修改</div>
+            </div>
+        </div>
+				</li>
+
+
 			</ul>
 			</div>
-		</div><!-- end grid-1 -->
 	</div><!-- end content -->
-</div><!-- end container -->
 {% endblock %}
