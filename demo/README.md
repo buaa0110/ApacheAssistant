@@ -136,7 +136,9 @@ $.ajax(settings).done(function (response) {
 
 ### 1.下载并解压
 
-下载Apache24.zip压缩包(https://raw.githubusercontent.com/buaa0110/ApacheAssistant/master/demo/Apache24.zip)，解压到C盘根目录下，解压后的路径和文件目录如下图所示
+下载Apache24.zip压缩包，链接：https://raw.githubusercontent.com/buaa0110/ApacheAssistant/master/demo/Apache24.zip
+
+解压到C盘根目录下，解压后的路径和文件目录如下图所示
 
 ![](readme_image/apache1.png)
 
