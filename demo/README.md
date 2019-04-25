@@ -21,10 +21,18 @@ python demo.py
 
 ## 后端开发进度
 
+### API版本：V0.3
+
+- 增加/api/clear_log_text/ 清除日志文件内容的API
+- 增加/api/backup_log_text/ 备份日志文件内容的API
+- 增加/api/filter_log_text/ 根据参数筛选日志文件内容的API
+- 删除/api/save_log_text/ 考虑到没有修改日志文件内容的需求，删除该API
+
 ### API版本：V0.2
 
 - /api/save_config/ 修改配置文件API修改为前端仅发送要修改的项
 - 增加/api/load_all_settings/ 查看所有保存的信息（如配置文件路径等）API，用于读取database.sqlite文件，仅用于debug
+
 
 ### API实现进度
 
