@@ -36,10 +36,10 @@ python demo.py
 
 #### 日志管理
 
-- [ ] /api/save_log_path/	保存Apache日志文件路径
-- [ ] /api/load_log_path/	读取保存的Apache日志文件路径
-- [ ] /api/load_log_text/	读取Apahce日志文件文本
-- [ ] /api/save_log_text/	保存修改过的Apahce日志文件文本
+- [x] /api/save_log_path/	保存Apache日志文件路径
+- [x] /api/load_log_path/	读取保存的Apache日志文件路径
+- [x] /api/load_log_text/	读取Apahce日志文件文本
+- [x] /api/save_log_text/	保存修改过的Apahce日志文件文本
 
 #### 性能监控
 
