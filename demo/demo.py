@@ -128,9 +128,9 @@ def save_config():
     return success('保存成功')
 
 
- """
+"""
  日志管理
- """
+"""
 
 #保存Apache日志文件路径/api/save_log_path/
 @app.route('/api/save_log_path/', methods=['POST'])
@@ -177,7 +177,7 @@ def load_log_text():
         return error('日志文件路径未保存')
 
 #保存修改过的Apahce日志文件文本
-@app.route('/api/save_log_text/',method=['POST'])
+@app.route('/api/save_log_text/',methods=['POST'])
 def save_log_text():
     if 'log_path' in storage:
         path = storage['log_path']
