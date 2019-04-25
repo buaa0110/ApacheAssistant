@@ -88,11 +88,11 @@ Postman是一款功能强大的HTTP请求测试软件，常用于Web开发与测
 
 以/api/save_config_path/ 保存Apache配置文件路径为例测试后端API的具体功能
 
-#### 1.下载Postman并安装
+### 1.下载Postman并安装
 
 https://www.getpostman.com/
 
-#### 2.运行demo.py，启动Postman
+### 2.运行demo.py，启动Postman
 
 发送请求的操作如图所示
 
@@ -100,7 +100,7 @@ https://www.getpostman.com/
 
 ![](readme_image/postman2.png)
 
-#### 3.使用Postman生成前端发送请求的js代码
+### 3.使用Postman生成前端发送请求的js代码
 
 Postman可以自动生成各种变成语言的请求代码，生成js代码的操作如图所示
 
@@ -128,3 +128,50 @@ $.ajax(settings).done(function (response) {
 });
 ```
 
+## Windows平台安装Apache
+
+性能管理和模块管理的功能需要与Apache程序交互，因此需要在Windows平台下安装Apache并安装为服务(Linux下使用apt-get即可，无需手动操作)
+
+具体的安装步骤如下
+
+### 1.下载并解压
+
+下载Apache24.zip压缩包(https://raw.githubusercontent.com/buaa0110/ApacheAssistant/master/demo/Apache24.zip)，解压到C盘根目录下，解压后的路径和文件目录如下图所示
+
+![](readme_image/apache1.png)
+
+### 2.添加环境变量
+
+右击“**此电脑**”，点击“**属性**”，在弹出的对话框中点击左侧的“**高级系统设置**”，然后选择“**高级**”选项卡中的“**环境变量**”，然后在系统变量的Path中加入Apache程序的执行目录C:\Apache24\bin\
+
+![](readme_image/apache2.png)
+
+### 3.安装服务
+
+使用**管理员权限**打开cmd
+
+![](readme_image/apache3.png)
+
+在cmd命令提示符窗口中输入
+
+```shell
+httpd -k install
+```
+
+即可将Apache安装为服务，安装过程如下图所示
+
+![](readme_image/apache4.png)
+
+### 4.启动/关闭Apache
+
+使用命令行启动或关闭Apache必须使用**管理员权限**（类似于Linux下的sudo权限），在cmd中输入以下命令可以完成启动/关闭Apache等操作
+
+```shell
+httpd -k start	#启动Apache
+httpd -k stop	#关闭Apache
+httpd -h		#查看Apache的其他命令
+```
+
+启动Apache后在浏览器中输入localhost，即可看到Apache的页面
+
+![](readme_image/apache5.png)
