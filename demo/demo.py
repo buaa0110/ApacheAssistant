@@ -4,6 +4,8 @@ import re
 import json
 from sqlitedict import SqliteDict
 import os
+import apache_log_parser
+from pprint import pprint
 from apacheconfig import *
 app = Flask(__name__)
 
@@ -124,7 +126,72 @@ def save_config():
     with open(storage['config_path'],'w') as f:
         f.write(config_text)
     return success('保存成功')
-    
+
+
+ """
+ 日志管理
+ """
+
+#保存Apache日志文件路径/api/save_log_path/
+@app.route('/api/save_log_path/', methods=['POST'])
+def save_log_path():
+    #接收前端发来的json数据
+    data = request.json
+    path = data['path']
+
+    #检查路径是否存在
+    if os.path.exists(path):
+        #保存并返回保存成功信息
+        storage['log_path'] = path
+        return success('保存成功')
+    else:
+        #返回错误信息
+        return error('路径不存在')
+
+
+#读取保存的Apache日志文件路径
+@app.route('/api/load_log_path/',methods=['GET'])
+def load_log_path():
+    #检查是否已经保存日志文件路径
+    if 'log_path' in storage:
+        #返回已保存的日志文件路径
+        result = {'path':storage['log_path']}
+        return jsonify(result)
+    else:
+        #返回错误信息
+        return error('日志文件路径未保存')
+
+#读取Apahce日志文件文本
+@app.route('/api/load_log_text/',methods=['GET'])
+def load_log_text():
+    if 'log_path' in storage:
+        path = storage['log_path']
+        if os.path.exists(path):
+            with open(path,'r') as f:
+                log_text = f.read()
+            storage['log_text'] = log_text
+            return success('读取日志文件成功')
+        else:
+            return error('日志文件路径不存在')
+    else:
+        return error('日志文件路径未保存')
+
+#保存修改过的Apahce日志文件文本
+@app.route('/api/save_log_text/',method=['POST'])
+def save_log_text():
+    if 'log_path' in storage:
+        path = storage['log_path']
+        if os.path.exists(path):
+            with open(path,'r') as f:
+                log_text = f.read()
+            storage['log_text'] = log_text
+            return success('保存成功')
+        else:
+            return error('日志文件路径不存在')
+    else:
+        return error('日志文件路径未保存')
+
+
 #----------------页面----------------------
 #homepage主页
 @app.route('/')
