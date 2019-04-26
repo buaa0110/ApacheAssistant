@@ -29,10 +29,10 @@ def parse_config():
     }
     with make_loader(**options) as loader:
         config = loader.load(storage['config_path'])
-    
+
     #返回特定的配置项
     result={}
-    #配置项含义 
+    #配置项含义
     # Listen 监听端口(数值)
     result['Listen']=config['Listen']
     # DocumentRoot 网页目录位置(文件夹路径字符串)
@@ -48,7 +48,7 @@ def parse_config():
         if 'log_config_module' in obj:
             log_module=obj
     result['LogFormat']=log_module['log_config_module']['LogFormat']
-    
+
     return result
 
 #返回成功信息
@@ -74,7 +74,7 @@ def load_all_settings():
 @app.route('/api/save_config_path/',methods=['POST'])
 def save_config_path():
     #接收前端发来的json数据
-    data=request.json 
+    data=request.json
     path=data['path']
 
     #检查路径是否存在
@@ -110,14 +110,14 @@ def load_config():
 @app.route('/api/save_config/',methods=['POST'])
 def save_config():
     #接收前端发来的json数据
-    data=request.json 
+    data=request.json
 
     #解析配置文件
     config=parse_config()
     #读取配置文件文本
     with open(storage['config_path'],'r') as f:
         config_text=f.read()
-    
+
     #修改配置项
     for key in data:
         if key not in config:
@@ -125,7 +125,7 @@ def save_config():
         old=config[key]
         new=data[key]
         config_text= re.sub(key+'\s+'+old,key+' '+new, config_text)
-    
+
     #保存文件内容并返回成功信息
     with open(storage['config_path'],'w') as f:
         f.write(config_text)
@@ -233,10 +233,10 @@ def filter_log_text():
                 match_flag = False
         if match_flag == True:
             filter_text.append(item)
-    
+
     storage['filter_text'] = filter_text
     return success("筛选成功")
-                
+
 
 
 

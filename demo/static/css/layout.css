@@ -206,7 +206,7 @@ ul.skills li span.ux {
 .about .what-we-do img {
 	float: left;
 	width: 345px;
-	
+
 }
 
 .about .what-we-do img {
@@ -221,9 +221,8 @@ ul.team {
 
 ul.team li {
 	float: left;
-	width:223px;
+	width:300px;
 	margin-right: 20px;
-	background: url("../img/team-box.png") top no-repeat;
 	padding: 0;
 }
 
@@ -240,7 +239,7 @@ ul.team li p {
 ul.team li p.team-member {
 	text-align: center;
 	font-weight: bold;
-	color: #fff;
+	color: #000;
 	margin: 0 0 30px 0;
 	font-size: 12px;
 
@@ -260,52 +259,52 @@ ul.team li.last {
 
 /* 3 Coloumn gallery */
 
-ul#filter { 
-	float: left; 
-	font-size: 14px; 
-	list-style: none; 
+ul#filter {
+	float: left;
+	font-size: 14px;
+	list-style: none;
 	margin 0;
-	padding: 0; 
-	width: 100%; 
+	padding: 0;
+	width: 100%;
 }
 
-ul#filter li { 
+ul#filter li {
 	float: left;
 	line-height: 16px;
 	margin-right: 10px;
 	padding-right: 10px;
 }
 
-ul#filter li:last-child { 
-	border-right: none; 
-	margin-right: 0; 
-	padding-right: 0; 
+ul#filter li:last-child {
+	border-right: none;
+	margin-right: 0;
+	padding-right: 0;
 }
 
-ul#filter a { 
-	color: #999; 
-	text-decoration: none; 
+ul#filter a {
+	color: #999;
+	text-decoration: none;
 }
 
-ul#filter li.current a, ul#filter a:hover { 
-	text-decoration: none; 
+ul#filter li.current a, ul#filter a:hover {
+	text-decoration: none;
 }
 
-ul#filter li.current a { 
-	color: #333; 
+ul#filter li.current a {
+	color: #333;
 	border-bottom: 3px solid #ccc;
 }
 
-ul#portfolio { 
-	float: left; 
-	list-style: none; 
+ul#portfolio {
+	float: left;
+	list-style: none;
 	margin: 0;
-	padding: 0; 
+	padding: 0;
 }
 
-ul#portfolio li { 
-	background: #fff; 
-	float: left; 
+ul#portfolio li {
+	background: #fff;
+	float: left;
 	margin: 0 10px 20px 10px;
 	width: 210px;
 	border: 10px solid #fff;
@@ -322,22 +321,22 @@ ul#portfolio li p span {
 	color: #999;
 }
 
-ul#portfolio a { 
-	display: block; 
-	width: 100%; 
+ul#portfolio a {
+	display: block;
+	width: 100%;
 }
 
-ul#portfolio a:hover { 
-	text-decoration: none; 
+ul#portfolio a:hover {
+	text-decoration: none;
 }
 
-ul#portfolio img {  
-	display: block; 
-	padding-bottom: 5px; 
+ul#portfolio img {
+	display: block;
+	padding-bottom: 5px;
 }
 
-ul#portfolio img:hover {  
-	display: block; 
+ul#portfolio img:hover {
+	display: block;
 	padding-bottom: 5px;
 	opacity: 0.8;
 }
@@ -351,7 +350,7 @@ ul#portfolio img:hover {
 ul#portfolio-one  {
 	list-style-type: none;
 	margin: 20px 0 0 0;
-	padding: 0; 
+	padding: 0;
 	display: block;
 }
 
@@ -388,7 +387,7 @@ ul#portfolio-one img {
 
 .single.blog img {
 	margin-bottom: 20px;
-} 
+}
 
 .single.blog comments {
 
