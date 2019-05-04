@@ -48,232 +48,63 @@
 				<div class="ui divider"></div>
 				<div class="ui segment">
 					<a class="ui basic right label">CPU占用率监控</a>
-					<div class="echarts" id="CPUOccupied">
-
-					</div>
+					<canvas id="CPUOccupied"></canvas>
 				</div>
 				<div class="ui divider"></div>
 				<div class="ui segment">
 					<a class="ui basic right label">内存占用率监控</a>
-					<div class="echarts" id="RAMOccupied">
-
-					</div>
+					<canvas id="RAMOccupied"></canvas>
 				</div>
 				</li>
 			</ul>
 			</div>
 		</div><!-- end grid-1 -->
+
 		<script type="text/javascript">
-			$.get('url', function (data) {
-				var speedChart = echarts.init(document.getElementById('netSpeedChart'));
-				speedChart.setOption(option = {
-	        title: {
-	            text: 'Beijing AQI'
-	        },
-	        tooltip: {
-	            trigger: 'axis'
-	        },
-	        xAxis: {
-	            data: data.map(function (item) {
-	                return item[0];
-	            })
-	        },
-	        yAxis: {
-	            splitLine: {
-	                show: false
-	            }
-	        },
-	        toolbox: {
-	            left: 'center',
-	            feature: {
-	                dataZoom: {
-	                    yAxisIndex: 'none'
-	                },
-	                restore: {},
-	                saveAsImage: {}
-	            }
-	        },
-	        dataZoom: [{
-	            startValue: '2014-06-01'
-	        }, {
-	            type: 'inside'
-	        }],
-	        visualMap: {
-	            top: 10,
-	            right: 10,
-	            pieces: [{
-	                gt: 0,
-	                lte: 50,
-	                color: '#096'
-	            }, {
-	                gt: 50,
-	                lte: 100,
-	                color: '#ffde33'
-	            }, {
-	                gt: 100,
-	                lte: 150,
-	                color: '#ff9933'
-	            }, {
-	                gt: 150,
-	                lte: 200,
-	                color: '#cc0033'
-	            }, {
-	                gt: 200,
-	                lte: 300,
-	                color: '#660099'
-	            }, {
-	                gt: 300,
-	                color: '#7e0023'
-	            }],
-	            outOfRange: {
-	                color: '#999'
-	            }
-	        },
-	        series: {
-	            name: 'Beijing AQI',
-	            type: 'line',
-	            data: data.map(function (item) {
-	                return item[1];
-	            }),
-	            markLine: {
-	                silent: true,
-	                data: [{
-	                    yAxis: 50
-	                }, {
-	                    yAxis: 100
-	                }, {
-	                    yAxis: 150
-	                }, {
-	                    yAxis: 200
-	                }, {
-	                    yAxis: 300
-	                }]
-	            }
-	        }
-	    });
+
+			var settings = {
+			  "async": true,
+			  "crossDomain": true,
+			  "url": "http://127.0.0.1:5000/api/save_config_path/",
+			  "method": "POST",
+			  "headers": {
+			    "Content-Type": "application/json",
+			    "Access-Control-Allow-Origin": "*",
+			    "Access-Control-Allow-Methods": "OPTIONS,HEAD,GET,POST",
+			    "Access-Control-Allow-Headers": "x-requested-with",
+			    "Accept": "*/*",
+			    "Cache-Control": "no-cache",
+			    "Postman-Token": "9ba09a17-a92d-44bb-8975-1f61e4cc17a1,17b28c91-d48d-49b1-9ade-1c6022f60aa9",
+			    "cache-control": "no-cache"
+			  },
+			  "processData": false,
+			  "data": "{\n\t\"path\":\"wjknb\"\n}"
+			}
+
+			$.ajax(settings).success(function (response) {
+			  console.log(response);
+				var ctx = document.getElementById('RAMOccupied').getContext('2d');
+				var chart = new Chart(ctx, {
+						// The type of chart we want to create
+						type: 'line',
+
+						// The data for our dataset
+						data: {
+								labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+								datasets: [{
+										label: 'My First dataset',
+										backgroundColor: 'rgb(255, 99, 132)',
+										borderColor: 'rgb(255, 99, 132)',
+										data: [0, 10, 5, 2, 20, 30, 45]
+								}]
+						},
+
+						// Configuration options go here
+						options: {}
+					});
 			});
-			$.get('url', function(data) {
-				var cpuChart = echarts.init(document.getElementById('CPUOccupied'));
-    		cpuOption = {
-        	legend: {},
-        	tooltip: {
-            trigger: 'axis',
-            showContent: false
-        	},
-        	dataset: {
-            source: [
-                ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
-                ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
-                ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
-                ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
-                ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
-            ]
-        	},
-        	xAxis: {type: 'category'},
-        	yAxis: {gridIndex: 0},
-        	grid: {top: '55%'},
-        	series: [
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {
-                type: 'pie',
-                id: 'pie',
-                radius: '30%',
-                center: ['50%', '25%'],
-                label: {
-                    formatter: '{b}: {@2012} ({d}%)'
-                },
-                encode: {
-                    itemName: 'product',
-                    value: '2012',
-                    tooltip: '2012'
-                }
-            }
-        	]
-    		};
-
-    		cpuChart.on('updateAxisPointer', function (event) {
-        	var xAxisInfo = event.axesInfo[0];
-        	if (xAxisInfo) {
-            	var dimension = xAxisInfo.value + 1;
-            	cpuChart.setOption({
-                	series: {
-                    	id: 'pie',
-                    	label: {
-                        	formatter: '{b}: {@[' + dimension + ']} ({d}%)'
-                    	},
-                    	encode: {
-                        	value: dimension,
-                        	tooltip: dimension
-                    	}
-                	}
-            	});
-        		}
-    		});
-
-    		cpuChart.setOption(cpuOption);
-			});
-			$.get('url',function(data){
-				var ramChart = echarts.init(document.getElementById('RAMOccupied'));
-    		ramOption = {
-        	legend: {},
-        	tooltip: {
-            trigger: 'axis',
-            showContent: false
-        	},
-        	dataset: {
-            source: [
-                ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
-                ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
-                ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
-                ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
-                ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
-            ]
-        	},
-        	xAxis: {type: 'category'},
-        	yAxis: {gridIndex: 0},
-        	grid: {top: '55%'},
-        	series: [
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
-            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
 
 
-						{type: 'pie',	 id: 'pie',	radius: '30%', center: ['50%', '25%'],
-                label: {
-                    formatter: '{b}: {@2012} ({d}%)'
-                },
-                encode: {
-                    itemName: 'product',
-                    value: '2012',
-                    tooltip: '2012'
-                }
-            }]
-    		};
 
-    		ramChart.on('updateAxisPointer', function (event) {
-        	var xAxisInfo = event.axesInfo[0];
-        	if (xAxisInfo) {
-            	var dimension = xAxisInfo.value + 1;
-            	ramChart.setOption({
-                	series: {
-                    	id: 'pie',
-                    	label: {
-                        	formatter: '{b}: {@[' + dimension + ']} ({d}%)'
-                    	},
-                    	encode: {
-                        	value: dimension,
-                        	tooltip: dimension
-                    	}
-                	}
-            	});
-        		}
-    		});
-
-    		ramChart.setOption(ramOption);
-			});
 		</script>
 {% endblock %}

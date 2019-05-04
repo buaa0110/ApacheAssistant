@@ -9,7 +9,10 @@ import shutil
 import apache_log_parser
 from pprint import pprint
 from apacheconfig import *
+from flask_cors import *
+
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 line_parser = apache_log_parser.make_parser("%h %l %u %t \"%r\" %>s %b")
 
@@ -57,8 +60,8 @@ def success(info):
 
 #返回错误信息,HTTP 400 Bad Request
 def error(info):
-    return jsonify({'error':info}),400
-
+    return jsonify({'error':info})
+## this part changed by jk for solve the net problem
 #查看所有保存的信息
 @app.route('/api/load_all_settings/',methods=['GET'])
 def load_all_settings():
@@ -76,14 +79,16 @@ def save_config_path():
     #接收前端发来的json数据
     data=request.json
     path=data['path']
-
+    print(path)
     #检查路径是否存在
     if os.path.exists(path):
         #保存并返回成功信息
         storage['config_path']=path
+        print("success")
         return success('保存成功')
     else:
         #返回错误信息
+        print("fail")
         return error('路径不存在')
 
 #读取保存的Apache配置文件路径
@@ -221,6 +226,7 @@ def backup_log_text():
 
 #筛选日志内容字段
 @app.route('/api/filter_log_text/',methods=['GET'])
+
 def filter_log_text():
     data = request.json
     key_list = list(data.keys())
