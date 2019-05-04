@@ -41,9 +41,7 @@
 
 				<div class="ui segment">
 					<a class="ui basic right label">网络速度监控</a>
-					<div class="echarts" id="netSpeedChart">
-
-					</div>
+					<canvas id="netSpeedChart"></canvas>
 				</div>
 				<div class="ui divider"></div>
 				<div class="ui segment">
@@ -81,30 +79,67 @@
 			  "data": "{\n\t\"path\":\"wjknb\"\n}"
 			}
 
-			$.ajax(settings).success(function (response) {
+			$.ajax(settings).success(function(response){
 			  console.log(response);
-				var ctx = document.getElementById('RAMOccupied').getContext('2d');
-				var chart = new Chart(ctx, {
-						// The type of chart we want to create
-						type: 'line',
+				var speed = document.getElementById('netSpeedChart').getContext('2d');
+				var chart = new Chart(speed, {
+				    // The type of chart we want to create
+				    type: 'line',
 
-						// The data for our dataset
-						data: {
-								labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-								datasets: [{
-										label: 'My First dataset',
-										backgroundColor: 'rgb(255, 99, 132)',
-										borderColor: 'rgb(255, 99, 132)',
-										data: [0, 10, 5, 2, 20, 30, 45]
-								}]
-						},
+				    // The data for our dataset
+				    data: {
+				        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+				        datasets: [{
+				            label: 'My First dataset',
+				            backgroundColor: 'rgb(255, 99, 132)',
+				            borderColor: 'rgb(255, 99, 132)',
+				            data: [0, 10, 5, 2, 20, 30, 45]
+				        }]
+				    },
 
-						// Configuration options go here
-						options: {}
-					});
+				    // Configuration options go here
+				    options: {}
+				});
+
+				var cpu = document.getElementById('CPUOccupied').getContext('2d');
+				dataCpu = {
+				    datasets: [{
+				        data: [10, 20, 30],
+								backgroundColor:['#ff6384','#36a2eb','#cc65fe']
+				    }],
+
+				    // These labels appear in the legend and in the tooltips when hovering different arcs
+				    labels: [
+				        'Red',
+				        'Yellow',
+				        'Blue'
+				    ]
+				};
+				var cpuChart = new Chart(cpu, {
+				    type: 'pie',
+				    data: dataCpu,
+				    options: {}
+				});
+
+				var ram = document.getElementById('RAMOccupied').getContext('2d');
+				dataRam = {
+				    datasets: [{
+				        data: [10, 20, 30],
+								backgroundColor:['#ff6384','#36a2eb','#cc65fe']
+				    }],
+
+				    // These labels appear in the legend and in the tooltips when hovering different arcs
+				    labels: [
+				        'Red',
+				        'Yellow',
+				        'Blue'
+				    ]
+				};
+				var ramChart = new Chart(ram, {
+				    type: 'pie',
+				    data: dataRam,
+				    options: {}
+				});
 			});
-
-
-
 		</script>
 {% endblock %}
