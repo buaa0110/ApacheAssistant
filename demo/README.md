@@ -68,6 +68,28 @@ python demo.py
 
 - [x] /api/load_all_settings	查看所有保存的信息
 
+## 前端发送json数据到后端的代码示例
+
+```javascript
+$.ajax({
+    url: '/api/save_config_path/',
+    data: JSON.stringify({ 'path': '乱写的' }),
+    type: 'POST',
+    dataType: 'json', //收到的数据格式
+    contentType: 'application/json;charset=utf-8', //发送的数据格式
+    success: function (data) {
+        //发送成功
+        console.log('成功')
+        console.log(data)
+    },
+    error: function(data){
+        //后端返回error
+        console.log('失败')
+        console.log(data)
+    }
+})
+```
+
 ## 使用的框架
 
 - 后端框架
@@ -109,34 +131,6 @@ https://www.getpostman.com/
 ![](readme_image/postman1.png)
 
 ![](readme_image/postman2.png)
-
-### 3.使用Postman生成前端发送请求的js代码
-
-Postman可以自动生成各种变成语言的请求代码，生成js代码的操作如图所示
-
-![](readme_image/postman3.png)
-
-生成的js代码（稍作修改即可用于前端页面）：
-
-```javascript
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:5000/api/save_config_path/",
-  "method": "POST",
-  "headers": {
-    "Content-Type": "application/json",
-    "cache-control": "no-cache",
-    "Postman-Token": "74738f9b-cb8b-4f08-a47b-6227b40ae6b3"
-  },
-  "processData": false,
-  "data": "{\n\t\"path\":\"乱写的\"\n}"
-}
-
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});
-```
 
 ## Windows平台安装Apache
 
