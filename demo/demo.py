@@ -9,6 +9,8 @@ import shutil
 import apache_log_parser
 from pprint import pprint
 from apacheconfig import *
+import psutil
+import subprocess
 
 app = Flask(__name__)
 
@@ -52,6 +54,18 @@ def parse_config():
 
     return result
 
+#获取apache的pid
+def get_apache_pid(pid_path):
+    if os.path.exists(pid_path):
+        with open('C:/Apache24/logs/httpd.pid') as f:
+            pid=int(f.read())
+        if psutil.pid_exists(pid):
+            return pid
+        else:
+            return -1
+    else:
+        return -1
+
 #返回成功信息
 def success(info):
     return jsonify({'info':info})
@@ -59,7 +73,7 @@ def success(info):
 #返回错误信息,HTTP 400 Bad Request
 def error(info):
     return jsonify({'error':info}),400
-## this part changed by jk for solve the net problem
+
 #查看所有保存的信息
 @app.route('/api/load_all_settings/',methods=['GET'])
 def load_all_settings():
@@ -243,7 +257,106 @@ def filter_log_text():
     storage['filter_text'] = filter_text
     return success("筛选成功")
 
+"""
+ 性能监控
+"""
 
+#保存Apache目录路径
+@app.route('/api/save_apache_path/',methods=['POST'])
+def save_apache_path():
+    #接收前端发来的json数据
+    data=request.json
+    path=data['path']
+    #检查路径是否存在
+    if os.path.exists(path):
+        #保存并返回成功信息
+        storage['apache_path']=path
+        storage['httpd_path']=storage['apache_path']+'bin/httpd.exe'
+        storage['pid_path']=storage['apache_path']+'logs/httpd.pid'
+        return success('保存成功')
+    else:
+        #返回错误信息
+        return error('路径不存在')
+
+#读取保存的Apache目录路径
+@app.route('/api/load_apache_path/',methods=['GET'])
+def load_apache_path():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' in storage:
+        #返回已保存的Apache目录路径
+        result={'path':storage['apache_path']}
+        return jsonify(result)
+    else:
+        #返回错误信息
+        return error('Apache目录路径未保存')
+
+#查看apache系统状态(running/stop)
+@app.route('/api/apache_status/',methods=['GET'])
+def apache_status():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' not in storage:
+        return error('Apache目录路径未保存')
+    #获取pid
+    httpd_pid=get_apache_pid(storage['pid_path'])
+    #判断是否正在运行
+    if httpd_pid>=0:
+        status='running'
+    else:
+        status='stop'
+    #返回结果
+    return jsonify({'status':status})
+
+#改变apache系统状态
+@app.route('/api/control_apache/',methods=['POST'])
+def control_apache():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' not in storage:
+        return error('Apache目录路径未保存')
+    #接收前端发来的json数据
+    data=request.json
+    command=data['command']
+    #检查命令是否正确
+    if command in ['stop','start','restart']:
+        proc=subprocess.run([storage['httpd_path'],'-k',command],stdout=subprocess.PIPE)
+        print(proc.stdout)
+        return success('操作成功')
+    else:
+        #返回错误信息
+        return error('命令有误,应为stop/start/restart')
+    
+#查看apache的性能参数
+@app.route('/api/apache_params/',methods=['GET'])
+def apache_params():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' not in storage:
+        return error('Apache目录路径未保存')
+    #获取pid
+    httpd_pid=get_apache_pid(storage['pid_path'])
+    result={}
+    #判断是否正在运行
+    if httpd_pid>=0: #正在运行
+        p=psutil.Process(httpd_pid)
+        #CPU占用，数值范围0~100，可以直接在后面加百分号
+        result['cpu_percent']=p.cpu_percent()
+        #内存占用，数值范围0~100，可以直接在后面加百分号
+        result['memory_percent']=p.memory_percent()
+        #连接数，非负整数
+        result['connections']=len(p.connections())
+        #网络传输量，单位为MB
+        network_data = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
+        network_data=round(network_data/1024.0/1024.0,2)
+        result['network_data']=network_data
+    else: #已停止
+        result['cpu_percent']=0.0
+        result['memory_percent']=0.0
+        result['connections']=0
+        result['network_data']=0
+    #返回结果
+    return jsonify(result)
+
+"""
+ 模块管理
+"""
 
 
 
