@@ -17,6 +17,10 @@ pip install flask apacheconfig apache_log_parser psutil sqlitedict
 python demo.py
 ```
 
+由于**性能监控**和**模块管理**部分需要管理员权限才能与Apache程序本身进行交互，请按照下方提示安装好Apache后，双击demo目录下的“**使用管理员权限启动demo**”文件，即可自动使用管理员权限启动demo，启动后效果如下图所示
+
+![](readme_image/cmd1.png)
+
 在浏览器中输入127.0.0.1:5000即可看到页面
 
 ## 后端开发进度
