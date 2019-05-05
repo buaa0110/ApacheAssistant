@@ -58,7 +58,7 @@ def success(info):
 
 #返回错误信息,HTTP 400 Bad Request
 def error(info):
-    return jsonify({'error':info})
+    return jsonify({'error':info}),400
 ## this part changed by jk for solve the net problem
 #查看所有保存的信息
 @app.route('/api/load_all_settings/',methods=['GET'])
