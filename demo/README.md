@@ -70,7 +70,7 @@ python demo.py
 
 ## 前端发送json数据到后端的代码示例
 
-```
+```javascript
 $.ajax({
     url: '/api/save_config_path/',
     data: JSON.stringify({ 'path': '乱写的' }),
