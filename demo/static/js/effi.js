@@ -8,7 +8,7 @@ function updateCpu(){
         $.ajax({
             url: '/api/',
             data:{},
-            type: 'get',
+            type: 'GET',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
@@ -23,14 +23,14 @@ function updateRam(){
   $('#ramOcc').click(function () {
         //发送POST请求,与后端双向传输json数据
         $.ajax({
-            url: '/api/savedata/',
-            data: JSON.stringify({ 'savetext': $('#savetext').val() }),
-            type: 'get',
+            url: '/api/',
+            data: {},
+            type: 'GET',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
-                cpuChart.segment.value = data['cpu'];
-                cpuChart.update();
+                ramChart.segment.value = data['ram'];
+                ramChart.update();
             }
         })
     })
@@ -40,48 +40,67 @@ function updateSpeed(){
   $('#netSpeed').click(function () {
         //发送POST请求,与后端双向传输json数据
         $.ajax({
-            url: '/api/savedata/',
-            data: JSON.stringify({ 'savetext': $('#savetext').val() }),
-            type: 'get',
+            url: '/api/',
+            data: {},
+            type: 'GET',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
-                cpuChart.segment.value = data['cpu'];
-                cpuChart.update();
+                netSpeedChart.segment.value = data['cpu'];
+                netSpeedChart.update();
             }
         })
     })
 }
 
 function changeState(){
-  $('#cpuOcc').click(function () {
+  $('#changeButton').click(function () {
         //发送POST请求,与后端双向传输json数据
         $.ajax({
-            url: '/api/savedata/',
-            data: JSON.stringify({ 'savetext': $('#savetext').val() }),
-            type: 'get',
+            url: '/api/',
+            data: JSON.stringify({ 'curState': $('#stateButton').val() }),
+            type: 'POST',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
-                cpuChart.segment.value = data['cpu'];
-                cpuChart.update();
+                $("#stateButton").val(data['state'])
             }
         })
     })
 }
 
 function toSeeState(){
-  $('#cpuOcc').click(function () {
-        //发送POST请求,与后端双向传输json数据
+  $('#stateButton').click(function () {
+        //发送get请求,与后端请求当前服务器状态
         $.ajax({
-            url: '/api/savedata/',
-            data: JSON.stringify({ 'savetext': $('#savetext').val() }),
-            type: 'get',
+            url: '/api/',
+            data: {},
+            type: 'GET',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
-                cpuChart.segment.value = data['cpu'];
-                cpuChart.update();
+                $("#stateButton").val(data['state'])
+            }
+        })
+    })
+}
+
+function restart(){
+  $('#restartButton').click(function () {
+        //发送get请求,与后端请求当前服务器状态
+        $.ajax({
+            url: '/api/',
+            data: JSON.stringify({ 'restart': "true"}),
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                //显示结果
+                if(data['result'] == "success"){
+                  alert("restart successfully!");
+                }
+                else{
+                  alert("restart failed!");
+                }
             }
         })
     })
