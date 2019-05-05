@@ -66,6 +66,42 @@ def get_apache_pid(pid_path):
     else:
         return -1
 
+#获取所有模块信息
+def get_module_info():
+    modules={}
+    #从文件中读取所有动态模块的信息
+    with open('modules_list.txt','r') as f:
+        for line in f:
+            attributes=line.strip().split(' ')
+            if len(attributes)==2:
+                #获取属性
+                name=attributes[0]
+                path=attributes[1]
+                #添加属性
+                modules[name]={}
+                modules[name]['path']=path
+                modules[name]['type']='shared'
+                modules[name]['status']='uninstalled'
+    #读取apache的现有模块
+    proc = subprocess.run([storage['httpd_path'],'-M'],stdout=subprocess.PIPE)
+    exist_modules_textlist=proc.stdout.decode('utf-8').split('\n')
+    for index in range(len(exist_modules_textlist)):
+        if index==0: #去掉首行
+            continue
+        #解析模块的名称和类型
+        text=exist_modules_textlist[index].strip()
+        attributes=text.split(' ')
+        if len(attributes)==2:
+            name=attributes[0]
+            module_type=attributes[1]
+            if module_type=='(static)': #静态模块
+                modules[name]={}
+                modules[name]['type']='static'
+                modules[name]['status']='installed'
+            else: #动态模块
+                modules[name]['status']='installed'
+    return modules
+
 #返回成功信息
 def success(info):
     return jsonify({'info':info})
@@ -358,7 +394,92 @@ def apache_params():
  模块管理
 """
 
+#获得模块列表
+@app.route('/api/modules_list/',methods=['GET'])
+def modules_list():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' not in storage:
+        return error('Apache目录路径未保存')
+    #获取模块信息
+    modules=get_module_info()
+    #生成列表
+    static_list=[]
+    shared_list=[]
+    for name in modules:
+        if modules[name]['type']=='static':
+            static_list.append({'name':name})
+        else:
+            shared_list.append({'name':name,'status':modules[name]['status'],'path':modules[name]['path']})
+    result={'static_list':static_list,'shared_list':shared_list}
+    #返回结果
+    return jsonify(result)
 
+#安装模块
+@app.route('/api/install_module/',methods=['POST'])
+def install_module():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' not in storage:
+        return error('Apache目录路径未保存')
+    #接收前端发来的json数据
+    data=request.json
+    name=data['name']
+    #获取模块信息
+    modules=get_module_info()
+    if name not in modules:
+        return error('模块名称有误')
+    else:
+        module=modules[name]
+        #安装模块
+        #读取配置文件文本
+        with open(storage['config_path'],'r') as f:
+            config_text=f.read()
+
+        #修改配置项
+        config_text= re.sub('#+\s*LoadModule\s+'+name+'\s+'+module['path'],'LoadModule '+name+' '+module['path'], config_text)
+
+        #保存文件内容
+        with open(storage['config_path'],'w') as f:
+            f.write(config_text)
+        
+        #重新启动apache
+        subprocess.run([storage['httpd_path'],'-k','restart'],stdout=subprocess.PIPE)
+
+        return success('操作成功')
+
+#卸载模块
+@app.route('/api/remove_module/',methods=['POST'])
+def remove_module():
+    #检查是否已保存Apache目录路径
+    if 'apache_path' not in storage:
+        return error('Apache目录路径未保存')
+    #接收前端发来的json数据
+    data=request.json
+    name=data['name']
+    #获取模块信息
+    modules=get_module_info()
+    if name not in modules:
+        return error('模块名称有误')
+    else:
+        module=modules[name]
+        if module['type']=='static':
+            return error('模块'+name+'是静态模块，不可卸载')
+        else:
+            #安装模块
+            #读取配置文件文本
+            with open(storage['config_path'],'r') as f:
+                config_text=f.read()
+
+            #修改配置项
+            config_text= re.sub('#*LoadModule\s+'+name+'\s+'+module['path'],'#LoadModule '+name+' '+module['path'], config_text)
+
+            #保存文件内容
+            with open(storage['config_path'],'w') as f:
+                f.write(config_text)
+            
+            #重新启动apache
+            subprocess.run([storage['httpd_path'],'-k','restart'],stdout=subprocess.PIPE)
+
+            return success('操作成功')
 
 #----------------页面----------------------
 #homepage主页
