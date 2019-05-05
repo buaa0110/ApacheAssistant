@@ -9,10 +9,8 @@ import shutil
 import apache_log_parser
 from pprint import pprint
 from apacheconfig import *
-from flask_cors import *
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
 
 line_parser = apache_log_parser.make_parser("%h %l %u %t \"%r\" %>s %b")
 
