@@ -76,6 +76,8 @@ def load_all_settings():
 def save_config_path():
     #接收前端发来的json数据
     data=request.json
+    print(request)
+    print(data)
     path=data['path']
     print(path)
     #检查路径是否存在

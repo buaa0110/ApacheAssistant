@@ -40,17 +40,17 @@
 				<h2>查看性能参数</h2>
 
 				<div class="ui segment">
-					<a class="ui basic right label">网络速度监控</a>
+					<a class="ui basic right button" id="netSpeed">网络速度监控</a>
 					<canvas id="netSpeedChart"></canvas>
 				</div>
 				<div class="ui divider"></div>
 				<div class="ui segment">
-					<a class="ui basic right label">CPU占用率监控</a>
+					<a class="ui basic right button" id="cpuOcc">CPU占用率监控</a>
 					<canvas id="CPUOccupied"></canvas>
 				</div>
 				<div class="ui divider"></div>
 				<div class="ui segment">
-					<a class="ui basic right label">内存占用率监控</a>
+					<a class="ui basic right button" id="ramOcc">内存占用率监控</a>
 					<canvas id="RAMOccupied"></canvas>
 				</div>
 				</li>
@@ -59,84 +59,73 @@
 		</div><!-- end grid-1 -->
 
 		<script type="text/javascript">
-// http://127.0.0.1:5000/
-			var settings = {
-			  "async": true,
-			  "crossDomain": true,
-			  "url": "/api/save_config_path/",
-			  "method": "POST",
-			  "headers": {
-			    "Content-Type": "application/json",
-			    "Accept": "*/*",
-			    "Cache-Control": "no-cache",
-			    "Postman-Token": "9ba09a17-a92d-44bb-8975-1f61e4cc17a1,17b28c91-d48d-49b1-9ade-1c6022f60aa9",
-			    "cache-control": "no-cache"
-			  },
-			  "processData": false,
-			  "data": "{\n\t\"path\":\"wjknb\"\n}"
-			}
+			$.ajax({
+            url: '/api/save_config_path/',
+            data: JSON.stringify({ 'path': "wjknb" }),
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                //显示结果
+                console.log(data);
+								var speed = document.getElementById('netSpeedChart').getContext('2d');
+								var chart = new Chart(speed, {
+								    // The type of chart we want to create
+								    type: 'line',
 
-			$.ajax(settings).success(function(response){
-			  console.log(response);
-				var speed = document.getElementById('netSpeedChart').getContext('2d');
-				var chart = new Chart(speed, {
-				    // The type of chart we want to create
-				    type: 'line',
+								    // The data for our dataset
+								    data: {
+								        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+								        datasets: [{
+								            label: 'Speed',
+								            backgroundColor: 'rgb(255, 99, 132)',
+								            borderColor: 'rgb(255, 99, 132)',
+								            data: [0, 10, 5, 2, 20, 30, 45]
+								        }]
+								    },
 
-				    // The data for our dataset
-				    data: {
-				        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-				        datasets: [{
-				            label: 'My First dataset',
-				            backgroundColor: 'rgb(255, 99, 132)',
-				            borderColor: 'rgb(255, 99, 132)',
-				            data: [0, 10, 5, 2, 20, 30, 45]
-				        }]
-				    },
+								    // Configuration options go here
+								    options: {}
+								});
 
-				    // Configuration options go here
-				    options: {}
-				});
+								var cpu = document.getElementById('CPUOccupied').getContext('2d');
+								dataCpu = {
+								    datasets: [{
+								        data: [10, 20],
+												backgroundColor:['#ff6384','#36a2eb']
+								    }],
 
-				var cpu = document.getElementById('CPUOccupied').getContext('2d');
-				dataCpu = {
-				    datasets: [{
-				        data: [10, 20, 30],
-								backgroundColor:['#ff6384','#36a2eb','#cc65fe']
-				    }],
+								    // These labels appear in the legend and in the tooltips when hovering different arcs
+								    labels: [
+								        '已用',
+								        '可用'
+								    ]
+								};
+								var cpuChart = new Chart(cpu, {
+								    type: 'pie',
+								    data: dataCpu,
+								    options: {}
+								});
 
-				    // These labels appear in the legend and in the tooltips when hovering different arcs
-				    labels: [
-				        'Red',
-				        'Yellow',
-				        'Blue'
-				    ]
-				};
-				var cpuChart = new Chart(cpu, {
-				    type: 'pie',
-				    data: dataCpu,
-				    options: {}
-				});
+								var ram = document.getElementById('RAMOccupied').getContext('2d');
+								dataRam = {
+								    datasets: [{
+								        data: [10, 20],
+												backgroundColor:['#ff6384','#36a2eb']
+								    }],
 
-				var ram = document.getElementById('RAMOccupied').getContext('2d');
-				dataRam = {
-				    datasets: [{
-				        data: [10, 20, 30],
-								backgroundColor:['#ff6384','#36a2eb','#cc65fe']
-				    }],
+								    // These labels appear in the legend and in the tooltips when hovering different arcs
+								    labels: [
+								        '已用',
+								        '可用'
+								    ]
+								};
+								var ramChart = new Chart(ram, {
+								    type: 'pie',
+								    data: dataRam,
+								    options: {}
+								});
+            }
+        })
 
-				    // These labels appear in the legend and in the tooltips when hovering different arcs
-				    labels: [
-				        'Red',
-				        'Yellow',
-				        'Blue'
-				    ]
-				};
-				var ramChart = new Chart(ram, {
-				    type: 'pie',
-				    data: dataRam,
-				    options: {}
-				});
-			});
 		</script>
 {% endblock %}
