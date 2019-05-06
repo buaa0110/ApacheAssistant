@@ -5,7 +5,7 @@
 {% block head %}
 {% endblock %}
 {% block MainContainer %}
-    <div class="content cf">
+  <div class="content cf">
 		<div class="grid-1 cf">
 			<h1>配置管理</h1>
 			<p><strong>您可以在此查看当前配置文件路径、管理配置文件路径、读取配置信息和修改配置信息</strong></p>
@@ -38,7 +38,7 @@
 				<h2>当前配置文件信息</h2>
           <div class="ui segment">
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui basic right label" id="confInfo1">
                 路径内容，使用js读取后端实时返回内容
                 </a>
                 <div class="ui button" id="getConfInfo1">
@@ -47,7 +47,7 @@
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui basic right label" id=“confInfo2”>
                 路径内容，使用js读取后端实时返回内容
                 </a>
                 <div class="ui button" id="getConfInfo2">
@@ -56,7 +56,7 @@
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui basic right label" id="confInfo3">
                 路径内容，使用js读取后端实时返回内容
                 </a>
                 <div class="ui button" id="getConfInfo3">
@@ -64,9 +64,7 @@
                 </div>
               </div>
           </div>
-        </div>
-
-				</li>
+        </li>
 
 				<li class="design services">
 				<h2>修改配置文件信息</h2>
@@ -89,6 +87,26 @@
 				</li>
 
 			</ul>
-			</div>
+		</div>
+    <script type="text/javascript">
+			$.ajax({
+            url: '/api/',
+            data: {},
+            type: 'GET',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                //显示结果
+                $('#confPathLabel').val = data['confPathLabel'];
+                $('#confInfo1').val = data['confInfo1'];
+                $('#confInfo2').val = data['confInfo2'];
+                $('#confInfo3').val = data['confInfo3'];
+                console.log("load successfully");
+            },
+            error:function(data){
+              alert(data);
+            }
+      })
+		</script>
 	</div><!-- end content -->
+
 {% endblock %}
