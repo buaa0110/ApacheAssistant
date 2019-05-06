@@ -15,10 +15,10 @@
 				<li class="development design">
 				<h2 class="ui left aligned icon header">原配置文件路径</h2>
         <div class="ui left labeled button " >
-          <a class="ui basic right label">
+          <a class="ui basic right label" id="confPathLabel">
           路径内容，使用js读取后端实时返回内容
           </a>
-          <div class="ui button">
+          <div class="ui button" id="getConfPathButton>
             <i class="sync icon"></i> 刷新
           </div>
         </div>
@@ -27,10 +27,10 @@
 				<li class="development photography">
 				<h2>修改配置文件路径</h2>
         <div class="ui fluid action input">
-            <input type="text" placeholder="默认路径">
+            <input type="text" placeholder="默认路径" id="confPathText">
                 <button class="ui button"><i class="large folder open outline icon"></i></button>
                         &nbsp;
-                <button class="ui button">修改</button>
+                <button class="ui button" id='updateConfPathButton'>修改</button>
                 </div>
 				</li>
 
