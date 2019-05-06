@@ -36,21 +36,12 @@
 
 				<li class="photography design">
 				<h2>当前配置文件信息</h2>
-
-				<div >
-          <div class="ui grid">
-            <div class="twelve wide column">
-
-            </div>
-
-
-          </div>
           <div class="ui segment">
               <div class="ui fluid action input">
                 <a class="ui basic right label">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button">
+                <div class="ui button" id="getConfInfo1">
                   <i class="sync icon"></i> 刷新
                 </div>
               </div>
@@ -59,7 +50,7 @@
                 <a class="ui basic right label">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button">
+                <div class="ui button" id="getConfInfo2">
                   <i class="sync icon"></i> 刷新
                 </div>
               </div>
@@ -68,7 +59,7 @@
                 <a class="ui basic right label">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button">
+                <div class="ui button" id="getConfInfo3">
                   <i class="sync icon"></i> 刷新
                 </div>
               </div>
@@ -81,18 +72,18 @@
 				<h2>修改配置文件信息</h2>
         <div class="ui segment">
             <div class="ui fluid action input">
-              <input type="text" placeholder="配置项1">
-              <div class="ui button">修改</div>
+              <input type="text" placeholder="配置项1" id="confInfoText1">
+              <div class="ui button" id="updateConfInfo1">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="配置项2">
-              <div class="ui button">修改</div>
+              <input type="text" placeholder="配置项2" id="confInfoText2">
+              <div class="ui button" id="updateConfInfo2">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="配置项3">
-              <div class="ui button">修改</div>
+              <input type="text" placeholder="配置项3" id="confInfoText3">
+              <div class="ui button" id="updateConfInfo3">修改</div>
             </div>
         </div>
 				</li>
