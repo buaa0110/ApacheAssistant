@@ -18,7 +18,7 @@
           <a class="ui basic right label" id="confPathLabel">
           路径内容，使用js读取后端实时返回内容
           </a>
-          <div class="ui button" id="getConfPathButton>
+          <div class="ui button" id="getConfPathButton" onclick="getConfPath()">
             <i class="sync icon"></i> 刷新
           </div>
         </div>
@@ -148,9 +148,10 @@
 
 			</ul>
 		</div>
+    <script src="../static/js/conf.js"></script>
     <script type="text/javascript">
 			$.ajax({
-            url: '/api/load_config_path',
+            url: '/api/load_config_path/',
             data: {},
             type: 'GET',
             contentType: 'application/json;charset=utf-8',
@@ -163,7 +164,7 @@
             }
       })
       $.ajax({
-            url: '/api/load_config',
+            url: '/api/load_config/',
             data: {},
             type: 'GET',
             contentType: 'application/json;charset=utf-8',

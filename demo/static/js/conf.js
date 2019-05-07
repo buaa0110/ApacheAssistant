@@ -3,35 +3,36 @@
 // button state and so on
 
 function getConfPath(){
-  $('#getConfPathButton').click(function () {
+
         //发送POST请求,与后端双向传输json数据
         $.ajax({
-            url: '/api/',
+            url: '/api/load_config_path/',
             data:{},
             type: 'GET',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
-                $('#confPathLabel').val = data['confPath'];
+                $('#confPathLabel').text(data['path']);
+                console.log("get successfully");
             },
             error:function(data){
               alert("data")
             }
         })
-    })
+  
 }
 function updateConfPath(){
   $('#updateConfPathButton').click(function(){
     data = $('#confPathText').val();
     $.ajax({
-      url:'/api/',
-      data:data,
+      url:'/api/save_config_path/',
+      data:JSON.stringify({'path':data}),
       type:'POST',
       contentType:'application/json;charset=utf-8',
-      success:function(data){
+      success:function(res){
         //need to finish
-        $('#confPathLabel').val = data['confPath'];
-        console.log("update conf path successfully!");
+        $('#confPathLabel').val = data;
+        console.log(res);
       },
       error:function(data){
         alert(data);
