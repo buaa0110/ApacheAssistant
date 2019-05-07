@@ -25,6 +25,13 @@ python demo.py
 
 ## 后端开发进度
 
+### API版本：V0.4
+
+- 增加/api/save_apache_path/保存Apahce目录路径的API
+- 增加/api/load_apache_path/读取保存的Apache目录路径的API
+- 【性能监控】查看apache的性能参数API(/api/apache_params/)无法获取到实时的网络速度，返回的值为网络传输量network_data，前端需要每隔1s发送请求，网络速度为两次network_data的差值，单位为MB
+- 【模块管理】获得模块列表API(/api/modules_list/)后端发送的数据格式进行调整，返回的模块列表分为两个表，static_list中的是静态的模块，不可安装/卸载，shared_list中是动态模块，可以安装/卸载
+
 ### API版本：V0.3
 
 - 增加/api/clear_log_text/ 清除日志文件内容的API
@@ -58,15 +65,17 @@ python demo.py
 
 #### 性能监控
 
-- [ ] /api/apache_status/	查看apache系统状态(running/stop)
-- [ ] /api/control_apache/	改变apache系统状态(stop/start/restart)
-- [ ] /api/apache_params/	查看apache的性能参数
+- [x] /api/save_apache_path/	保存Apache目录路径
+- [x] /api/load_apache_path/	读取保存的Apache目录路径
+- [x] /api/apache_status/	查看apache系统状态(running/stop)
+- [x] /api/control_apache/	改变apache系统状态(stop/start/restart)
+- [x] /api/apache_params/	查看apache的性能参数
 
 #### 模块管理
 
-- [ ] /api/modules_list/	获得模块列表
-- [ ] /api/install_module/	安装模块
-- [ ] /api/remove_module/	卸载模块
+- [x] /api/modules_list/	获得模块列表
+- [x] /api/install_module/	安装模块
+- [x] /api/remove_module/	卸载模块
 
 #### 全局工具
 
