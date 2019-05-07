@@ -305,14 +305,16 @@ def save_apache_path():
     path=data['path']
     #检查路径是否存在
     if os.path.exists(path):
-        #保存并返回成功信息
-        storage['apache_path']=path
-        storage['httpd_path']=storage['apache_path']+'bin/httpd.exe'
-        storage['pid_path']=storage['apache_path']+'logs/httpd.pid'
-        return success('保存成功')
+        if os.path.exists(os.path.join(path,'bin/httpd.exe')):
+            storage['apache_path']=path
+            storage['httpd_path']=os.path.join(path,'bin/httpd.exe')
+            storage['pid_path']=os.path.join(path,'logs/httpd.pid')
+            return success('保存成功')
+        else:
+            return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     else:
         #返回错误信息
-        return error('路径不存在')
+        return error('目录路径不存在')
 
 #读取保存的Apache目录路径
 @app.route('/api/load_apache_path/',methods=['GET'])
@@ -332,6 +334,8 @@ def apache_status():
     #检查是否已保存Apache目录路径
     if 'apache_path' not in storage:
         return error('Apache目录路径未保存')
+    elif not os.path.exists(storage['httpd_path']):
+        return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     #获取pid
     httpd_pid=get_apache_pid(storage['pid_path'])
     #判断是否正在运行
@@ -348,6 +352,8 @@ def control_apache():
     #检查是否已保存Apache目录路径
     if 'apache_path' not in storage:
         return error('Apache目录路径未保存')
+    elif not os.path.exists(storage['httpd_path']):
+        return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     #接收前端发来的json数据
     data=request.json
     command=data['command']
@@ -366,6 +372,8 @@ def apache_params():
     #检查是否已保存Apache目录路径
     if 'apache_path' not in storage:
         return error('Apache目录路径未保存')
+    elif not os.path.exists(storage['httpd_path']):
+        return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     #获取pid
     httpd_pid=get_apache_pid(storage['pid_path'])
     result={}
@@ -400,6 +408,8 @@ def modules_list():
     #检查是否已保存Apache目录路径
     if 'apache_path' not in storage:
         return error('Apache目录路径未保存')
+    elif not os.path.exists(storage['httpd_path']):
+        return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     #获取模块信息
     modules=get_module_info()
     #生成列表
@@ -420,6 +430,8 @@ def install_module():
     #检查是否已保存Apache目录路径
     if 'apache_path' not in storage:
         return error('Apache目录路径未保存')
+    elif not os.path.exists(storage['httpd_path']):
+        return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     #接收前端发来的json数据
     data=request.json
     name=data['name']
@@ -452,6 +464,8 @@ def remove_module():
     #检查是否已保存Apache目录路径
     if 'apache_path' not in storage:
         return error('Apache目录路径未保存')
+    elif not os.path.exists(storage['httpd_path']):
+        return error('Apache目录中没有httpd.exe，请确认已安装Apache并设置正确的Apache目录')
     #接收前端发来的json数据
     data=request.json
     name=data['name']
