@@ -5,6 +5,8 @@
 {% block head %}
 {% endblock %}
 {% block MainContainer %}
+
+  </script>
   <div class="content cf">
 		<div class="grid-1 cf">
 			<h1>配置管理</h1>
@@ -14,13 +16,13 @@
 			<ul id="portfolio-one">
 				<li class="development design">
 				<h2 class="ui left aligned icon header">原配置文件路径</h2>
-        <div class="ui left labeled button " >
+        <div class="ui fluid action input" >
+          <a class="ui teal tag label">
+          Path
+          </a>
           <a class="ui basic right label" id="confPathLabel">
           路径内容，使用js读取后端实时返回内容
           </a>
-          <div class="ui button" id="getConfPathButton" onclick="getConfPath()">
-            <i class="sync icon"></i> 刷新
-          </div>
         </div>
 				</li>
 
@@ -30,7 +32,7 @@
             <input type="text" placeholder="默认路径" id="confPathText">
                 <button class="ui button"><i class="large folder open outline icon"></i></button>
                         &nbsp;
-                <button class="ui button" id='updateConfPathButton'>修改</button>
+                <button class="ui button" id='updateConfPathButton' onclick="updateConfPath()">修改</button>
                 </div>
 				</li>
 
@@ -38,75 +40,63 @@
 				<h2>当前配置文件信息</h2>
           <div class="ui segment">
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui teal tag label">
                 Listen
                 </a>
                 <a class="ui basic right label" id="confInfo1">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button" id="getConfInfo1">
-                  <i class="sync icon"></i> 刷新
-                </div>
+
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui teal tag label">
                 KeepAlive
                 </a>
                 <a class="ui basic right label" id="confInfo2">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button" id="getConfInfo2">
-                  <i class="sync icon"></i> 刷新
-                </div>
+
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui teal tag label">
                 KeepAliveTimeout
                 </a>
                 <a class="ui basic right label" id="confInfo3">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button" id="getConfInfo3">
-                  <i class="sync icon"></i> 刷新
-                </div>
+
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui teal tag label">
                 MaxKeepAliveRequests
                 </a>
                 <a class="ui basic right label" id="confInfo4">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button" id="getConfInfo4">
-                  <i class="sync icon"></i> 刷新
-                </div>
+
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
-                KeepAlive
+                <a class="ui teal tag label">
+                DocumentRoot
                 </a>
                 <a class="ui basic right label" id="confInfo5">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button" id="getConfInfo5">
-                  <i class="sync icon"></i> 刷新
-                </div>
+
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label">
+                <a class="ui teal tag label">
                 LogFormat
                 </a>
                 <a class="ui basic right label" id="confInfo6">
                 路径内容，使用js读取后端实时返回内容
                 </a>
-                <div class="ui button" id="getConfInfo6">
-                  <i class="sync icon"></i> 刷新
-                </div>
+
               </div>
           </div>
         </li>
@@ -135,7 +125,7 @@
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="KeepAlive" id="confInfoText5">
+              <input type="text" placeholder="DocumentRoot" id="confInfoText5">
               <div class="ui button" id="updateConfInfo5">修改</div>
             </div>
             <div class="ui divider"></div>
@@ -148,7 +138,7 @@
 
 			</ul>
 		</div>
-    <script src="../static/js/conf.js"></script>
+
     <script type="text/javascript">
 			$.ajax({
             url: '/api/load_config_path/',
@@ -162,7 +152,7 @@
             error:function(data){
               alert(data);
             }
-      })
+      });
       $.ajax({
             url: '/api/load_config/',
             data: {},
@@ -174,15 +164,168 @@
                 $('#confInfo2').text(data['KeepAlive']);
                 $('#confInfo3').text(data['KeepAliveTimeout']);
                 $('#confInfo4').text(data['MaxKeepAliveRequests']);
-                $('#confInfo5').text(data['KeepAlive']);
+                $('#confInfo5').text(data['DocumentRoot']);
                 $('#confInfo6').text(data['LogFormat']);
                 console.log(data);
             },
             error:function(data){
               alert(data);
             }
-      })
-		</script>
+      });
+      // getconfpath
+      $('#getConfPathButton').click(function(){
+           console.log("hello");
+           $.ajax({
+               url: '/api/load_config_path/',
+               data:{},
+               type: 'GET',
+               contentType: 'application/json;charset=utf-8',
+               success: function (data) {
+                   //显示结果
+                   $('#confPathLabel').text(data['path']);
+                   console.log("get successfully1");
+               },
+               error:function(data){
+                 alert("data")
+               }
+           });
+      });
+      // updateConfPath
+      $('#updateConfPathButton').click(function(){
+        dataConfPath = $('#confPathText').val();
+        console.log(dataConfPath);
+        $.ajax({
+          url:'/api/save_config_path/',
+          data:JSON.stringify({'path':dataConfPath}),
+          type:'POST',
+          contentType:'application/json;charset=utf-8',
+          success:function(res){
+            //need to finish
+            $('#confPathLabel').text(dataConfPath);
+            console.log(res);
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+      // getConfInfo1 Listen
+      $('#updateConfInfo1').click(function(){
+        data = $('confInfoText1').val();
+        $.ajax({
+          url:'/api/save_config/',
+          data:JSON.stringify({'Listen':data}),
+          type:"POST",
+          contentType:'application/json;charset=utf-8',
+          success:function(data){
+            console.log("update conf info 1 successfully!");
+            $.ajax({
+                  url: '/api/load_config/',
+                  data: {},
+                  type: 'GET',
+                  contentType: 'application/json;charset=utf-8',
+                  success: function (data) {
+                      //显示结果
+                      $('#confInfo1').text(data['Listen']);
+                      console.log(data);
+                  },
+                  error:function(data){
+                    alert(data);
+                  }
+            });
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+      // getConfInfo2 KeepAlive
+      $('#updateConfInfo2').click(function(){
+        data = $('confInfoText2').val();
+        $.ajax({
+          url:'/api/save_config/',
+          data:JSON.stringify({'KeepAlive':data}),
+          type:"POST",
+          contentType:'application/json;charset=utf-8',
+          success:function(data){
+            $('#confInfo2').text(data['KeepAlive']);
+            console.log("update conf info 2 successfully!");
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+      // getConfInfo3 KeepAliveTimeout
+      $('#updateConfInfo3').click(function(){
+        data = $('confInfoText3').val();
+        $.ajax({
+          url:'/api/save_config/',
+          data:JSON.stringify({'KeepAliveTimeout':data}),
+          type:"POST",
+          contentType:'application/json;charset=utf-8',
+          success:function(data){
+            $('#confInfo3').text(data['KeepAliveTimeout']);
+            console.log("update conf info 3 successfully!");
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+      // getConfInfo4 MaxKeepAliveRequests
+      $('#updateConfInfo4').click(function(){
+        data = $('confInfoText4').val();
+        $.ajax({
+          url:'/api/save_config/',
+          data:JSON.stringify({'MaxKeepAliveRequests':data}),
+          type:"POST",
+          contentType:'application/json;charset=utf-8',
+          success:function(data){
+            $('#confInfo4').text(data['MaxKeepAliveRequests']);
+            console.log("update conf info 4 successfully!");
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+      // getConfInfo5 DocumentRoot
+      $('#updateConfInfo5').click(function(){
+        data = $('confInfoText5').val();
+        $.ajax({
+          url:'/api/save_config/',
+          data:JSON.stringify({'DocumentRoot':data}),
+          type:"POST",
+          contentType:'application/json;charset=utf-8',
+          success:function(data){
+            $('#confInfo5').text(data['DocumentRoot']);
+            console.log("update conf info 5 successfully!");
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+      // getConfInfo6 LogFormat
+      $('#updateConfInfo6').click(function(){
+        data = $('confInfoText6').val();
+        $.ajax({
+          url:'/api/save_config/',
+          data:JSON.stringify({'LogFormat':data}),
+          type:"POST",
+          contentType:'application/json;charset=utf-8',
+          success:function(data){
+            $('#confInfo6').text(data['LogFormat']);
+            console.log("update conf info 6 successfully!");
+          },
+          error:function(data){
+            alert(data);
+          }
+        });
+      });
+    </script>
+
 	</div><!-- end content -->
 
 {% endblock %}
