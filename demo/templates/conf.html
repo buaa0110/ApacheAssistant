@@ -38,6 +38,9 @@
 				<h2>当前配置文件信息</h2>
           <div class="ui segment">
               <div class="ui fluid action input">
+                <a class="ui basic right label">
+                Listen
+                </a>
                 <a class="ui basic right label" id="confInfo1">
                 路径内容，使用js读取后端实时返回内容
                 </a>
@@ -47,7 +50,10 @@
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
-                <a class="ui basic right label" id=“confInfo2”>
+                <a class="ui basic right label">
+                KeepAlive
+                </a>
+                <a class="ui basic right label" id="confInfo2">
                 路径内容，使用js读取后端实时返回内容
                 </a>
                 <div class="ui button" id="getConfInfo2">
@@ -56,10 +62,49 @@
               </div>
               <div class="ui divider"></div>
               <div class="ui fluid action input">
+                <a class="ui basic right label">
+                KeepAliveTimeout
+                </a>
                 <a class="ui basic right label" id="confInfo3">
                 路径内容，使用js读取后端实时返回内容
                 </a>
                 <div class="ui button" id="getConfInfo3">
+                  <i class="sync icon"></i> 刷新
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                MaxKeepAliveRequests
+                </a>
+                <a class="ui basic right label" id="confInfo4">
+                路径内容，使用js读取后端实时返回内容
+                </a>
+                <div class="ui button" id="getConfInfo4">
+                  <i class="sync icon"></i> 刷新
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                KeepAlive
+                </a>
+                <a class="ui basic right label" id="confInfo5">
+                路径内容，使用js读取后端实时返回内容
+                </a>
+                <div class="ui button" id="getConfInfo5">
+                  <i class="sync icon"></i> 刷新
+                </div>
+              </div>
+              <div class="ui divider"></div>
+              <div class="ui fluid action input">
+                <a class="ui basic right label">
+                LogFormat
+                </a>
+                <a class="ui basic right label" id="confInfo6">
+                路径内容，使用js读取后端实时返回内容
+                </a>
+                <div class="ui button" id="getConfInfo6">
                   <i class="sync icon"></i> 刷新
                 </div>
               </div>
@@ -70,18 +115,33 @@
 				<h2>修改配置文件信息</h2>
         <div class="ui segment">
             <div class="ui fluid action input">
-              <input type="text" placeholder="配置项1" id="confInfoText1">
+              <input type="text" placeholder="Listen" id="confInfoText1">
               <div class="ui button" id="updateConfInfo1">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="配置项2" id="confInfoText2">
+              <input type="text" placeholder="KeepAlive" id="confInfoText2">
               <div class="ui button" id="updateConfInfo2">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="配置项3" id="confInfoText3">
+              <input type="text" placeholder="KeepAliveTimeout" id="confInfoText3">
               <div class="ui button" id="updateConfInfo3">修改</div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui fluid action input">
+              <input type="text" placeholder="MaxKeepAliveRequests" id="confInfoText4">
+              <div class="ui button" id="updateConfInfo4">修改</div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui fluid action input">
+              <input type="text" placeholder="KeepAlive" id="confInfoText5">
+              <div class="ui button" id="updateConfInfo5">修改</div>
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui fluid action input">
+              <input type="text" placeholder="LogFormat" id="confInfoText6">
+              <div class="ui button" id="updateConfInfo6">修改</div>
             </div>
         </div>
 				</li>
@@ -90,17 +150,32 @@
 		</div>
     <script type="text/javascript">
 			$.ajax({
-            url: '/api/',
+            url: '/api/load_config_path',
             data: {},
             type: 'GET',
             contentType: 'application/json;charset=utf-8',
             success: function (data) {
                 //显示结果
-                $('#confPathLabel').val = data['confPathLabel'];
-                $('#confInfo1').val = data['confInfo1'];
-                $('#confInfo2').val = data['confInfo2'];
-                $('#confInfo3').val = data['confInfo3'];
-                console.log("load successfully");
+                $('#confPathLabel').text(data['path']);
+            },
+            error:function(data){
+              alert(data);
+            }
+      })
+      $.ajax({
+            url: '/api/load_config',
+            data: {},
+            type: 'GET',
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                //显示结果
+                $('#confInfo1').text(data['Listen']);
+                $('#confInfo2').text(data['KeepAlive']);
+                $('#confInfo3').text(data['KeepAliveTimeout']);
+                $('#confInfo4').text(data['MaxKeepAliveRequests']);
+                $('#confInfo5').text(data['KeepAlive']);
+                $('#confInfo6').text(data['LogFormat']);
+                console.log(data);
             },
             error:function(data){
               alert(data);
