@@ -16,15 +16,20 @@
 				<li class="development design">
 				<h2>查看Apache状态</h2>
 				<div class="ui segment">
+					<div class="ui fluid action input">
+						<input type="text" placeholder="设置Apache目录（仅需一次即可）" id="saveConfDirText">
+						<div class="ui primary button" id="saveConfDir">保存Apache目录</div>
+					</div>
+					<div class="ui divider"></div>
 					<a class="ui basic right label">当前Apache服务器的状态为：</a>
-					<button class="positive ui button" id="stateButton">Running</button>
+					<button class="positive ui button" id="stateButton">stop</button>
 				</div>
 				</li>
 
 				<li class="development photography">
 				<h2>改变Apache状态</h2>
 				<div class="ui segment">
-					<button class="positive ui button" id="changeButton">运行/停止</button>
+					<button class="positive ui button" id="changeButton">运行</button>
 					<button class="positive ui button" id="restartButton">重启</button>
 				</div>
 				</li>
@@ -52,11 +57,33 @@
 
 		<script type="text/javascript">
 			$.ajax({
-            url: '/api/save_config_path/',
-            data: JSON.stringify({ 'path': "wjknb" }),
-            type: 'POST',
-            contentType: 'application/json;charset=utf-8',
-            success: function (data) {
+				url: '/api/apache_status/',
+				data: {},
+				type: 'GET',
+				contentType: 'application/json;charset=utf-8',
+				success:function(data){
+					if (data['status'] != 'running'){
+						$('#stateButton').attr("class","negative ui button");
+						$('#stateButton').text("STOP");
+					}
+					else{
+						$('#stateButton').attr("class","positive ui button");
+						$('#stateButton').text("RUNNING");
+					}
+				},
+				error:function(data){
+					console.log(data);
+				}
+			});
+
+			$("#saveConfDir").click(function(){
+				// use cookie save info
+				data = $('#saveConfDirText').val();
+				document.cookie = "confdir=" + data + ";";
+
+			});
+
+			$('.gallery').ready(function (data) {
                 //显示结果
                 console.log(data);
 								var speed = document.getElementById('netSpeedChart').getContext('2d');
@@ -116,12 +143,8 @@
 								    data: dataRam,
 								    options: {}
 								});
-            },
-						error:function(data){
-							alert(data["error"]);
-						}
+            });
 
-        })
 
 		</script>
 	</div>
