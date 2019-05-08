@@ -22,15 +22,15 @@
 					</div>
 					<div class="ui divider"></div>
 					<a class="ui basic right label">当前Apache服务器的状态为：</a>
-					<button class="positive ui button" id="stateButton">stop</button>
+					<button class="ui button" id="stateButton">STOP</button>
 				</div>
 				</li>
 
 				<li class="development photography">
 				<h2>改变Apache状态</h2>
 				<div class="ui segment">
-					<button class="positive ui button" id="changeButton">运行</button>
-					<button class="positive ui button" id="restartButton">重启</button>
+					<button class="ui button" id="changeButton" disabled="disabled">启动/停止</button>
+					<button class="ui button" id="restartButton" disabled="disabled">重启</button>
 				</div>
 				</li>
 
@@ -56,96 +56,308 @@
 		</div>
 
 		<script type="text/javascript">
-			$.ajax({
-				url: '/api/apache_status/',
-				data: {},
-				type: 'GET',
-				contentType: 'application/json;charset=utf-8',
-				success:function(data){
-					if (data['status'] != 'running'){
-						$('#stateButton').attr("class","negative ui button");
-						$('#stateButton').text("STOP");
-					}
-					else{
-						$('#stateButton').attr("class","positive ui button");
-						$('#stateButton').text("RUNNING");
-					}
-				},
-				error:function(data){
-					console.log(data);
+			// NOTE: default charts means every value is 0
+			function defaultChart(){
+				const obj = {
+					labels:[],
+					data:[]
 				}
-			});
+				sessionStorage.setItem("lineData",JSON.stringify(obj));
+				var speed = document.getElementById('netSpeedChart').getContext('2d');
+				var chart = new Chart(speed, {
+										// The type of chart we want to create
+										type: 'line',
 
-			$("#saveConfDir").click(function(){
-				// use cookie save info
-				data = $('#saveConfDirText').val();
-				document.cookie = "confdir=" + data + ";";
+										// The data for our dataset
+										data: {
+												labels: ['0', '0', '0', '0', '0', '0', '0'],
+												datasets: [{
+														label: 'Speed',
+														backgroundColor: 'rgb(255, 99, 132)',
+														borderColor: 'rgb(255, 99, 132)',
+														data: [0, 0, 0, 0, 0, 0, 0]
+												}]
+										},
 
-			});
+										// Configuration options go here
+										options: {}
+								});
 
+				var cpu = document.getElementById('CPUOccupied').getContext('2d');
+				dataCpu = {
+										datasets: [{
+												data: [100, 0],
+												backgroundColor:['#ff6384','#36a2eb']
+										}],
+
+										// These labels appear in the legend and in the tooltips when hovering different arcs
+										labels: [
+												'已用',
+												'可用'
+										]
+								};
+				var cpuChart = new Chart(cpu, {
+										type: 'pie',
+										data: dataCpu,
+										options: {}
+								});
+
+				var ram = document.getElementById('RAMOccupied').getContext('2d');
+				dataRam = {
+										datasets: [{
+												data: [100, 0],
+												backgroundColor:['#ff6384','#36a2eb']
+										}],
+
+										// These labels appear in the legend and in the tooltips when hovering different arcs
+										labels: [
+												'已用',
+												'可用'
+										]
+								};
+				var ramChart = new Chart(ram, {
+										type: 'pie',
+										data: dataRam,
+										options: {}
+								});
+			}
+			// NOTE: function of get state
+			function getState(){
+				$.ajax({
+					url: '/api/apache_status/',
+					data: {},
+					type: 'GET',
+					contentType: 'application/json;charset=utf-8',
+					success:function(data){
+						console.log(data);
+						$('#changeButton').attr("disabled","");
+						$('#changeButton').attr("class","positive ui button");
+
+						if (data['status'] != 'running'){
+							$('#stateButton').attr("class","negative ui button");
+							$('#stateButton').text("STOP");
+							$('#restartButton').attr("class","negative ui button");
+						}
+						else{
+							$('#stateButton').attr("class","positive ui button");
+							$('#stateButton').text("RUNNING");
+							$('#restartButton').attr("disabled","");
+							$('#restartButton').attr("class","positive ui button");
+						}
+					},
+					error:function(data){
+						// NOTE: when get status error draw charts as 0
+						console.log(data['error']);
+						defaultChart();
+						}
+				});
+			}
+			// NOTE: exchange state
+			function changeState(command){
+				if(command == "stop"){
+					$('#stateButton').attr("class","negative ui button");
+					$('#stateButton').text("RUNNING");
+					$('#restartButton').attr("class","positive ui button");
+					$('#restartButton').attr("disabled","");
+				}
+				else{
+					$('#stateButton').attr("class","positive ui button");
+					$('#stateButton').text("STOP");
+					$('#restartButton').attr("class","negative ui button");
+					$('#restartButton').attr("disabled","disabled");
+				}
+			}
+			// NOTE: draw pie charts
+			function pieChart(){
+				$.ajax({
+	            url: '/api/apache_params/',
+	            data: {},
+	            type: 'GET',
+	            contentType: 'application/json;charset=utf-8',
+	            success: function (data) {
+	                //显示结果
+	                dataCpu0 = parseInt(data['cpu_percent']);
+									dataRam0 = parseInt(data['memory_percent']);
+									var cpu = document.getElementById('CPUOccupied').getContext('2d');
+									dataCpu = {
+															datasets: [{
+																	data: [dataCpu0, 100-dataCpu0],
+																	backgroundColor:['#ff6384','#36a2eb']
+															}],
+
+															// These labels appear in the legend and in the tooltips when hovering different arcs
+															labels: [
+																	'已用',
+																	'可用'
+															]
+													};
+									var cpuChart = new Chart(cpu, {
+															type: 'pie',
+															data: dataCpu,
+															options: {}
+													});
+
+									var ram = document.getElementById('RAMOccupied').getContext('2d');
+									dataRam = {
+															datasets: [{
+																	data: [dataRam0, 100-dataRam0],
+																	backgroundColor:['#ff6384','#36a2eb']
+															}],
+
+															// These labels appear in the legend and in the tooltips when hovering different arcs
+															labels: [
+																	'已用',
+																	'可用'
+															]
+													};
+									var ramChart = new Chart(ram, {
+															type: 'pie',
+															data: dataRam,
+															options: {}
+													});
+
+	            },
+	            error:function(data){
+	              console.log(data);
+	            }
+	      });
+			}
+			// NOTE: draw line charts
+			function lineChart(){
+				$.ajax({
+	            url: '/api/apache_params/',
+	            data: {},
+	            type: 'GET',
+	            contentType: 'application/json;charset=utf-8',
+	            success: function (data) {
+									var myDate = new Date();
+									var h = myDate.getHours();       //获取当前小时数(0-23)
+									var m = myDate.getMinutes();     //获取当前分钟数(0-59)
+									var s = myDate.getSeconds();     //获取当前秒数(0-59)
+									time = h + ":" + m + ":" + s;
+									// NOTE: read data List
+									var a = JSON.parse(sessionStorage['lineData']);
+									a['labels'].unshift(time);
+									var l = a['data'].unshift(data['network_data']);
+									a['labels'].splice(0,10);
+									a['data'].splice(0,10);
+									// NOTE: save new data List
+									sessionStorage['lineData'] = JSON.stringify(a);
+									// NOTE: start to draw line chart
+									var speed = document.getElementById('netSpeedChart').getContext('2d');
+									var chart = new Chart(speed, {
+															// The type of chart we want to create
+															type: 'line',
+
+															// The data for our dataset
+															data: {
+																	labels: a['labels'].reverse(),
+																	datasets: [{
+																			label: 'Speed',
+																			backgroundColor: 'rgb(255, 99, 132)',
+																			borderColor: 'rgb(255, 99, 132)',
+																			data: a['data'].reverse()
+																	}]
+															},
+
+															// Configuration options go here
+															options: {}
+													});
+
+							}
+				});
+
+			}
+			// NOTE: first load page
 			$('.gallery').ready(function (data) {
-                //显示结果
-                console.log(data);
-								var speed = document.getElementById('netSpeedChart').getContext('2d');
-								var chart = new Chart(speed, {
-								    // The type of chart we want to create
-								    type: 'line',
 
-								    // The data for our dataset
-								    data: {
-								        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-								        datasets: [{
-								            label: 'Speed',
-								            backgroundColor: 'rgb(255, 99, 132)',
-								            borderColor: 'rgb(255, 99, 132)',
-								            data: [0, 10, 5, 2, 20, 30, 45]
-								        }]
-								    },
+				$.ajax({
+					url: '/api/load_apache_path/',
+					data: {},
+					type: 'GET',
+					contentType: 'application/json;charset=utf-8',
+					success:function(data){
+						// document.getElementById("saveConfDirText").value = data['path'];
+						$('#saveConfDirText').attr("value",data['path']);
+						document.getElementById("saveConfDirText").disabled = "disabled";
+						document.getElementById("saveConfDir").disabled = "disabled";
+						console.log("set value");
+						// load apache state
+						getState();
+						pieChart();
+						setTimeout("lineChart()", 5000);
+					},
+						// NOTE: no apache path find
+						error:function(data){
+							alert("set apache path first please!");
+							// NOTE: set all chart as null or zero
+							defaultChart();
+							}
+					});
+			});
+			// NOTE: this about save apache path button clicks
+			$('#saveConfDir').click(function(){
+				apachePath = $('#saveConfDirText').val();
+				$.ajax({
+	            url: '/api/save_apache_path/',
+	            data: JSON.stringify({'path':apachePath}),
+	            type: 'POST',
+	            contentType: 'application/json;charset=utf-8',
+	            success: function (data) {
+	                //显示结果
+	                console.log(data['info']);
+									document.getElementById("saveConfDirText").disabled = "disabled";
+									document.getElementById("saveConfDir").disabled = "disabled";
+									getState();
+									pieChart();
+									setTimeout("lineChart()", 5000);
+	            },
+	            error:function(data){
+	              console.log(data);
+	            }
+	      });
+			})
+			// NOTE: this is about restart button clicks
+			$('#restartButton').click(function(){
+				$.ajax({
+	            url: '/api/control_apache/',
+	            data: JSON.stringify({'command':"restart"}),
+	            type: 'POST',
+	            contentType: 'application/json;charset=utf-8',
+	            success: function (data) {
+	                //显示结果
+	                console.log(data['info']);
+	            },
+	            error:function(data){
+	              console.log(data);
+	            }
+	      });
+			})
+			// NOTE: this is about change button clicks
+			$('#changeButton').click(function(){
+				nowState = $('#stateButton').val();
+				if (nowState == "RUNNING"){
+					command = "stop";
+				}
+				else{
+					command = "start";
+				}
+				$.ajax({
+	            url: '/api/control_apache/',
+	            data: JSON.stringify({'command':command}),
+	            type: 'POST',
+	            contentType: 'application/json;charset=utf-8',
+	            success: function (data) {
+	                //显示结果
+	                console.log(data['info']);
+									changeState(command);
 
-								    // Configuration options go here
-								    options: {}
-								});
-
-								var cpu = document.getElementById('CPUOccupied').getContext('2d');
-								dataCpu = {
-								    datasets: [{
-								        data: [10, 20],
-												backgroundColor:['#ff6384','#36a2eb']
-								    }],
-
-								    // These labels appear in the legend and in the tooltips when hovering different arcs
-								    labels: [
-								        '已用',
-								        '可用'
-								    ]
-								};
-								var cpuChart = new Chart(cpu, {
-								    type: 'pie',
-								    data: dataCpu,
-								    options: {}
-								});
-
-								var ram = document.getElementById('RAMOccupied').getContext('2d');
-								dataRam = {
-								    datasets: [{
-								        data: [10, 20],
-												backgroundColor:['#ff6384','#36a2eb']
-								    }],
-
-								    // These labels appear in the legend and in the tooltips when hovering different arcs
-								    labels: [
-								        '已用',
-								        '可用'
-								    ]
-								};
-								var ramChart = new Chart(ram, {
-								    type: 'pie',
-								    data: dataRam,
-								    options: {}
-								});
-            });
-
-
+	            },
+	            error:function(data){
+	              console.log(data);
+	            }
+	      });
+			})
 		</script>
 	</div>
 {% endblock %}
