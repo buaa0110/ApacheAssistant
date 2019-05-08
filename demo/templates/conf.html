@@ -6,7 +6,7 @@
 {% endblock %}
 {% block MainContainer %}
 
-  </script>
+
   <div class="content cf">
 		<div class="grid-1 cf">
 			<h1>配置管理</h1>
@@ -211,7 +211,9 @@
       });
       // getConfInfo1 Listen
       $('#updateConfInfo1').click(function(){
-        data = $('confInfoText1').val();
+        data = $('#confInfoText1').val();
+        console.log(data);
+        console.log(JSON.stringify({'Listen':data}));
         $.ajax({
           url:'/api/save_config/',
           data:JSON.stringify({'Listen':data}),
@@ -241,7 +243,7 @@
       });
       // getConfInfo2 KeepAlive
       $('#updateConfInfo2').click(function(){
-        data = $('confInfoText2').val();
+        data = $('#confInfoText2').val();
         $.ajax({
           url:'/api/save_config/',
           data:JSON.stringify({'KeepAlive':data}),
@@ -258,7 +260,7 @@
       });
       // getConfInfo3 KeepAliveTimeout
       $('#updateConfInfo3').click(function(){
-        data = $('confInfoText3').val();
+        data = $('#confInfoText3').val();
         $.ajax({
           url:'/api/save_config/',
           data:JSON.stringify({'KeepAliveTimeout':data}),
@@ -275,7 +277,7 @@
       });
       // getConfInfo4 MaxKeepAliveRequests
       $('#updateConfInfo4').click(function(){
-        data = $('confInfoText4').val();
+        data = $('#confInfoText4').val();
         $.ajax({
           url:'/api/save_config/',
           data:JSON.stringify({'MaxKeepAliveRequests':data}),
@@ -292,7 +294,7 @@
       });
       // getConfInfo5 DocumentRoot
       $('#updateConfInfo5').click(function(){
-        data = $('confInfoText5').val();
+        data = $('#confInfoText5').val();
         $.ajax({
           url:'/api/save_config/',
           data:JSON.stringify({'DocumentRoot':data}),
@@ -309,7 +311,7 @@
       });
       // getConfInfo6 LogFormat
       $('#updateConfInfo6').click(function(){
-        data = $('confInfoText6').val();
+        data = $('#confInfoText6').val();
         $.ajax({
           url:'/api/save_config/',
           data:JSON.stringify({'LogFormat':data}),
