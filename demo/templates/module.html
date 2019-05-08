@@ -9,8 +9,11 @@
         let install = [];
         let allmodules = [];
 
-        function somefunction(params) {
-            console.log(params);
+        function InstallClick(element, params){
+       /*     element.innerHTML = "已卸载";
+            $(element).removeAttr("onclick");
+            $(element).addClass("disabled");*/
+            alert(install[params]['name']+'已卸载');
             $.ajax({
                 type: "post",
                 url: "/api/remove_module/",
@@ -24,27 +27,14 @@
                     console.log(data);
                 }
             })
-        };
-
-        function unfunction(params) {
-            console.log(params);
-            $.ajax({
-                type: "post",
-                url: "/api/remove_module/",
-                data: JSON.stringify({'name': allmodules[params]["name"]}),
-                dataType: "json",
-                contentType: "application/json;charest = utf-8",
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-            })
-        };
-
-        function infunction(params) {
-            console.log(params);
+            window.location.reload();
+        }
+        function AllinClick(element, params){
+          /*  element.innerHTML = "已安装";
+            $(element).removeAttr("onclick");
+            $(element).addClass("disabled");*/
+          alert(allmodules[params]['name']+'已安装');
+            console.log(allmodules[params]['name']);
             $.ajax({
                 type: "post",
                 url: "/api/install_module/",
@@ -58,11 +48,30 @@
                     console.log(data);
                 }
             })
-        };
-
+            window.location.reload();
+        }
+        function AllunClick(element, params){
+           /* element.innerHTML = "已卸载";
+            $(element).removeAttr("onclick");
+            $(element).addClass("disabled");*/
+            alert(allmodules[params]['name']+'已卸载');
+            $.ajax({
+                type: "post",
+                url: "/api/remove_module/",
+                data: JSON.stringify({'name': allmodules[params]["name"]}),
+                dataType: "json",
+                contentType: "application/json;charest = utf-8",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+            window.location.reload();
+        }
 
         $(function () {
-
             let total;
             let all;
             $.ajax({
@@ -97,9 +106,9 @@
                         let html = '';
                         while (i < total && i < 5) {
                             if (!install[i].hasOwnProperty("status"))
-                                html += '<div class="item"><div class="right floated ui button">不可卸载</div>' + install[i]["name"] + '</div>';
+                                html += '<div class="item"><button class="right floated ui disabled button">不可卸载</button>' + install[i]["name"] + '</div>';
                             else
-                                html += '<div class="item"><a href="javascript:somefunction(' + i + ')"><div class="right floated ui button">卸载</div></a>' + install[i]["name"] + '</div>';
+                                html += '<div class="item"><button class="right floated ui button" onclick="InstallClick(this,'+i+')">卸载</button>' + install[i]["name"] + '</div>';
                             i++;
                         }
                         $('#installed').html(html);
@@ -111,9 +120,9 @@
                                 let html = '';
                                 while (i < total && i < current * 5) {
                                     if (!install[i].hasOwnProperty("status"))
-                                        html += '<div class="item"><div class="right floated ui button">不可卸载</div>' + install[i]["name"] + '</div>';
+                                        html += '<div class="item"><button class="right floated ui disabled button">不可卸载</button>' + install[i]["name"] + '</div>';
                                     else
-                                        html += '<div class="item"><a href="javascript:somefunction(' + i + ')"><div class="right floated ui button">卸载</div></a>' + install[i]["name"] + '</div>';
+                                        html += '<div class="item"><button class="right floated ui button" onclick="InstallClick(this,'+i+')">卸载</button>' + install[i]["name"] + '</div>';
                                     i++;
                                 }
                                 $('#installed').html(html);
@@ -127,12 +136,12 @@
                         let htm = '';
                         while (i < all && i < 5) {
                             if (!allmodules[i].hasOwnProperty("status"))
-                                htm += '<div class="item"><div class="right floated ui button">不可卸载</div><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                                htm += '<div class="item"><button class="right floated disabled ui button">不可卸载</button><div class="right floated ui disabled button">已安装</div>' + allmodules[i]["name"] + '</div>';
                             else {
                                 if (allmodules[i]["status"] === "installed")
-                                    htm += '<div class="item"><a href="javascript:unfunction(' + i + ')"><div class="right floated ui button">卸载</div></a><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                                    htm += '<div class="item"><button class="right floated ui button"  onclick="AllunClick(this,'+i+')">卸载</button><button class="right floated ui disabled button">已安装</button>' + allmodules[i]["name"] + '</div>';
                                 else
-                                    htm += '<div class="item"><a href="javascript:infunction(' + i + ')"><div class="right floated ui button">安装</div></a><div class="right floated ui button">未安装</div>' + allmodules[i]["name"] + '</div>';
+                                    htm += '<div class="item"><button class="right floated ui button"  onclick="AllinClick(this,'+i+')">安装</button><button class="right floated ui disabled button">未安装</button>' + allmodules[i]["name"] + '</div>';
                             }
                             i++;
                         }
@@ -143,16 +152,16 @@
                             callback: function (current) {
                                 let i = (current - 1) * 5;
                                 let htm = '';
-                                while (i < all && i < current*5) {
+                                while (i < all && i < current * 5) {
                                     if (!allmodules[i].hasOwnProperty("status"))
-                                        htm += '<div class="item"><div class="right floated ui button">不可卸载</div><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
-                                    else {
-                                        if (allmodules[i]["status"] === "installed")
-                                            htm += '<div class="item"><a href="javascript:unfunction(' + i + ')"><div class="right floated ui button">卸载</div></a><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
-                                        else
-                                            htm += '<div class="item"><a href="javascript:infunction(' + i + ')"><div class="right floated ui button">安装</div></a><div class="right floated ui button">未安装</div>' + allmodules[i]["name"] + '</div>';
-                                    }
-                                    i++;
+                                htm += '<div class="item"><button class="right floated disabled ui button">不可卸载</button><div class="right floated ui disabled button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                            else {
+                                if (allmodules[i]["status"] === "installed")
+                                    htm += '<div class="item"><button class="right floated ui button"  onclick="AllunClick(this,'+i+')">卸载</button><button class="right floated ui disabled button">已安装</button>' + allmodules[i]["name"] + '</div>';
+                                else
+                                    htm += '<div class="item"><button class="right floated ui button"  onclick="AllinClick(this,'+i+')">安装</button><button class="right floated ui disabled button">未安装</button>' + allmodules[i]["name"] + '</div>';
+                            }
+                            i++;
                                 }
                                 $('#allmodule').html(htm);
                                 $("#current4").text(current)
