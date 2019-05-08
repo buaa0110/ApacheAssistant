@@ -6,57 +6,167 @@
     <link rel="stylesheet" type="text/css" href="../static/jqueryPagination/css/jquery.pagination.css"/>
     <script type="text/javascript" src="../static/jqueryPagination/js/jquery.pagination.min.js"></script>
     <script>
+        let install = [];
+        let allmodules = [];
+
+        function somefunction(params) {
+            console.log(params);
+            $.ajax({
+                type: "post",
+                url: "/api/remove_module/",
+                data: JSON.stringify({'name': install[params]["name"]}),
+                dataType: "json",
+                contentType: "application/json;charest = utf-8",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        };
+
+        function unfunction(params) {
+            console.log(params);
+            $.ajax({
+                type: "post",
+                url: "/api/remove_module/",
+                data: JSON.stringify({'name': allmodules[params]["name"]}),
+                dataType: "json",
+                contentType: "application/json;charest = utf-8",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        };
+
+        function infunction(params) {
+            console.log(params);
+            $.ajax({
+                type: "post",
+                url: "/api/install_module/",
+                data: JSON.stringify({'name': allmodules[params]["name"]}),
+                dataType: "json",
+                contentType: "application/json;charest = utf-8",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        };
+
+
         $(function () {
-            $("#pagination1").pagination({
-                currentPage: 1,
-                totalPage: 12,
-                callback: function (current) {
-                    $("#current1").text(current)
+
+            let total;
+            let all;
+            $.ajax({
+                    type: "GET",
+                    url: "/api/modules_list/",
+                    success: function (data) {
+                        /*初始化install 和 allmodules*/
+                        let i = 0;
+                        let j = 0;
+                        let staticlist = data['static_list'];
+                        for (let c of staticlist) {
+                            install[i] = c;
+                            allmodules[j] = c;
+                            i++;
+                            j++;
+                        }
+                        let sharedlist = data['shared_list'];
+                        for (let c of sharedlist) {
+                            if (c['status'] === "installed") {
+                                install[i] = c;
+                                i++;
+                            }
+                            allmodules[j] = c;
+                            j++;
+                        }
+                        console.log(sharedlist);
+                        console.log(staticlist);
+                        total = install.length;
+                        let totalpage = Math.ceil(total / 5);
+                        /*已安装模块部分*/
+                        i = 0;
+                        let html = '';
+                        while (i < total && i < 5) {
+                            if (!install[i].hasOwnProperty("status"))
+                                html += '<div class="item"><div class="right floated ui button">不可卸载</div>' + install[i]["name"] + '</div>';
+                            else
+                                html += '<div class="item"><a href="javascript:somefunction(' + i + ')"><div class="right floated ui button">卸载</div></a>' + install[i]["name"] + '</div>';
+                            i++;
+                        }
+                        $('#installed').html(html);
+                        $("#pagination1").pagination({
+                            currentPage: 1,
+                            totalPage: totalpage,
+                            callback: function (current) {
+                                let i = (current - 1) * 5;
+                                let html = '';
+                                while (i < total && i < current * 5) {
+                                    if (!install[i].hasOwnProperty("status"))
+                                        html += '<div class="item"><div class="right floated ui button">不可卸载</div>' + install[i]["name"] + '</div>';
+                                    else
+                                        html += '<div class="item"><a href="javascript:somefunction(' + i + ')"><div class="right floated ui button">卸载</div></a>' + install[i]["name"] + '</div>';
+                                    i++;
+                                }
+                                $('#installed').html(html);
+                                $("#current1").text(current);
+                            }
+                        });
+
+                        /*模块安装部分*/
+                        all = allmodules.length;
+                        i = 0;
+                        let htm = '';
+                        while (i < all && i < 5) {
+                            if (!allmodules[i].hasOwnProperty("status"))
+                                htm += '<div class="item"><div class="right floated ui button">不可卸载</div><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                            else {
+                                if (allmodules[i]["status"] === "installed")
+                                    htm += '<div class="item"><a href="javascript:unfunction(' + i + ')"><div class="right floated ui button">卸载</div></a><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                                else
+                                    htm += '<div class="item"><a href="javascript:infunction(' + i + ')"><div class="right floated ui button">安装</div></a><div class="right floated ui button">未安装</div>' + allmodules[i]["name"] + '</div>';
+                            }
+                            i++;
+                        }
+                        $('#allmodule').html(htm);
+                        $("#pagination4").pagination({
+                            currentPage: 1,
+                            totalPage: Math.ceil(all / 5),
+                            callback: function (current) {
+                                let i = (current - 1) * 5;
+                                let htm = '';
+                                while (i < all && i < current*5) {
+                                    if (!allmodules[i].hasOwnProperty("status"))
+                                        htm += '<div class="item"><div class="right floated ui button">不可卸载</div><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                                    else {
+                                        if (allmodules[i]["status"] === "installed")
+                                            htm += '<div class="item"><a href="javascript:unfunction(' + i + ')"><div class="right floated ui button">卸载</div></a><div class="right floated ui button">已安装</div>' + allmodules[i]["name"] + '</div>';
+                                        else
+                                            htm += '<div class="item"><a href="javascript:infunction(' + i + ')"><div class="right floated ui button">安装</div></a><div class="right floated ui button">未安装</div>' + allmodules[i]["name"] + '</div>';
+                                    }
+                                    i++;
+                                }
+                                $('#allmodule').html(htm);
+                                $("#current4").text(current)
+                            }
+                        });
+
+                    },
+                    complete: function () {
+                        console.log("complete");
+                    }
                 }
-            });
-            $("#pagination4").pagination({
-                currentPage: 1,
-                totalPage: 12,
-                callback: function (current) {
-                    $("#current4").text(current)
-                }
-            });
+            );
 
 
-            $("#pagination2").pagination({
-                currentPage: 3,
-                totalPage: 12,
-                isShow: false,
-                count: 6,
-                prevPageText: "< 上一页",
-                nextPageText: "下一页 >",
-                callback: function (current) {
-                    $("#current2").text(current)
-                }
-            });
-
-            $("#pagination3").pagination({
-                currentPage: 4,
-                totalPage: 16,
-                isShow: true,
-                count: 7,
-                homePageText: "首页",
-                endPageText: "尾页",
-                prevPageText: "上一页",
-                nextPageText: "下一页",
-                callback: function (current) {
-                    $("#current3").text(current)
-                }
-            });
-
-            $("#getPage").on("click", function () {
-                var info = $("#pagination3").pagination("getPage");
-                alert("当前页数：" + info.current + ",总页数：" + info.total);
-            });
-
-            $("#setPage").on("click", function () {
-                $("#pagination3").pagination("setPage", 1, 10);
-            });
         });
     </script>
 {% endblock %}
@@ -77,70 +187,22 @@
 
                 <li class="development photography">
                     <h2 class="ui center aligned header">已安装模块</h2>
-                    <div class="ui middle aligned celled list">
-                        <div class="item">
-                            <div class="right floated ui button">卸载</div>
-
-                            分页插件
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">卸载</div>
-
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">卸载</div>
-
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">卸载</div>
-
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div id="pagination1" class="page fl"></div>
-                            <div class="info fl">
-                                <p>当前页数：<span id="current1">1</span></p>
-                            </div>
+                    <div class="ui middle aligned celled list" id="installed"></div>
+                    <div class="item">
+                        <div id="pagination1" class="page fl"></div>
+                        <div class="info fl">
+                            <p>当前页数：<span id="current1">1</span></p>
                         </div>
                     </div>
-
                 </li>
 
                 <li class="photography design">
                     <h2 class="ui center aligned header">模块安装</h2>
-                    <div class="ui middle aligned celled list">
-                        <div class="item">
-                            <div class="right floated ui button">安装/已安装</div>
-                            <div class="right floated ui button">卸载/已卸载</div>
-                            分页插件
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">安装/已安装</div>
-                            <div class="right floated ui button">卸载/已卸载</div>
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">安装/已安装</div>
-                            <div class="right floated ui button">卸载/已卸载</div>
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">安装/已安装</div>
-                            <div class="right floated ui button">卸载/已卸载</div>
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div class="right floated ui button">安装/已安装</div>
-                            <div class="right floated ui button">卸载/已卸载</div>
-                            Lena
-                        </div>
-                        <div class="item">
-                            <div id="pagination4" class="page fl"></div>
-                            <div class="info fl">
+                    <div class="ui middle aligned celled list" id="allmodule"></div>
+                    <div class="item">
+                        <div id="pagination4" class="page fl"></div>
+                        <div class="info fl">
                             <p>当前页数：<span id="current4">1</span></p>
-                        </div>
                         </div>
                     </div>
 
