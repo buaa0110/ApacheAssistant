@@ -242,22 +242,22 @@
 
 
 									var a = JSON.parse(window.sessionStorage['lineData']);
-									console.log("a is :", a);
-									console.log(a['labels']);
+									// console.log("a is :", a);
+									// console.log(a['labels']);
 									a['labels'].unshift(time);
-									console.log(a['labels']);
+									// console.log(a['labels']);
 									a['data'].unshift(data['network_data']);
-									console.log(a['data']);
-									console.log("a[data] and a[labels] is ", a['data'],a['labels']);
-									console.log(a);
-									a['labels'].slice(0,10);
-									a['data'].slice(0,10);
+									// console.log(a['data']);
+									// console.log("a[data] and a[labels] is ", a['data'],a['labels']);
+									// console.log(a);
+									a['labels'] = a['labels'].slice(0,10);
+									a['data'] = a['data'].slice(0,10);
 									console.log(a);
 									// NOTE: save new data List
 									// sessionStorage['lineData'] = JSON.stringify(a);
 
-									window.sessionStorage.setItem("lineDate",JSON.stringify(a));
-
+									window.sessionStorage.setItem("lineData",JSON.stringify(a));
+									console.log(window.sessionStorage);
 									// NOTE: start to draw line chart
 									var speed = document.getElementById('netSpeedChart').getContext('2d');
 									var chart = new Chart(speed, {
@@ -301,7 +301,7 @@
 						// load apache state
 						getState();
 						pieChart();
-						// setInterval("lineChart()", 5000);
+						setInterval("lineChart()", 1000);
 					},
 						// NOTE: no apache path find
 						error:function(data){
@@ -327,7 +327,8 @@
 									document.getElementById("saveConfDir").disabled = "disabled";
 									getState();
 									pieChart();
-									setTimeout("lineChart()", 5000);
+									console.log("ready yo line chart");
+									setInterval("lineChart()", 1000);
 	            },
 	            error:function(data){
 	              console.log(data);
