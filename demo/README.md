@@ -58,10 +58,9 @@ python demo.py
 
 - [x] /api/save_log_path/	保存Apache日志文件路径
 - [x] /api/load_log_path/	读取保存的Apache日志文件路径
-- [x] /api/load_log_text/	读取Apahce日志文件文本并解析
+- [x] /api/filter_log_text/	按字段筛选Apahce日志文件内容
 - [x] /api/clear_log_text/	清除Apahce日志文件内容
 - [x] /api/backup_log_text/	备份Apahce日志文件内容
-- [x] /api/filter_log_text/	按字段筛选Apahce日志文件内容
 
 #### 性能监控
 

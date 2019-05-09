@@ -220,32 +220,6 @@ def load_log_path():
         #返回错误信息
         return error('日志文件路径未保存')
 
-#读取Apahce日志文件并解析
-@app.route('/api/load_log_text/',methods=['GET'])
-def load_log_text():
-    if 'log_path' in storage:
-        path = storage['log_path']
-        if os.path.exists(path):
-            with open(path,'r') as f:
-                log_text = f.read()
-            log_text_list = log_text.split('\n')
-            line={}
-            log_json=[]
-            for item in log_text_list:
-                log_line_data = line_parser(item)
-                line['remote_host'] = log_line_data['remote_host']
-                line['request_method'] = log_line_data['request_method']
-                line['request_url'] = log_line_data['request_url']
-                line['status'] = log_line_data['status']
-                line['time_received'] = log_line_data['time_received']
-                log_json.append(line)
-            storage['log_text'] = log_json
-            return success('读取日志文件成功')
-        else:
-            return error('日志文件路径不存在')
-    else:
-        return error('日志文件路径未保存')
-
 #清除日志文件内容
 @app.route('/api/clear_log_text/',methods=['POST'])
 def clear_log_text():
@@ -275,23 +249,45 @@ def backup_log_text():
         return error('日志文件路径未保存')
 
 #筛选日志内容字段
-@app.route('/api/filter_log_text/',methods=['GET'])
-
+@app.route('/api/filter_log_text/',methods=['POST'])
 def filter_log_text():
     data = request.json
     key_list = list(data.keys())
-    log_text = storage['log_text']
+    #检查是否已保存日志文件路径
+    if 'log_path' not in storage:
+        return error('日志文件路径未保存')
+    path = storage['log_path']
+    #检查日志文件是否存在
+    if not os.path.exists(path):
+        return error('日志文件不存在')
+    #读取并解析日志文件 
+    with open(path,'r') as f:
+        log_text = f.read()
+    log_text_list = log_text.split('\n')
+    log_json=[]
+    for item in log_text_list:
+        try: #去除空行等情况
+            log_line_data = line_parser(item)
+        except:
+            continue
+        line={}
+        line['remote_host'] = log_line_data['remote_host']
+        line['request_method'] = log_line_data['request_method']
+        line['request_url'] = log_line_data['request_url']
+        line['status'] = log_line_data['status']
+        line['time_received'] = log_line_data['time_received']
+        line['text']=item
+        log_json.append(line)
     filter_text = []
-    for item in log_text:
+    for item in log_json:
         match_flag = True
         for key in key_list:
             if item[key]!=data[key]:
                 match_flag = False
         if match_flag == True:
-            filter_text.append(item)
+            filter_text.append(item['text']) #仅返回日志文本
 
-    storage['filter_text'] = filter_text
-    return success("筛选成功")
+    return jsonify(filter_text)
 
 """
  性能监控
