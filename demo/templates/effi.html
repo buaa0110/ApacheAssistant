@@ -59,10 +59,10 @@
 			// NOTE: default charts means every value is 0
 			function defaultChart(){
 				const obj = {
-					labels:[],
-					data:[]
+					labels:["0"],
+					data:[0]
 				}
-				sessionStorage.setItem("lineData",JSON.stringify(obj));
+				window.sessionStorage.setItem("lineData",JSON.stringify(obj));
 				var speed = document.getElementById('netSpeedChart').getContext('2d');
 				var chart = new Chart(speed, {
 										// The type of chart we want to create
@@ -129,8 +129,8 @@
 					type: 'GET',
 					contentType: 'application/json;charset=utf-8',
 					success:function(data){
-						console.log(data);
-						$('#changeButton').attr("disabled","");
+						console.log("get apache status"+data);
+						$('#changeButton').removeAttr("disabled");
 						$('#changeButton').attr("class","positive ui button");
 
 						if (data['status'] != 'running'){
@@ -141,7 +141,7 @@
 						else{
 							$('#stateButton').attr("class","positive ui button");
 							$('#stateButton').text("RUNNING");
-							$('#restartButton').attr("disabled","");
+							$('#restartButton').removeAttr("disabled");
 							$('#restartButton').attr("class","positive ui button");
 						}
 					},
@@ -154,17 +154,18 @@
 			}
 			// NOTE: exchange state
 			function changeState(command){
+				console.log(command);
 				if(command == "stop"){
 					$('#stateButton').attr("class","negative ui button");
-					$('#stateButton').text("RUNNING");
-					$('#restartButton').attr("class","positive ui button");
-					$('#restartButton').attr("disabled","");
-				}
-				else{
-					$('#stateButton').attr("class","positive ui button");
 					$('#stateButton').text("STOP");
 					$('#restartButton').attr("class","negative ui button");
 					$('#restartButton').attr("disabled","disabled");
+				}
+				else{
+					$('#stateButton').attr("class","positive ui button");
+					$('#stateButton').text("RUNNING");
+					$('#restartButton').attr("class","positive ui button");
+					$('#restartButton').removeAttr("disabled");
 				}
 			}
 			// NOTE: draw pie charts
@@ -178,6 +179,8 @@
 	                //显示结果
 	                dataCpu0 = parseInt(data['cpu_percent']);
 									dataRam0 = parseInt(data['memory_percent']);
+									console.log("params"+dataCpu0+dataRam0);
+
 									var cpu = document.getElementById('CPUOccupied').getContext('2d');
 									dataCpu = {
 															datasets: [{
@@ -234,15 +237,27 @@
 									var h = myDate.getHours();       //获取当前小时数(0-23)
 									var m = myDate.getMinutes();     //获取当前分钟数(0-59)
 									var s = myDate.getSeconds();     //获取当前秒数(0-59)
-									time = h + ":" + m + ":" + s;
+									var time = h + ":" + m + ":" + s;
 									// NOTE: read data List
-									var a = JSON.parse(sessionStorage['lineData']);
+
+
+									var a = JSON.parse(window.sessionStorage['lineData']);
+									console.log("a is :", a);
+									console.log(a['labels']);
 									a['labels'].unshift(time);
-									var l = a['data'].unshift(data['network_data']);
-									a['labels'].splice(0,10);
-									a['data'].splice(0,10);
+									console.log(a['labels']);
+									a['data'].unshift(data['network_data']);
+									console.log(a['data']);
+									console.log("a[data] and a[labels] is ", a['data'],a['labels']);
+									console.log(a);
+									a['labels'].slice(0,10);
+									a['data'].slice(0,10);
+									console.log(a);
 									// NOTE: save new data List
-									sessionStorage['lineData'] = JSON.stringify(a);
+									// sessionStorage['lineData'] = JSON.stringify(a);
+
+									window.sessionStorage.setItem("lineDate",JSON.stringify(a));
+
 									// NOTE: start to draw line chart
 									var speed = document.getElementById('netSpeedChart').getContext('2d');
 									var chart = new Chart(speed, {
@@ -279,13 +294,14 @@
 					success:function(data){
 						// document.getElementById("saveConfDirText").value = data['path'];
 						$('#saveConfDirText').attr("value",data['path']);
-						document.getElementById("saveConfDirText").disabled = "disabled";
-						document.getElementById("saveConfDir").disabled = "disabled";
+						$("#saveConfDirText").attr("disabled","disabled");
+						$("#saveConfDir").attr("disabled",true);
+
 						console.log("set value");
 						// load apache state
 						getState();
 						pieChart();
-						setTimeout("lineChart()", 5000);
+						// setInterval("lineChart()", 5000);
 					},
 						// NOTE: no apache path find
 						error:function(data){
@@ -298,6 +314,7 @@
 			// NOTE: this about save apache path button clicks
 			$('#saveConfDir').click(function(){
 				apachePath = $('#saveConfDirText').val();
+				console.log(apachePath);
 				$.ajax({
 	            url: '/api/save_apache_path/',
 	            data: JSON.stringify({'path':apachePath}),
@@ -335,7 +352,9 @@
 			})
 			// NOTE: this is about change button clicks
 			$('#changeButton').click(function(){
-				nowState = $('#stateButton').val();
+				var nowState = $('#stateButton').text();
+				console.log(nowState);
+				var command = "";
 				if (nowState == "RUNNING"){
 					command = "stop";
 				}
