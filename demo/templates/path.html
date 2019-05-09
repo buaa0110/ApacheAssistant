@@ -1,156 +1,398 @@
 {% extends 'base.html' %}
 {% block title %}
- 配置管理
+    日志管理
 {% endblock %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="../static/jqueryPagination/css/jquery.pagination.css"/>
     <script type="text/javascript" src="../static/jqueryPagination/js/jquery.pagination.min.js"></script>
-    <script>
-        $(function () {
-            $("#pagination1").pagination({
-                currentPage: 1,
-                totalPage: 12,
-                callback: function (current) {
-                    $("#current1").text(current)
-                }
-            });
-            $("#pagination4").pagination({
-                currentPage: 1,
-                totalPage: 12,
-                callback: function (current) {
-                    $("#current4").text(current)
-                }
-            });
-
-
-            $("#pagination2").pagination({
-                currentPage: 3,
-                totalPage: 12,
-                isShow: false,
-                count: 6,
-                prevPageText: "< 上一页",
-                nextPageText: "下一页 >",
-                callback: function (current) {
-                    $("#current2").text(current)
-                }
-            });
-
-            $("#pagination3").pagination({
-                currentPage: 4,
-                totalPage: 16,
-                isShow: true,
-                count: 7,
-                homePageText: "首页",
-                endPageText: "尾页",
-                prevPageText: "上一页",
-                nextPageText: "下一页",
-                callback: function (current) {
-                    $("#current3").text(current)
-                }
-            });
-
-            $("#getPage").on("click", function () {
-                var info = $("#pagination3").pagination("getPage");
-                alert("当前页数：" + info.current + ",总页数：" + info.total);
-            });
-
-            $("#setPage").on("click", function () {
-                $("#pagination3").pagination("setPage", 1, 10);
-            });
-        });
-    </script>
 {% endblock %}
 {% block MainContainer %}
     <div class="content cf">
-		<div class="grid-1 cf">
-			<h1>日志管理</h1>
-			<p><strong>您可以在此查看当前日志文件路径、管理日志文件路径、读取日志信息和修改日志信息</strong></p>
-		</div>
-		<div class="gallery">
-			<ul id="portfolio-one">
-				<li class="development design">
-				<h2 class="ui left aligned icon header">原日志文件路径</h2>
-        <div class="ui left labeled button " >
-          <a class="ui basic right label">
-          路径内容，使用js读取后端实时返回内容
-          </a>
-          <div class="ui button">
-            <i class="sync icon"></i> 刷新
-          </div>
+        <div class="grid-1 cf">
+            <h1>日志管理</h1>
+            <p><strong>您可以在此查看当前日志文件路径、管理日志文件路径、读取日志信息和修改日志信息</strong></p>
         </div>
-	</li>
-	<li class="development photography">
-				<h2>修改日志文件路径</h2>
-        <div class="ui fluid action input">
-            <input type="text" placeholder="默认路径">
-                <button class="ui button"><i class="large folder open outline icon"></i></button>
+        <div class="gallery">
+            <ul id="portfolio-one">
+                <li class="development design">
+                    <h2 class="ui left aligned icon header">原日志文件路径</h2>
+                    <div class="ui fluid action input">
+                        <a class="ui teal tag label">
+                            Path
+                        </a>
+                        <a class="ui basic right label" id="logPathLabel">
+                            路径内容，使用js读取后端实时返回内容
+                        </a>
+                    </div>
+                </li>
+
+                <li class="development photography">
+                    <h2>修改日志文件路径</h2>
+                    <div class="ui fluid action input">
+                        <input type="text" placeholder="默认路径" id="logPathText">
+                        <button class="ui button"><i class="large folder open outline icon"></i></button>
                         &nbsp;
-                <button class="ui button">修改</button>
-                </div>
-				</li>
+                        <button class="ui button" id='updateLogPathButton'>修改</button>
+                    </div>
+                </li>
 
+                <li class="development photography">
+                    <h2 class="ui left aligned icon header">日志文件信息</h2>
+                    <div class="ui middle aligned celled list">
+                        <input type="text" placeholder="" id="Key_Search">
+                        <button class="ui button" id='whole' onclick="SearchLogData(0)">全部</button>
+                        <button class="ui button" id='byremote_host' onclick="SearchLogData(1)">按remote_host查询</button>
+                        <button class="ui button" id='byrequest_method' onclick="SearchLogData(2)">按request_method查询
+                        </button>
+                        <button class="ui button" id='byrequest_url' onclick="SearchLogData(3)">按request_url查询</button>
+                        <button class="ui button" id='bystatus' onclick="SearchLogData(4)">按status查询</button>
+                        <button class="ui button" id='bytime_received' onclick="SearchLogData(5)">按time_received查询
+                        </button>
 
-				<li class="photography design">
-				<h2>当前日志文件信息</h2>
-
-				<div >
-          <div class="ui grid">
-            <div class="twelve wide column">
-
-            </div>
-
-
-          </div>
-          <div class="ui segment">
-              <div class="ui fluid action input">
-                <a class="ui basic right label">
-                日志内容，使用js读取后端实时返回内容
-                </a>
-              </div>
-              <div class="ui divider"></div>
-              <div class="ui fluid action input">
-                <a class="ui basic right label">
-                日志内容，使用js读取后端实时返回内容
-                </a>
-              </div><div class="ui divider"></div>
-              <div class="ui fluid action input">
-                <a class="ui basic right label">
-                日志内容，使用js读取后端实时返回内容
-                </a>
-              </div><div class="ui divider"></div>
-              <div class="ui fluid action input">
-                <a class="ui basic right label">
-                日志内容，使用js读取后端实时返回内容
-                </a>
-              </div><div class="ui divider"></div>
-              <div class="ui fluid action input">
-                <a class="ui basic right label">
-                日志内容，使用js读取后端实时返回内容
-                </a>
-              </div>
-              <div class="ui divider"></div>
-              <div class="item">
-                            <div id="pagination1" class="page fl"></div>
-                            <div class="info fl">
-                                <p>当前页数：<span id="current1">1</span></p>
-                            </div>
+                    </div>
+                    <div class="ui middle aligned celled list" id="logData"></div>
+                    <div class="item">
+                        <div id="pagination1" class="page fl"></div>
+                        <div class="info fl">
+                            <p>当前页数：<span id="current1">1</span></p>
                         </div>
-          </div>
+                    </div>
+                </li>
+
+                <li class="development photography">
+                    <h2>清除/备份日志文件</h2>
+                    <div class="ui segment">
+                        <button class="ui button" id='clearLogPathButton'>清除日志信息</button>
+                        <button class="ui button" id='backupLogPathButton'>备份日志信息</button>
+                    </div>
+                </li>
+
+
+            </ul>
         </div>
 
-				</li>
-         <li class="design services">
-				<h2>修改日志文件信息</h2>
-        <div class="ui segment">
-            <div class="ui fluid action input">
-              <input type="text" placeholder="日志内容">
-              <div class="ui button">修改</div>
-            </div>
-        </div>
-				</li>
+        <script type="text/javascript">
+            let total;
+            $.ajax({
+                url: '/api/load_log_path/',
+                data: {},
+                type: 'GET',
+                contentType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    //显示结果
+                    $('#logPathLabel').text(data['path']);
+                },
+                error: function (data) {
+                    alert(data);
+                }
+            });
+
+            // updatelogPath
+            $('#updateLogPathButton').click(function () {
+                dataLogPath = $('#logPathText').val();
+                console.log(dataLogPath);
+                $.ajax({
+                    url: '/api/save_log_path/',
+                    data: JSON.stringify({'path': dataLogPath}),
+                    type: 'POST',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (res) {
+                        //need to finish
+                        $('#logPathLabel').text(dataLogPath);
+                        console.log(res);
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                });
+            });
 
 
-			</ul>
-			</div>
-	</div><!-- end content -->
+            // clearLogData
+            $('#clearLogPathButton').click(function () {
+                console.log("try clear log data");
+                $.ajax({
+                    url: '/api/clear_log_text/',
+                    type: 'POST',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        //显示结果
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+
+            // backupLogData
+            $('#backupLogPathButton').click(function () {
+                console.log("try clear log data");
+                $.ajax({
+                    url: '/api/backup_log_text/',
+                    type: 'POST',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        //显示结果
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+
+
+            function SearchLogData(element) {
+                dataLog = $('#Key_Search').val();
+                var Order = new Array("", "remote_host", "request_method", "request_url", "status", "time_received");
+                let log_data = '';
+                if (element === 0) {
+                    $.ajax({
+                        type: "post",
+                        url: "/api/filter_log_text/",
+                        data: JSON.stringify({}),
+                        dataType: "json",
+                        contentType: "application/json;charest = utf-8",
+                        success: function (data) {
+                            console.log("all");
+                            let i = 0;
+                            total = data.length;
+                            let totalpage = Math.ceil(total / 5);
+                            /*日志文件*/
+                            i = 0;
+                            let html = '';
+                            while (i < total && i < 5) {
+                                html += '<div class="item">' + data[i] + '</div>';
+                                i++;
+                            }
+                            $('#logData').html(html);
+                            $("#pagination1").pagination({
+                                currentPage: 1,
+                                totalPage: totalpage,
+                                callback: function (current) {
+                                    let i = (current - 1) * 5;
+                                    let html = '';
+                                    while (i < total && i < current * 5) {
+                                        html += '<div class="item">' + data[i] + '</div>';
+                                        i++;
+                                    }
+                                    $('#logData').html(html);
+                                    $("#current1").text(current);
+                                }
+                            });
+                        },
+                        error: function (data) {
+                            alert("error");
+                            console.log(data);
+                        }
+                    })
+                } else if (element === 1) {
+                    $.ajax({
+                        type: "post",
+                        url: "/api/filter_log_text/",
+                        data: JSON.stringify({"remote_host": dataLog}),
+                        dataType: "json",
+                        contentType: "application/json;charest = utf-8",
+                        success: function (data) {
+                            console.log("all");
+                            let i = 0;
+                            total = data.length;
+                            let totalpage = Math.ceil(total / 5);
+                            /*日志文件*/
+                            i = 0;
+                            let html = '';
+                            while (i < total && i < 5) {
+                                html += '<div class="item">' + data[i] + '</div>';
+                                i++;
+                            }
+                            $('#logData').html(html);
+                            $("#pagination1").pagination({
+                                currentPage: 1,
+                                totalPage: totalpage,
+                                callback: function (current) {
+                                    let i = (current - 1) * 5;
+                                    let html = '';
+                                    while (i < total && i < current * 5) {
+                                        html += '<div class="item">' + data[i] + '</div>';
+                                        i++;
+                                    }
+                                    $('#logData').html(html);
+                                    $("#current1").text(current);
+                                }
+                            });
+                        },
+                        error: function (data) {
+                            alert("error");
+                            console.log(data);
+                        }
+                    })
+                } else if (element === 2) {
+                    $.ajax({
+                        type: "post",
+                        url: "/api/filter_log_text/",
+                        data: JSON.stringify({"request_method": dataLog}),
+                        dataType: "json",
+                        contentType: "application/json;charest = utf-8",
+                        success: function (data) {
+                            console.log("all");
+                            let i = 0;
+                            total = data.length;
+                            let totalpage = Math.ceil(total / 5);
+                            /*日志文件*/
+                            i = 0;
+                            let html = '';
+                            while (i < total && i < 5) {
+                                html += '<div class="item">' + data[i] + '</div>';
+                                i++;
+                            }
+                            $('#logData').html(html);
+                            $("#pagination1").pagination({
+                                currentPage: 1,
+                                totalPage: totalpage,
+                                callback: function (current) {
+                                    let i = (current - 1) * 5;
+                                    let html = '';
+                                    while (i < total && i < current * 5) {
+                                        html += '<div class="item">' + data[i] + '</div>';
+                                        i++;
+                                    }
+                                    $('#logData').html(html);
+                                    $("#current1").text(current);
+                                }
+                            });
+                        },
+                        error: function (data) {
+                            alert("error");
+                            console.log(data);
+                        }
+                    })
+                } else if (element === 3) {
+                    $.ajax({
+                        type: "post",
+                        url: "/api/filter_log_text/",
+                        data: JSON.stringify({"request_url": dataLog}),
+                        dataType: "json",
+                        contentType: "application/json;charest = utf-8",
+                        success: function (data) {
+                            console.log("all");
+                            let i = 0;
+                            total = data.length;
+                            let totalpage = Math.ceil(total / 5);
+                            /*日志文件*/
+                            i = 0;
+                            let html = '';
+                            while (i < total && i < 5) {
+                                html += '<div class="item">' + data[i] + '</div>';
+                                i++;
+                            }
+                            $('#logData').html(html);
+                            $("#pagination1").pagination({
+                                currentPage: 1,
+                                totalPage: totalpage,
+                                callback: function (current) {
+                                    let i = (current - 1) * 5;
+                                    let html = '';
+                                    while (i < total && i < current * 5) {
+                                        html += '<div class="item">' + data[i] + '</div>';
+                                        i++;
+                                    }
+                                    $('#logData').html(html);
+                                    $("#current1").text(current);
+                                }
+                            });
+                        },
+                        error: function (data) {
+                            alert("error");
+                            console.log(data);
+                        }
+                    })
+                } else if (element === 4) {
+                    $.ajax({
+                        type: "post",
+                        url: "/api/filter_log_text/",
+                        data: JSON.stringify({"status": dataLog}),
+                        dataType: "json",
+                        contentType: "application/json;charest = utf-8",
+                        success: function (data) {
+                            console.log("all");
+                            let i = 0;
+                            total = data.length;
+                            let totalpage = Math.ceil(total / 5);
+                            /*日志文件*/
+                            i = 0;
+                            let html = '';
+                            while (i < total && i < 5) {
+                                html += '<div class="item">' + data[i] + '</div>';
+                                i++;
+                            }
+                            $('#logData').html(html);
+                            $("#pagination1").pagination({
+                                currentPage: 1,
+                                totalPage: totalpage,
+                                callback: function (current) {
+                                    let i = (current - 1) * 5;
+                                    let html = '';
+                                    while (i < total && i < current * 5) {
+                                        html += '<div class="item">' + data[i] + '</div>';
+                                        i++;
+                                    }
+                                    $('#logData').html(html);
+                                    $("#current1").text(current);
+                                }
+                            });
+                        },
+                        error: function (data) {
+                            alert("error");
+                            console.log(data);
+                        }
+                    })
+                } else if (element === 5) {
+                    $.ajax({
+                        type: "post",
+                        url: "/api/filter_log_text/",
+                        data: JSON.stringify({"time_received": dataLog}),
+                        dataType: "json",
+                        contentType: "application/json;charest = utf-8",
+                        success: function (data) {
+                            console.log("all");
+                            let i = 0;
+                            total = data.length;
+                            let totalpage = Math.ceil(total / 5);
+                            /*日志文件*/
+                            i = 0;
+                            let html = '';
+                            while (i < total && i < 5) {
+                                html += '<div class="item">' + data[i] + '</div>';
+                                i++;
+                            }
+                            $('#logData').html(html);
+                            $("#pagination1").pagination({
+                                currentPage: 1,
+                                totalPage: totalpage,
+                                callback: function (current) {
+                                    let i = (current - 1) * 5;
+                                    let html = '';
+                                    while (i < total && i < current * 5) {
+                                        html += '<div class="item">' + data[i] + '</div>';
+                                        i++;
+                                    }
+                                    $('#logData').html(html);
+                                    $("#current1").text(current);
+                                }
+                            });
+                        },
+                        error: function (data) {
+                            alert("error");
+                            console.log(data);
+                        }
+                    })
+                }
+
+            }
+
+        </script>
+
+
+    </div><!-- end content -->
 {% endblock %}
