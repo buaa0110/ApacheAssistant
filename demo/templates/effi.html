@@ -240,9 +240,15 @@
 									var time = h + ":" + m + ":" + s;
 									// NOTE: read data List
 
-
+									if(window.sessionStorage['lineData'] == null){
+										var ori = {
+											labels:[time],
+											data:[0]
+										}
+										window.sessionStorage.setItem("lineData",JSON.stringify(ori));
+									}
 									var a = JSON.parse(window.sessionStorage['lineData']);
-									// console.log("a is :", a);
+
 									// console.log(a['labels']);
 									a['labels'].unshift(time);
 									// console.log(a['labels']);
