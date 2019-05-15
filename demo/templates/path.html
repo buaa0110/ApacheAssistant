@@ -81,6 +81,10 @@
                 success: function (data) {
                     //显示结果
                     $('#logPathLabel').text(data['path']);
+                    QUnit.test("test path", function(assert){
+                      assert.ok( 1 == "1", "Passed!" );
+                      console.log("hello");
+                    })
                 },
                 error: function (data) {
                     alert(data);
@@ -257,6 +261,7 @@
                                         html += '<div class="item">' + data[i] + '</div>';
                                         i++;
                                     }
+
                                     $('#logData').html(html);
                                     $("#current1").text(current);
                                 }
