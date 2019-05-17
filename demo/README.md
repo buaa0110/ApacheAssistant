@@ -96,8 +96,7 @@ $.ajax({
     },
     error: function(data){
         //后端返回error
-        console.log('失败')
-        console.log(data)
+        alert(data.responseJSON['error'])
     }
 })
 ```
