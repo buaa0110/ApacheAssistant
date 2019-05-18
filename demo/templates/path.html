@@ -30,8 +30,6 @@
                     <h2>修改日志文件路径</h2>
                     <div class="ui fluid action input">
                         <input type="text" placeholder="默认路径" id="logPathText">
-                        <button class="ui button"><i class="large folder open outline icon"></i></button>
-                        &nbsp;
                         <button class="ui button" id='updateLogPathButton'>修改</button>
                     </div>
                 </li>
@@ -108,7 +106,7 @@
                         console.log(res);
                     },
                     error: function (data) {
-                        alert(data);
+                        alert(data.responseJSON['error']);
                     }
                 });
             });
@@ -189,7 +187,7 @@
                             });
                         },
                         error: function (data) {
-                            alert("error");
+                            alert(data.responseJSON['error']);
                             console.log(data);
                         }
                     })
@@ -229,7 +227,7 @@
                             });
                         },
                         error: function (data) {
-                            alert("error");
+                            alert(data.responseJSON['error']);
                             console.log(data);
                         }
                     })
@@ -270,7 +268,7 @@
                             });
                         },
                         error: function (data) {
-                            alert("error");
+                            alert(data.responseJSON['error']);
                             console.log(data);
                         }
                     })
@@ -310,7 +308,7 @@
                             });
                         },
                         error: function (data) {
-                            alert("error");
+                            alert(data.responseJSON['error']);
                             console.log(data);
                         }
                     })
@@ -350,7 +348,7 @@
                             });
                         },
                         error: function (data) {
-                            alert("error");
+                            alert(data.responseJSON['error']);
                             console.log(data);
                         }
                     })
@@ -390,7 +388,7 @@
                             });
                         },
                         error: function (data) {
-                            alert("error");
+                            alert(data.responseJSON['error']);
                             console.log(data);
                         }
                     })
