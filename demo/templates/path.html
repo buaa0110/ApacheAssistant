@@ -39,7 +39,9 @@
                 <li class="development photography">
                     <h2 class="ui left aligned icon header">日志文件信息</h2>
                     <div class="ui middle aligned celled list">
-                        <input type="text" placeholder="" id="Key_Search">
+                        <div class="ui input">
+                            <input type="text" placeholder="" id="Key_Search">
+                        </div>
                         <button class="ui button" id='whole' onclick="SearchLogData(0)">全部</button>
                         <button class="ui button" id='byremote_host' onclick="SearchLogData(1)">按remote_host查询</button>
                         <button class="ui button" id='byrequest_method' onclick="SearchLogData(2)">按request_method查询
