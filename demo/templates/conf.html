@@ -104,27 +104,27 @@
 				<h2>修改配置文件信息</h2>
         <div class="ui segment">
             <div class="ui fluid action input">
-              <input type="text" placeholder="Listen" id="confInfoText1">
+              <input type="text" placeholder="Listen" id="confInfoText1" onkeyup="this.value=this.value.replace(/\D/g,'')">
               <div class="ui button" id="updateConfInfo1">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="KeepAlive" id="confInfoText2">
+              <input type="text" placeholder="KeepAlive" id="confInfoText2" onkeyup="value=value.replace(/[\W]/g,'')">
               <div class="ui button" id="updateConfInfo2">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="KeepAliveTimeout" id="confInfoText3">
+              <input type="text" placeholder="KeepAliveTimeout" id="confInfoText3" onkeyup="this.value=this.value.replace(/\D/g,'')">
               <div class="ui button" id="updateConfInfo3">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="MaxKeepAliveRequests" id="confInfoText4">
+              <input type="text" placeholder="MaxKeepAliveRequests" id="confInfoText4" onkeyup="this.value=this.value.replace(/\D/g,'')">
               <div class="ui button" id="updateConfInfo4">修改</div>
             </div>
             <div class="ui divider"></div>
             <div class="ui fluid action input">
-              <input type="text" placeholder="DocumentRoot" id="confInfoText5">
+              <input type="text" placeholder="DocumentRoot" id="confInfoText5" >
               <div class="ui button" id="updateConfInfo5">修改</div>
             </div>
             <div class="ui divider"></div>
