@@ -82,6 +82,9 @@ def get_module_info():
                 modules[name]['path']=path
                 modules[name]['type']='shared'
                 modules[name]['status']='uninstalled'
+                #将某些模块标记为不可卸载
+                if name in ['authz_core_module','log_config_module','autoindex_module','dir_module']:
+                    modules[name]['type']='static'
     #读取apache的现有模块
     proc = subprocess.run([storage['httpd_path'],'-M'],stdout=subprocess.PIPE)
     exist_modules_textlist=proc.stdout.decode('utf-8').split('\n')

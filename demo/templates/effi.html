@@ -147,7 +147,7 @@
 					},
 					error:function(data){
 						// NOTE: when get status error draw charts as 0
-						console.log(data['error']);
+						alert(data.responseJSON['error'])
 						defaultChart();
 						}
 				});
@@ -221,7 +221,7 @@
 
 	            },
 	            error:function(data){
-	              console.log(data);
+	              alert(data.responseJSON['error'])
 	            }
 	      });
 			}
@@ -338,7 +338,7 @@
 									setInterval("lineChart()", 1000);
 	            },
 	            error:function(data){
-	              console.log(data);
+	              alert(data.responseJSON['error'])
 	            }
 	      });
 			})
@@ -354,7 +354,7 @@
 	                console.log(data['info']);
 	            },
 	            error:function(data){
-	              console.log(data);
+	              alert(data.responseJSON['error'])
 	            }
 	      });
 			})
@@ -381,7 +381,7 @@
 
 	            },
 	            error:function(data){
-	              console.log(data);
+	              alert(data.responseJSON['error'])
 	            }
 	      });
 			})
