@@ -253,7 +253,7 @@
 									a['labels'].unshift(time);
 									// console.log(a['labels']);
 									console.log("a[data]:",a['data'][0]);
-									a['data'].unshift(data['network_data'] - a['data'][0]);
+									a['data'].unshift(data['network_data']);//后端已修改为返回两次请求的差值，无需在前端做差
 									// console.log(a['data']);
 									// console.log("a[data] and a[labels] is ", a['data'],a['labels']);
 									// console.log(a);

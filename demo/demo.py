@@ -20,6 +20,8 @@ line_parser = apache_log_parser.make_parser("%h %l %u %t \"%r\" %>s %b")
 """
 全局工具
 """
+#上一次请求的网络数据初始值
+last_network_data=-1
 #持久化存储数据库，修改storage会自动保存
 storage = SqliteDict('./database.sqlite', autocommit=True)
 
@@ -385,9 +387,19 @@ def apache_params():
         result['memory_percent']=p.memory_percent()
         #连接数，非负整数
         result['connections']=len(p.connections())
-        #网络传输量，单位为MB
-        network_data = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
-        network_data=round(network_data/1024.0/1024.0,2)
+        #与上一次网络传输量的差值，单位为MB
+        global last_network_data
+        new_network_data = psutil.net_io_counters().bytes_sent + psutil.net_io_counters().bytes_recv
+        new_network_data=round(new_network_data/1024.0/1024.0,2)
+        if last_network_data<0: #第一次请求
+            network_data=0
+        else: #后面的请求
+            network_data=new_network_data-last_network_data
+        #更新上一次请求的值
+        last_network_data=new_network_data
+        if network_data<0.2: #避免负值
+            network_data=0
+        # print('new:',new_network_data,'last',last_network_data,'diff',network_data)
         result['network_data']=network_data
     else: #已停止
         result['cpu_percent']=0.0
