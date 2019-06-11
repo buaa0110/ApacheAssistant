@@ -1,38 +1,73 @@
 {% extends 'base.html' %}
 {% block title %}
-联系我们
+    联系我们
 {% endblock %}
 {% block head %}
 {% endblock %}
 {% block MainContainer %}
-	<div class="content cf">
-		<div class="grid-1">
-			<h1>联系我们</h1>
-			<p><strong>您可以通过以下给出的联系方式（e.g.邮箱或者电话）联系我们</strong></p>
-		</div>
+    <div class="content cf">
+        <div class="grid-1">
+            <h1>联系我们</h1>
+            <p><strong>您可以通过以下给出的联系方式（e.g.邮箱或者电话）联系我们</strong></p>
+        </div>
 
-		<div class="grid-4">
-			<h2>Use the form below to get in touch</h2>
-			<form id="commentForm" method="post" action="check.php" />
-		        <fieldset class="text-fields">
-		   			<input type="text" name="name" id="cname" class="required cname" onFocus="if(this.value == 'Your Name') { this.value = ''; }" value="Your name" />
-		          	<input type="text" name="cemail" id="cemail" class="required email" onFocus="if(this.value == 'Your Email') { this.value = ''; }" value="Your Email" />
-		        </fieldset>
-		        <fieldset class="text-block">
-		          	<textarea name="ccomment" class="required comment" onFocus="if(this.value == 'Type your message here') { this.value = ''; }">Type your message here</textarea>
-		        </fieldset>
-		        <button class="send">Send</button>
-		</div>
+        <div class="grid-4">
+            <h2>Use the form below to get in touch</h2>
+            <form id="commentForm" method="post" action="check.php"/>
+            <fieldset class="text-fields">
+                <input type="text" name="name" id="cname" class="required cname"
+                       onFocus="if(this.value == 'Your Name') { this.value = ''; }" value="Your name"/>
+                <input type="text" name="cemail" id="cemail" class="required email"
+                       onFocus="if(this.value == 'Your Email') { this.value = ''; }" value="Your Email"/>
+            </fieldset>
+            <fieldset class="text-block">
+                <textarea name="ccomment" class="required comment"
+                          onFocus="if(this.value == 'Type your message here') { this.value = ''; }">Type your message here</textarea>
+            </fieldset>
+            <button class="send">Send</button>
+        </div>
 
-		<div class="grid-3 extend last">
-			<h2>联系方式</h2>
-			<ul class="contact-details">
-				<li>Tel: <span>010-12345678</span></li>
-				<li>Phone: <span>12345678910</span></li>
-				<li>Email: <span><a href="mailto:info@example.com">jk_0816@buaa.edu.cn</a></span></li>
-                <li>GitHub: <span><a href="https://github.com/buaa0110/ApacheAssistant">ApacheAssistant</a></span></li>
-				<li>Address<br /> <span>北京市<br />海淀区<br />学院路37号<br />北京航空航天大学</span></li>
-			</ul>
-		</div>
-	</div><!-- end content -->
+        <div class="grid-3 extend last">
+            <h2>联系方式</h2>
+{#            <ul class="contact-details">#}
+{#                <li>Tel: <span>010-12345678</span></li>#}
+{#                <li>Phone: <span>12345678910</span></li>#}
+{#                <li>Email: <span><a href="mailto:info@example.com">jk_0816@buaa.edu.cn</a></span></li>#}
+{#                <li>GitHub: <span><a href="https://github.com/buaa0110/ApacheAssistant">ApacheAssistant</a></span></li>#}
+{#                <li>Address<br/> <span>北京市<br/>海淀区<br/>学院路37号<br/>北京航空航天大学</span></li>#}
+{#            </ul>#}
+               <div class="ui list">
+                    <div class="item">
+                        <i class="phone icon"></i>
+                        <div class="content">
+                            010-12345678
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="phone square icon"></i>
+                        <div class="content">
+                            12345678910
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="mail icon"></i>
+                        <div class="content">
+                            <a href="mailto:info@example.com">jk_0816@buaa.edu.cn</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="github icon"></i>
+                        <div class="content">
+                            <a href="https://github.com/buaa0110/ApacheAssistant">ApacheAssistant</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <i class="marker icon"></i>
+                        <div class="content">
+                            北京市<br/>海淀区<br/>学院路37号<br/>北京航空航天大学
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div><!-- end content -->
 {% endblock %}

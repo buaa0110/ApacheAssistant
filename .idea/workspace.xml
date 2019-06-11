@@ -3,11 +3,15 @@
   <component name="ChangeListManager">
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <list default="true" id="564e1f94-a413-497a-bc0b-563ef8d0a1be" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/ApacheAssistant.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ApacheAssistant.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+=======
+    <list default="true" id="564e1f94-a413-497a-bc0b-563ef8d0a1be" name="Default" comment="" />
+>>>>>>> Stashed changes
 =======
     <list default="true" id="564e1f94-a413-497a-bc0b-563ef8d0a1be" name="Default" comment="" />
 >>>>>>> Stashed changes
@@ -34,6 +38,7 @@
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <state relative-caret-position="130">
               <caret line="31" column="45" lean-forward="true" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
 =======
@@ -42,6 +47,10 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="665">
               <caret line="35" column="50" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
+>>>>>>> Stashed changes
+=======
+            <state relative-caret-position="535">
+              <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
 >>>>>>> Stashed changes
 =======
             <state relative-caret-position="535">
