@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4da30b98-8601-445d-9dbb-41585a761c8e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docs/测试需求文档/~$报告-王嘉凯.docx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5054">
-              <caret line="277" column="27" selection-start-line="277" selection-start-column="14" selection-end-line="277" selection-end-column="27" />
+            <state relative-caret-position="5149">
+              <caret line="282" column="27" selection-start-line="282" selection-start-column="27" selection-end-line="282" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -56,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/conf.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="34" column="91" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="91" />
+            <state relative-caret-position="627">
+              <caret line="33" column="91" selection-start-line="33" selection-start-column="91" selection-end-line="33" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -131,8 +130,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="254" />
-    <option name="y" value="256" />
+    <option name="x" value="114" />
+    <option name="y" value="42" />
     <option name="width" value="1400" />
     <option name="height" value="990" />
   </component>
@@ -181,7 +180,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flask server.Flask (demo.py)">
+  <component name="RunManager" selected="Python.demo">
     <configuration name="demo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="demo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,9 +188,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="D:\Anaconda\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -241,8 +240,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Flask server.Flask (demo.py)" />
         <item itemvalue="Python.demo" />
+        <item itemvalue="Flask server.Flask (demo.py)" />
       </list>
     </recent_temporary>
   </component>
@@ -268,22 +267,23 @@
       <workItem from="1557983390780" duration="34000" />
       <workItem from="1557983426081" duration="605000" />
       <workItem from="1557993897329" duration="68000" />
+      <workItem from="1558415073578" duration="8000" />
+      <workItem from="1558415082779" duration="541000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27133000" />
+    <option name="totallyTimeSpent" value="27682000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="254" y="256" width="1400" height="990" extended-state="0" />
-    <editor active="true" />
+    <frame x="114" y="42" width="1400" height="990" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.36940297" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38134328" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5403423" weight="0.23654708" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5395522" weight="0.23598132" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -291,7 +291,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.4596577" side_tool="true" visible="true" weight="0.24415888" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.46044776" side_tool="true" visible="true" weight="0.23598132" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -305,7 +305,7 @@
     <option name="version" value="1" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/demo$demo.coverage" NAME="demo Coverage Results" MODIFIED="1556020464877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/demo$demo.coverage" NAME="demo Coverage Results" MODIFIED="1558415188158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/demo$Flask__demo_py_.coverage" NAME="Flask (demo.py) Coverage Results" MODIFIED="1557983430816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="editorHistoryManager">
@@ -391,10 +391,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/test.py" />
     <entry file="file://$PROJECT_DIR$/demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5054">
-          <caret line="277" column="27" selection-start-line="277" selection-start-column="14" selection-end-line="277" selection-end-column="27" />
+        <state relative-caret-position="5149">
+          <caret line="282" column="27" selection-start-line="282" selection-start-column="27" selection-end-line="282" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -407,8 +408,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/conf.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="34" column="91" selection-start-line="34" selection-start-column="77" selection-end-line="34" selection-end-column="91" />
+        <state relative-caret-position="627">
+          <caret line="33" column="91" selection-start-line="33" selection-start-column="91" selection-end-line="33" selection-end-column="91" />
         </state>
       </provider>
     </entry>
@@ -418,9 +419,6 @@
           <caret line="60" column="72" selection-start-line="60" selection-start-column="72" selection-end-line="60" selection-end-column="72" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/test.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/path.html">
       <provider selected="true" editor-type-id="text-editor">
